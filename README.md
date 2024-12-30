@@ -2,6 +2,7 @@
 
 # AIxBlock
 
+
 **An On-Chain Open-Source Platform for Rapid AI Model Productization Using Decentralized Resources with Flexibility and Scalability**
 
 ---
@@ -85,6 +86,8 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 - **Telegram**: [Join the Discussion](https://t.me/AIxBlock)
 - **LinkedIn**: [Follow Us](https://www.linkedin.com/company/aixblock/)
 - **YouTube**: [Watch Our Channel](https://www.youtube.com/@AIXBlock)
+- **Website**: https://aixblock.io
+- **Platform**: https://app.aixblock.io
 
 ---
 
