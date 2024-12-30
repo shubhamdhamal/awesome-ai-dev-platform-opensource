@@ -21,6 +21,15 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 - **Decentralized Marketplaces**:
   - Globally distributed, high-end, and on-demand GPU resources.
   - Diverse, high-quality decentralized datasets (*coming soon*).
+  -     - This Decentralized Dataset Pool is A rich collection of data types, including but not limited to:
+              - Thousands of real-world call center audio datasets in multiple languages and accents across various domains and industries (redacted for PII and PHI).
+              - Doctor-patient conversations in English (redacted for sensitive information).
+              - Real-world medical dictation audio in English.
+              - Real-world medical datasets in DICOM format.
+              - Real-world utterances in multiple languages.
+              - Hundreds of thousands of real-world facial recognition datasets representing multiple ethnicities, all collected with consent forms.
+              - Many other unique and high-quality datasets.
+              - The pool is continuously enriched by contributions from new contributors globally.
   - Decentralized labelers from over 100 countries.
   - Decentralized pre-trained models for auto-labeling, fine-tuning, and deployment.
 - **Instant Self-Hosting**: Deploy on-premise in minutes with zero complex configurations.
