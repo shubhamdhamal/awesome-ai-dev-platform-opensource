@@ -79,4 +79,5 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 ## ⭐ Show Your Support
 
 Give this repository a ⭐ and share it with your network to help grow the AIxBlock community.
+Or sponsor us a cup of coffee? here: https://donate.stripe.com/7sI9ACbiZcuk61W5kk
 ```
