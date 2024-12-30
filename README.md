@@ -18,6 +18,8 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 ## 🌟 Features
 
 - **End-to-End AI Development Lifecycle**: From data crawling, labeling, training, real-time demos, to deployment.
+- - **Supports a Diversity of AI Models and a wide range of data formats**: The platform is highly versatile and supports a wide range of model types, including: CV, ASR, NLP, LLM, Generative AI. 
+  - **Flexibly Customizable**: AIxBlock allows users to tailor workflows and features to meet their unique requirements.
 - **Decentralized Marketplaces**:
   - Globally distributed, high-end, and on-demand GPU resources.
   - Diverse, high-quality decentralized datasets (*coming soon*).
@@ -32,6 +34,7 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
               - The pool is continuously enriched by contributions from new contributors globally.
   - Decentralized labelers from over 100 countries.
   - Decentralized pre-trained models for auto-labeling, fine-tuning, and deployment.
+  - - **Training DDP (Distributed Data Parallel)**: One of the core technology backbones of AIxBlock is **Distributed Data Parallel (DDP)** training. This allows models, including large language models (LLMs), to be trained across multiple nodes, significantly accelerating the training process and reducing computation bottlenecks. As of now, we support both Pytorch and Tensorflow DDP.
 - **Instant Self-Hosting**: Deploy on-premise in minutes with zero complex configurations.
 - **Monetization Opportunities**: Monetize your models or idle compute resources with just a few clicks through our integrated marketplaces.
 
