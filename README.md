@@ -90,6 +90,9 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 - **Platform**: https://app.aixblock.io
 
 ---
+## 🔖 Keywords
+ai, llm, decentralized-ai, generative-ai, asr, computer-vision, nlp, privacy, security, open-source, distributed-computing, ddp, distributed-training, distributed-data-parrallel, self-hosted-ai platform, decentralized-dataset-pool, self-hosted-labeling-tool, self-hosted-ai-deployment, fine-tuning, ai-development-platform, ai-production-platform
+
 
 ## ⭐ Show Your Support
 
