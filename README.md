@@ -97,5 +97,4 @@ ai, llm, decentralized-ai, generative-ai, asr, computer-vision, nlp, privacy, se
 ## ⭐ Show Your Support
 
 Give this repository a ⭐ and share it with your network to help grow the AIxBlock community.
-Or sponsor us a cup of coffee? here: https://donate.stripe.com/7sI9ACbiZcuk61W5kk
 ```
