@@ -3,7 +3,7 @@
 # AIxBlock
 
 
-**An On-Chain Open-Source Platform for Rapid AI Model Productization Using Decentralized Resources with Flexibility and Scalability**
+**An On-Chain Open-Source Platform for Rapid AI Model Development and Productization Using Decentralized Resources with Flexibility and Scalability**
 
 ---
 
