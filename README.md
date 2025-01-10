@@ -12,19 +12,21 @@
 AIxBlock is the first on-chain, open-source, comprehensive AI development platform designed to enable AI developers and businesses to:
 - **Develop and Productize AI Models** effortlessly and cost-effectively.
 - Access **Decentralized Marketplaces** of compute resources, datasets, pre-trained models, and labelers, saving up to 90% on costs.
+- Build and monetize **Multi-AI Agent Teams**: Create AI teams where each agent has specific roles, tools, and goals, working together to automate any workflows, bringing unprecedented efficiency and scalability to your operations.
 - Maintain **Full Privacy Control** with seamless self-hosting capabilities.
 
 ---
 
 ## 🌟 Features
 
-- **End-to-End AI Development Lifecycle**: From data crawling, labeling, training, real-time demos, to deployment.
-- - **Supports a Diversity of AI Models and a wide range of data formats**: The platform is highly versatile and supports a wide range of model types, including: CV, ASR, NLP, LLM, Generative AI. 
+  - **End-to-End AI Development Lifecycle**: From data crawling, labeling, training, real-time demos, to deployment.
+  - **Supports a Diversity of AI Models and a wide range of data formats**: The platform is highly versatile and supports a wide range of model types, including: CV, ASR, NLP, LLM, Generative AI.
+  - **Multi-AI Agent Infrastructure**: Build AI teams where each agent has specific roles, tools, and goals. These agents work together seamlessly to automate complex workflows, enabling businesses to streamline operations with efficiency and flexibility.
   - **Flexibly Customizable**: AIxBlock allows users to tailor workflows and features to meet their unique requirements.
-- **Decentralized Marketplaces**:
+  - **Decentralized Marketplaces**:
   - Globally distributed, high-end, and on-demand GPU resources.
   - Diverse, high-quality decentralized datasets (*coming soon*).
-  -     - This Decentralized Dataset Pool is A rich collection of data types, including but not limited to:
+  -     This Decentralized Dataset Pool is A rich collection of data types, including but not limited to:
               - Thousands of real-world call center audio datasets in multiple languages and accents across various domains and industries (redacted for PII and PHI).
               - Doctor-patient conversations in English (redacted for sensitive information).
               - Real-world medical dictation audio in English.
@@ -37,7 +39,7 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
   - Decentralized pre-trained models for auto-labeling, fine-tuning, and deployment.
   - - **Training DDP (Distributed Data Parallel)**: One of the core technology backbones of AIxBlock is **Distributed Data Parallel (DDP)** training. This allows models, including large language models (LLMs), to be trained across multiple nodes, significantly accelerating the training process and reducing computation bottlenecks. As of now, we support both Pytorch and Tensorflow DDP.
 - **Instant Self-Hosting**: Deploy on-premise in minutes with zero complex configurations.
-- **Monetization Opportunities**: Monetize your models or idle compute resources with just a few clicks through our integrated marketplaces.
+- **Monetization Opportunities**: Monetize your models, AI agents or idle compute resources with just a few clicks through our integrated marketplaces.
 
 ---
 
