@@ -1,4 +1,4 @@
-**Breaking: AIxBlock is going to open-source its full code shortly. Please follow us for more updates. Here is a brief overview of our project.**
+**Breaking: AIxBlock is going to open-source its full code soon in Q1-2025. Please follow us for more updates. Here is a brief overview of our project.**
 
 # AIxBlock
 
