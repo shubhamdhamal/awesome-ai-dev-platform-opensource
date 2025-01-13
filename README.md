@@ -78,7 +78,76 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 - Accumulate points that will be converted into tokens during our Token Generation Event (TGE).
 - Post-TGE, receive monthly rewards based on your contribution level.
 - Be part of our long-term profit-sharing ecosystem for every single contribution.
-- For detailed token distribution for opensource contributors, please check our whitepaper here: https://coda.io/d/_dobsJ2CuzGN/8-Tokenomics-Plan-Stake-and-Rewards-AxB-token_suP19Gor#_lumJNBTY
+To foster sustainable growth and reward valuable contributions, we allocate 15% of the total token supply for ecosystem growth. This allocation is divided into two main categories:
+
+1. Grants and Funding for Outstanding Projects (35%)
+2. Open-Source Contributor Rewards (65%)
+
+This section outlines the mechanisms for allocating these tokens, including how contributions are rewarded, thresholds to ensure fairness, and strategies for maintaining reserves.
+
+---
+
+1. Grants and Funding for Outstanding Projects (35%)
+
+We dedicate 35% of the ecosystem growth allocation to fund innovative and impactful projects built on top of our ecosystem. These grants are designed to:
+
+* Support developers creating tools, applications, or integrations that expand the ecosystem’s functionality.
+* Encourage research and development of new use cases for the platform.
+* Drive education, community growth, and user adoption through hackathons, tutorials, and outreach efforts.
+
+Grant Allocation Process:
+
+* Proposal Submission: Developers and teams submit detailed proposals outlining their project’s objectives, technical roadmap, and expected impact.
+* Community Voting: Token holders vote on the proposals to prioritize projects aligned with the ecosystem’s goals.
+* Milestone-Based Distribution: Grants are disbursed in phases, tied to the achievement of predefined milestones to ensure accountability and progress.
+
+---
+
+2. Open-Source Contributor Rewards (65%)
+
+We allocate 65% of the ecosystem growth tokens to reward contributors for their efforts in maintaining and improving the open-source ecosystem. This ensures that contributors are fairly compensated for their time and expertise while fostering innovation and collaboration.
+
+Point-Based Reward System:
+
+To distribute tokens fairly, we use a point system that assigns value to different types of contributions based on their impact, effort, and complexity.
+
+Contribution Types and Ratios:
+
+The contributions are categorized and weighted as follows:
+
+Contribution Type	Ratio (%)	Point Breakdown	Column 4	Column 5	Column 6
+					
+
+<img width="620" alt="Screenshot 2025-01-13 at 20 50 44" src="https://github.com/user-attachments/assets/141ecd1d-afa3-4a4b-a4dd-d2901cf1a40e" />
+
+---
+
+3. Monthly Token Distribution
+
+Every month, a fixed number of tokens from the open-source contributor pool are unlocked and distributed based on the total points earned by contributors during that period.
+
+Fairness Mechanism: Threshold for Token Distribution
+
+To prevent scenarios where only a small number of contributors claim all tokens with minimal effort, we implement a threshold system:
+
+* Minimum Points Threshold: If the total points earned by all contributors in a given month are less than 500 points, a reduced ratio of 50% of the monthly token allocation will be distributed. The remaining tokens will be added to a community reserve fund.
+  * Reasoning: A threshold of 500 points ensures that contributions reach a baseline level of activity and effort. Distributing only 50% of the allocation incentivizes more participation in subsequent months while maintaining fairness.
+
+Point-to-Token Calculation:
+
+Tokens are distributed proportionally based on the points earned:
+
+Example Calculation:
+
+* Monthly Token Pool: 10,000 tokens (for detailed monthly vesting, please check Open link
+* Total Contributor Points: 1,000 points
+* Contributor A’s Points: 100 points → He earns: 100*10000/1000 tokens (equal to 1k tokens)
+
+If the total points were below the threshold (e.g., 400 points):
+
+* Only 50% of the monthly token pool (5,000 tokens) would be distributed.
+* Contributor A’s Token Share with reduced distribution. → He earns: 100*5000/400 tokens (equal to 1250 tokens)
+
 
 ---
 
