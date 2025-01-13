@@ -95,28 +95,13 @@ We dedicate 35% of the ecosystem growth allocation to fund innovative and impact
 * Encourage research and development of new use cases for the platform.
 * Drive education, community growth, and user adoption through hackathons, tutorials, and outreach efforts.
 
-Grant Allocation Process:
-
-* Proposal Submission: Developers and teams submit detailed proposals outlining their project’s objectives, technical roadmap, and expected impact.
-* Community Voting: Token holders vote on the proposals to prioritize projects aligned with the ecosystem’s goals.
-* Milestone-Based Distribution: Grants are disbursed in phases, tied to the achievement of predefined milestones to ensure accountability and progress.
-
 ---
 
 2. Open-Source Contributor Rewards (65%)
 
 We allocate 65% of the ecosystem growth tokens to reward contributors for their efforts in maintaining and improving the open-source ecosystem. This ensures that contributors are fairly compensated for their time and expertise while fostering innovation and collaboration.
 
-Point-Based Reward System:
-
-To distribute tokens fairly, we use a point system that assigns value to different types of contributions based on their impact, effort, and complexity.
-
-Contribution Types and Ratios:
-
-The contributions are categorized and weighted as follows:
-
-Contribution Type	Ratio (%)	Point Breakdown	Column 4	Column 5	Column 6
-					
+The contributions are categorized and weighted as follows:					
 
 <img width="620" alt="Screenshot 2025-01-13 at 20 50 44" src="https://github.com/user-attachments/assets/141ecd1d-afa3-4a4b-a4dd-d2901cf1a40e" />
 
@@ -139,7 +124,7 @@ Tokens are distributed proportionally based on the points earned:
 
 Example Calculation:
 
-* Monthly Token Pool: 10,000 tokens (for detailed monthly vesting, please check Open link
+* Monthly Token Pool: 10,000 tokens (for detailed monthly vesting, please check our [whitepaper](https://coda.io/d/AIxBlock-Whitepaper_dobsJ2CuzGN/8-Tokenomics-Plan-Stake-and-Rewards-AxB-token_suP19Gor#_lu8hiyLK)
 * Total Contributor Points: 1,000 points
 * Contributor A’s Points: 100 points → He earns: 100*10000/1000 tokens (equal to 1k tokens)
 
