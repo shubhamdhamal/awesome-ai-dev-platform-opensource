@@ -78,6 +78,7 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 - Accumulate points that will be converted into tokens during our Token Generation Event (TGE).
 - Post-TGE, receive monthly rewards based on your contribution level.
 - Be part of our long-term profit-sharing ecosystem for every single contribution.
+- For detailed token distribution for opensource contributors, please check our whitepaper here: https://coda.io/d/_dobsJ2CuzGN/8-Tokenomics-Plan-Stake-and-Rewards-AxB-token_suP19Gor#_lumJNBTY
 
 ---
 
