@@ -1,0 +1,77 @@
+.deposit-axb {
+  padding: 20px;
+  min-width: 300px;
+  .c-modal__title {
+    color: #14142a;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .c-modal__content {
+    padding: 0;
+  }
+  &-modal {
+    img {
+      border: 1px solid #dedeec;
+      border-radius: 12px;
+    }
+    &-item {
+      margin-top: 30px;
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #dedeec;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &-content {
+        width: calc(100% - 50px);
+        &-title {
+          color: #adadb9;
+          font-size: 12px;
+          font-weight: 600;
+        }
+        &-name {
+          color: #333350;
+          font-size: 14px;
+          font-weight: 700;
+          margin: 3px 0;
+        }
+        &-des {
+          color: #333350;
+          font-size: 12px;
+          font-weight: 400;
+          span {
+            display: block;
+          }
+        }
+      }
+      &-icon {
+        svg {
+          cursor: pointer;
+        }
+      }
+    }
+    &-btn {
+      border: 1px solid #afafff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5050ff;
+      font-size: 14px;
+      font-weight: 600;
+      background-color: #fff;
+      width: 100%;
+      border-radius: 8px;
+      height: 40px;
+      margin-top: 20px;
+      cursor: pointer;
+      span {
+        margin-left: 10px;
+      }
+      svg {
+        width: 15px;
+        path {
+          stroke: #5050ff;
+        }
+      }
+    }
+  }
+}
