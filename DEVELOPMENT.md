@@ -1,4 +1,4 @@
-DEVELOPMENT
+## Development Setup Guide
 
 ### 1. (Optional) Install PostgreSQL
 PostgreSQL is optional. If you already have a database or prefer another, you can skip this step.
@@ -54,14 +54,37 @@ GRANT ALL PRIVILEGES ON DATABASE platform_v2 TO postgres;
 \q
 ```
 
-### 5. Setup and Run Project
-PostgreSQL is not required if your project supports other databases (e.g., SQLite, MySQL). Adjust configurations accordingly.
+### 5. Install Dependencies
+Before running the project, install the required dependencies.
+
+#### Using `pip` and `venv` (Recommended)
+1. **Create a virtual environment** (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On macOS/Linux
+   venv\Scripts\activate     # On Windows
+   ```
+2. **Install dependencies from `requirements.txt`**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+#### Using `pipenv` (Alternative)
+If you prefer `pipenv`, install dependencies with:
 ```bash
-# set-up
+pip install pipenv
+pipenv install --dev
+```
+
+### 6. Setup and Run Project
+PostgreSQL is not required if your project supports other databases (e.g., SQLite, MySQL). Adjust configurations accordingly.
+
+```bash
+# Setup project
 make setup
 
-# run - open two terminals and run
-make worker # in one terminal
-make run # in another terminal
+# Run the project - open two terminals
+make worker  # In one terminal
+make run     # In another terminal
 ```
 
