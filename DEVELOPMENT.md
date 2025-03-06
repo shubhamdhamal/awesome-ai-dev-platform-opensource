@@ -69,12 +69,12 @@ Before running the project, install the required dependencies.
    pip install -r requirements.txt
    ```
 
-#### Using `pipenv` (Alternative)
+<!-- #### Using `pipenv` (Alternative)
 If you prefer `pipenv`, install dependencies with:
 ```bash
 pip install pipenv
 pipenv install --dev
-```
+``` -->
 
 ### 6. Setup and Run Project
 PostgreSQL is not required if your project supports other databases (e.g., SQLite, MySQL). Adjust configurations accordingly.

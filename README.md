@@ -52,11 +52,24 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
    ```
 2. **Install Dependencies**:
    ```bash
+   python -m venv venv
+   source venv/bin/activate  # On macOS/Linux
+   venv\Scripts\activate     # On Windows
+   ```
+   
+   **Install dependencies from `requirements.txt`**:
+   ```bash
    pip install -r requirements.txt
    ```
+
 3. **Run the Platform**:
    ```bash
-   python run.py
+   # Setup project
+   make setup
+
+   # Run the project - open two terminals
+   make worker  # In one terminal
+   make run     # In another terminal
    ```
 
 ---
