@@ -26,13 +26,13 @@ export default function Login() {
   const handleResetPassword = () => {
     navigate("/user/reset-password");
   };
-/*
+
   const handleGoogleLogin = () => {
     auth.loginWithGoogle().then(() => {
       // redirect after auth
     });
   };
-*/
+
   React.useEffect(() => {
     if (!isSubmit) {
       return;
@@ -138,7 +138,7 @@ export default function Login() {
           >
             Reset your password ?
           </div>
-          {/* <div className="sign-up-content__or">Or</div>
+          <div className="sign-up-content__or">Or</div>
           <Button
             type="white"
             className="signup-google"
@@ -149,7 +149,7 @@ export default function Login() {
               alt="icon google"
             />
             Sign In With Google
-          </Button> */}
+          </Button>
         </div>
       </div>
     </div>

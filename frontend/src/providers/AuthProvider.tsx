@@ -12,6 +12,7 @@ import { useLoader } from "./LoaderProvider";
 import {confirmDialog, infoDialog} from "../components/Dialog";
 import Modal from "../components/Modal/Modal";
 import useDebouncedEffect from "../hooks/useDebouncedEffect";
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
 
 export type TAuthProvider = {
   error: string | null;
@@ -74,6 +75,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
   const { call } = useApi();
   const { createLoader } = useLoader();
   const [verifyEmailSent, setVerifyEmailSent] = React.useState<boolean>(false);
+  const { status, logout: walletLogout } = useWeb3Auth();
 
   const login = React.useCallback(
     async (
@@ -286,13 +288,18 @@ export function AuthProvider(props: React.PropsWithChildren) {
       message: "Are you sure you want to logout?",
       onSubmit() {
         sessionStorage.removeItem('hasReloaded');
+        if (status === "connected") {
+          try {
+            walletLogout();
+          } catch (e) {}
+        }
         terminateSession();
       },
       onCancel() {
         setShowLogoutConfirm(false);
       },
     });
-  }, [showLogoutConfirm, terminateSession]);
+  }, [showLogoutConfirm, terminateSession, status, walletLogout]);
 
   useDebouncedEffect(() => {
     const closeLoader = createLoader("Checking credentials...");

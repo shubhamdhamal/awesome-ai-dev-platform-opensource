@@ -154,6 +154,8 @@ export default function RentedComputeItem(props: TProps) {
       </>
     );
 
+    console.log(copyVerifyCommandButton)
+
     if (props?.installStatus === "installing") {
       return {
         color: "blue",

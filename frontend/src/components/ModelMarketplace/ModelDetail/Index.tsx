@@ -46,6 +46,7 @@ export interface IModelData {
   image_width: string;
   image_height: string;
   framework: string;
+  modeltype: string;
   precision: string;
   project: {
     epochs: string;
@@ -99,6 +100,7 @@ const Component = ({item, project, onBackClick, onCompleted, needConfirmResetCom
 
   const modelTasks = useMemo(() => (item?.tasks ?? []).map((t: TModelTask) => t.name), [item?.tasks]);
   const projectID = useMemo(() => project?.id ?? 0, [project?.id]);
+  // const isDeploy = useMemo(() => project?.flow_type === "deploy", [project?.flow_type]);
   const [isOpenModalModel, setOpenModalModel] = useState<boolean>(false);
   const {call} = useApi();
   const {onUpdate, onInstall} = useUpdateModelMarketplace();
@@ -348,6 +350,7 @@ const Component = ({item, project, onBackClick, onCompleted, needConfirmResetCom
         rent_cost: modelData?.rent_cost,
         accuracy: modelData?.accuracy,
         weight: addModelData?.weight,
+        modeltype: modelData?.modeltype
       };
 
       const payload = selectedCpus?.length
@@ -398,7 +401,7 @@ const Component = ({item, project, onBackClick, onCompleted, needConfirmResetCom
     }
 
     setInstalling(false);
-  }, [modelData.rent_time, modelData?.token_length, modelData?.accuracy, modelData?.precision, modelData?.sampling_frequency, modelData?.mono, modelData?.fps, modelData?.resolution, modelData.image_width, modelData?.image_height, modelData?.framework, modelData?.project?.epochs, modelData?.project?.batch_size, modelData?.project?.batch_size_per_epochs, modelData?.calculate_compute_gpu?.paramasters, modelData?.calculate_compute_gpu?.mac, modelData?.calculate_compute_gpu?.gpu_memory, modelData?.calculate_compute_gpu?.tflops, modelData?.calculate_compute_gpu?.total_cost, modelData?.calculate_compute_gpu?.total_power_consumption, modelData?.estimate_time, modelData?.estimate_cost, modelData?.rent_cost, addModelData.name, addModelData?.weight, item?.author_id, item.id, projectID, selectedGpus, selectedCpus, onUpdate, downloadModel, handleOpenModelRentModal, onCompleted]);
+  }, [modelData.rent_time, modelData?.token_length, modelData?.accuracy, modelData?.precision, modelData?.sampling_frequency, modelData?.mono, modelData?.fps, modelData?.resolution, modelData.image_width, modelData?.image_height, modelData?.framework, modelData?.modeltype, modelData?.project?.epochs, modelData?.project?.batch_size, modelData?.project?.batch_size_per_epochs, modelData?.calculate_compute_gpu?.paramasters, modelData?.calculate_compute_gpu?.mac, modelData?.calculate_compute_gpu?.gpu_memory, modelData?.calculate_compute_gpu?.tflops, modelData?.calculate_compute_gpu?.total_cost, modelData?.calculate_compute_gpu?.total_power_consumption, modelData?.estimate_time, modelData?.estimate_cost, modelData?.rent_cost, addModelData.name, addModelData?.weight, item?.author_id, item.id, projectID, selectedGpus, selectedCpus, onUpdate, downloadModel, handleOpenModelRentModal, onCompleted]);
 
   const installModel = useCallback(async (pid: number, onSuccess?: Function) => {
     setInstalling(true);
@@ -851,7 +854,7 @@ const Component = ({item, project, onBackClick, onCompleted, needConfirmResetCom
         </div>
         <ModelPreview
           showEstimateCost={!installable}
-          // detail={project}
+          detail={project}
           // paramsValue={paramsValue}
           // handleParamsChange={handleParamsChange}
           gpusFilter={gpusFilter as any}

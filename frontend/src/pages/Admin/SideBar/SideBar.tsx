@@ -40,6 +40,7 @@ const Sidebar: React.FC = () => {
       children: [
         { to: "/admin/model/catalog", label: "Catalog" },
         { to: "/admin/model/models", label: "Models" },
+        { to: "/admin/model/tasks", label: "Model Tasks" },
       ],
     },
     {
@@ -51,6 +52,9 @@ const Sidebar: React.FC = () => {
       ],
     },
     { to: "/admin/oauth", label: "OAuth Applications" },
+    { to: "/admin/activity", label: "Activity Logs" },
+    { to: "/admin/crypto-payment", label: "Crypto Payments" },
+    { to: "/admin/orders", label: "Orders" },
     // {
     //   to: "/admin/subscription",
     //   label: "Subscription",

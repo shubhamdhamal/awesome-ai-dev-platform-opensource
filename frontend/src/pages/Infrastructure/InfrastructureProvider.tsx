@@ -100,9 +100,10 @@ export default function InfrastructureProvider({children}: React.PropsWithChildr
 
   React.useEffect(() => {
     const unsubscribes = rentedGpu.list?.results?.map(c => {
-      if (c.compute_install !== "installing" && c.compute_install !== "wait_verify") {
+      if (c.compute_install !== "installing" && c.compute_install !== "wait_verify" && c.compute_install !== "wait_crypto") {
         return () => void 0;
       }
+
 
       return onMessage(c.compute_marketplace.infrastructure_id, msg => {
         if ("refresh" in msg) {

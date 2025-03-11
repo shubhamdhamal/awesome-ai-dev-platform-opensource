@@ -1,6 +1,6 @@
-import {useApi} from "@/providers/ApiProvider";
-import {usePromiseLoader} from "@/providers/LoaderProvider";
-import React, {useCallback, useMemo} from "react";
+import {useApi} from "../../providers/ApiProvider";
+import {usePromiseLoader} from "../../providers/LoaderProvider";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {OnApproveData} from "@paypal/paypal-js/types/components/buttons";
 import {PayPalButtons, PayPalButtonsComponentProps} from "@paypal/react-paypal-js";
 import {infoDialog} from "../Dialog";
@@ -14,6 +14,11 @@ import useStripeProvider from "@/providers/StripeProvider";
 import {IconInfoV2} from "@/assets/icons/IconInfoV2";
 import {Tooltip} from "react-tooltip";
 import CustomAmount from "./CustomAmount";
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
+import solanaRPC from "../../solanaRPC";
+import { IProvider } from "@web3auth/base";
+import { USDC } from "../../utils/solanaAddress";
+import { IOnchainBalance } from "../../pages/Wallet";
 
 const payPalStyles: PayPalButtonsComponentProps["style"] = {
   shape: "rect",
@@ -27,14 +32,20 @@ export type TProps = {
   note?: string;
   onFinish?: () => void;
   gateway?: "PAYPAL" | "STRIPE",
+  onFinishCrypto?: () => void;
 }
 
-export default function Topup({amount, note, onFinish, gateway = "STRIPE"}: TProps) {
+export default function Topup({amount, note, onFinish, gateway = "STRIPE", onFinishCrypto}: TProps) {
   const portfolio = useUserPortfolio(TOKEN_SYMBOL_DEFAULT);
   const {call} = useApi();
   const {addPromise} = usePromiseLoader();
   const stripe = useStripeProvider();
   const [isCustomAmount, setIsCustomAmount] = React.useState(false);
+  const { status, provider } = useWeb3Auth();
+  const [onchainBalance, setOnchainBalance] = useState<IOnchainBalance>({
+    solBalance: "0",
+    usdcBalance: "0",
+  });
 
   const depositAmount = useMemo(() => {
     if (amount > portfolio.balance) {
@@ -64,6 +75,32 @@ export default function Topup({amount, note, onFinish, gateway = "STRIPE"}: TPro
   const paymentGatewayFee = useMemo(() => {
     return depositAmountWithFee - depositAmount;
   }, [depositAmount, depositAmountWithFee]);
+
+  useEffect(() => {
+      const init = async () => {
+        try {
+          if (!provider) {
+            return;
+          }
+          if (status === "connected") {
+            const rpc = new solanaRPC(provider as IProvider);
+            const address = await rpc.getAccounts();
+            const [solBalance, usdcBalance] = await Promise.all([
+              rpc.getBalance(),
+              rpc.getTokenBalance(address, USDC.address),
+            ]);
+            setOnchainBalance({
+              solBalance,
+              usdcBalance,
+            });
+          }
+        } catch (error) {
+          // toastError("Get wallet address failed");
+        }
+      };
+  
+      init();
+    }, [provider, status]);
 
   const createPayPalOrder = useCallback(async () => {
     console.log(depositAmountWithFee);
@@ -155,11 +192,17 @@ export default function Topup({amount, note, onFinish, gateway = "STRIPE"}: TPro
           }
           {portfolio.balance !== 0.0 && <>
             <div className={styles.topupContentTotal}>
-              <p className={styles.topupContentTotalAmount}>Current balance <sup>(1)</sup></p>
+              <p className={styles.topupContentTotalAmount}>Current Fiat Balance <sup>(1)</sup></p>
               <p className={styles.topupContentTotalPrice}>{formatFloat(portfolio.balance ?? 0, PRICE_FP)} {TOKEN_SYMBOL_DEFAULT}</p>
             </div>
+            {provider && status === 'connected' && <>
             <div className={styles.topupContentTotal}>
-              <p className={styles.topupContentTotalAmount}>Total amount <sup>(2)</sup></p>
+                <p className={styles.topupContentTotalAmount}>Current Crypto balance <sup>(2)</sup> </p>
+                <p className={styles.topupContentTotalPrice}>{onchainBalance.usdcBalance} {TOKEN_SYMBOL_DEFAULT}</p>
+              </div>
+            </>}
+            <div className={styles.topupContentTotal}>
+              <p className={styles.topupContentTotalAmount}>Total amount <sup>(3)</sup></p>
               <p
                 className={styles.topupContentTotalPrice}>{formatFloat(amount, PRICE_FP)} {TOKEN_SYMBOL_DEFAULT}</p>
             </div>
@@ -200,14 +243,19 @@ export default function Topup({amount, note, onFinish, gateway = "STRIPE"}: TPro
             {
               portfolio.loading
                 ? <small>Refreshing account's balance...</small>
-                : <Button onClick={() => setIsCustomAmount(true)} type="secondary">Add Credit to balance</Button>
+                : <Button onClick={() => setIsCustomAmount(true)} type="secondary">Add Credits to fiat balance</Button>
             }
             {
               depositAmount === 0
-                ? <Button onClick={onFinish}>Confirm</Button>
+                ? <Button onClick={onFinish}>Pay with fiat</Button>
                 : gateway === "STRIPE"
                   ? <Button onClick={onStripeDeposit} disabled={portfolio.loading}>Deposit</Button>
                   : payPalButton
+            }
+            {
+              portfolio.loading
+                ? <small>Refreshing account's balance...</small>
+                : <Button onClick={onFinishCrypto} type="secondary">Pay with crypto</Button>
             }
           </div>
         </div>

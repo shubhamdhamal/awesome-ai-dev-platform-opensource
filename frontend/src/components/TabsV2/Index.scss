@@ -51,7 +51,8 @@
   &-heading {
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 69px;
+    // grid-template-columns: 1fr 69px;
+    grid-template-columns: 1fr auto auto;
     gap: 10px;
     background: #fff;
     padding: 24px;
@@ -59,6 +60,7 @@
     border-top-right-radius: 24px;
 
     &__page {
+      min-width: 60px;
       border: 2px solid #E9E9F2;
       background: #F0F0F6;
       display: flex;
@@ -136,4 +138,15 @@
       background-color: #ddd;
     }
   }
+}
+
+.open-model-button {
+  width: auto;
+  height: 100%; /* Đảm bảo cùng chiều cao với các phần khác */
+  min-width: 69px; /* Đặt min-width nếu cần */
+  padding: 8px 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

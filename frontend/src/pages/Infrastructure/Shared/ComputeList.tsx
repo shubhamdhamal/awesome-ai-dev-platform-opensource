@@ -6,8 +6,13 @@ import {confirmDialog} from "@/components/Dialog";
 import RentedComputeItem from "./RentedComputeItem";
 import styles from "./ComputeList.module.scss";
 import {useDeleteCompute} from "@/hooks/computes/useDeleteCompute";
-import {toastError} from "@/utils/toast";
+import {toastError, toastSuccess} from "@/utils/toast";
 import { useNotification } from "@/providers/NotificationProvider";
+import { useApi } from "@/providers/ApiProvider";
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
+import solanaRPC from "@/solanaRPC";
+import { IProvider } from "@web3auth/base";
+import { useNavigate } from "react-router-dom";
 
 export type TProps = {
   list: TComputeMarketplaceRentedCard[];
@@ -17,6 +22,56 @@ export type TProps = {
 export default function ComputeList({list, refresh}: TProps) {
   const deleteCompute = useDeleteCompute();
   const {showComputeNotifications, markNotificationAsRead} = useNotification();
+  const api = useApi();
+  const navigate = useNavigate();
+
+  const { status: solanaStatus, provider } = useWeb3Auth();
+
+  const onDeleteComputeCrypto = async (historyId: number) => {
+    confirmDialog({
+      message: "Are you sure you want to delete this compute?",
+      async onSubmit() {
+        if (!provider || solanaStatus !== "connected") {
+          toastError(
+            "Wallet is not connected yet. Please connect your wallet."
+          );
+          navigate("/user/wallet");
+          return;
+        }
+        try {
+          const rpc = new solanaRPC(provider as IProvider);
+          const address = await rpc.getAccounts();
+
+          if (!address) {
+            toastError("Invalid address. Please re-connect your wallet.");
+            return;
+          }
+
+          const ar = api.call("deleteRentedGpuCrypto", {
+            body: {
+              history_id: historyId,
+              walletAddress: address,
+            },
+          });
+          const r = await ar.promise;
+          console.log('response', r)
+          if (!r.ok) {
+            toastError("Send transaction error");
+          }
+          const data = await r.json();
+          const sendTransaction = await rpc.signAndSendTransaction(data);
+          console.log("sendTransaction", sendTransaction);
+          toastSuccess("Send transaction successfully");
+          refresh();
+        } catch (error) {
+          refresh();
+          console.log(error);
+          toastError("Send transaction error");
+          return;
+        }
+      },
+    });
+  };
 
   const onDeleteCompute = useCallback((id: number) => {
     confirmDialog({
@@ -97,6 +152,7 @@ export default function ComputeList({list, refresh}: TProps) {
             name={item.compute_marketplace.is_using_cpu ? config?.name : item.compute_gpu?.gpu_name}
             installStatus={item.compute_install ?? null}
             onDeleteCompute={onDeleteCompute}
+            onDeleteComputeCrypto={onDeleteComputeCrypto}
             onNotificationClick={() => showComputeNotifications(item.id, async (list) => {
               if (list.length === 0 || item.new_notifications_count === 0) {
                 return;
@@ -109,6 +165,7 @@ export default function ComputeList({list, refresh}: TProps) {
             schema={item.schema}
             history_id={item.id}
             new_notification_count={item.new_notifications_count}
+            payment_method={item.payment_method}
           />
         );
       })}

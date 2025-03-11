@@ -1,5 +1,24 @@
+/* Hide the spinners for WebKit browsers (Chrome, Safari) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide the spinners for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 .withdraw-axb {
   min-width: 350px;
+  min-height: 400px;
   padding: 20px;
   overflow: unset;
   .c-modal__content {
@@ -7,7 +26,7 @@
   }
   &-content {
     .group-field {
-      margin-top: 20px;
+      margin-top: 20px;  
       &-title {
         color: #40405b;
         font-size: 12px;
@@ -76,12 +95,14 @@
       &-qr {
         display: flex;
         gap: 10px;
+        flex-direction: column;
         input {
+          height: 40px;
           outline: none;
           border: 1px solid #dedeec;
           border-radius: 8px;
-          padding: 0 10px;
-          width: calc(100% - 49px);
+          padding-left: 10px;
+          width: calc(100% - 15px);
           font-weight: 500;
           font-size: 14px;
           &::placeholder {
@@ -171,4 +192,11 @@
       margin-top: 20px;
     }
   }
+}
+
+.withdraw-note {
+  color: #d9534f; /* Màu đỏ cảnh báo */
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
 }

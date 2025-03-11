@@ -1,3 +1,5 @@
+import { PublicKey } from "@solana/web3.js";
+
 export function isValidIPv4(ip: string) {
     const blocks = ip.split('.');
 
@@ -92,3 +94,12 @@ export function validatePrices(price1?: number, price2?: number): PriceValidatio
 
   return { isValid: true }; 
 }
+
+export const isValidSolanaAddress = (address: string): boolean => {
+  try {
+    new PublicKey(address);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

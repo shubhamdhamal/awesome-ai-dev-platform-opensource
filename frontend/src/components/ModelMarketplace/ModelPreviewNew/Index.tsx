@@ -8,7 +8,7 @@ import Select, {
   SelectOption,
 } from "../../Select/Select";
 // import useGetAnnotationTemplateDetail from "@/hooks/annotation/useAnnotationDetailTemplate";
-// import { TProjectModel } from "@/models/project";
+import { TProjectModel } from "@/models/project";
 import { useApi } from "@/providers/ApiProvider";
 import {convertFLOP, formatFloat, formatGpuMem} from "@/utils/customFormat";
 import InputRender from "../InputRender/Index";
@@ -19,7 +19,7 @@ import FormConfig from "../../ManageConnect/FormConfig/Index";
 import IconPlusSquare from "@/assets/icons/IconPlusSquare";
 import { CONFIG_TYPE, Config } from "../../ManageConnect/ManageConnect";
 import { infoDialog } from "../../Dialog";
-import {dataFramework} from "@/pages/Flow/constants/Index";
+import {dataFramework, dataModelType} from "@/pages/Flow/constants/Index";
 
 type TGPU = {
   id: number;
@@ -47,7 +47,7 @@ type TGPUList = {
 // };
 
 interface IModelPreviewProps {
-  // detail: TProjectModel | null | undefined;
+  detail: TProjectModel | null | undefined;
   // paramsValue?: number | undefined;
   // handleParamsChange?: (v: number) => void;
   // cpuFilters?: TCPU[];
@@ -91,7 +91,7 @@ export type TCalculateComputeGpuResponse = {
 const ModelPreview = (props: IModelPreviewProps) => {
   const api = useApi();
   const {
-    // detail,
+    detail,
     // paramsValue,
     // handleParamsChange,
     // cpuFilters,
@@ -136,6 +136,14 @@ const ModelPreview = (props: IModelPreviewProps) => {
   // });
   // const [resolution, setResolution] = useState<string>(modelConfig?.resolution?.toString() || "320");
   const [framework, setFramework] = useState<string>(modelConfig?.framework?.toString() || "pytorch");
+
+  const isDeploy = detail?.flow_type === "deploy";
+  // const isDeploy = detail?.flow_type === "deploy";
+  const [modeltype, setModelType] = useState<string>(
+    modelConfig?.modeltype?.toString() || (!isDeploy ? "inference" : "training")
+  );
+  // console.log(detail?.flow_type, isDeploy, modeltype)
+
   // const [accuracy, setAccuracy] = useState<string>(modelConfig?.accuracy?.toString() || "70");
   // const [precision, setPrecision] = useState<"FP16" | "BF16" | null>(modelConfig?.precision?.toString() || "FP16");
   const [estimateTime, setEstimateTime] = useState<string>(() => {
@@ -340,6 +348,7 @@ const ModelPreview = (props: IModelPreviewProps) => {
       // image_width: imageSize.width,
       // image_height: imageSize.height,
       framework: framework,
+      modeltype: modeltype,
       // precision: precision,
       // project
       project: {
@@ -367,6 +376,7 @@ const ModelPreview = (props: IModelPreviewProps) => {
     // fps,
     // resolution,
     framework,
+    modeltype,
     // token,
     // epochs,
     // batchSize,
@@ -555,6 +565,10 @@ const ModelPreview = (props: IModelPreviewProps) => {
         urlSearchParams.append("framework", framework);
       }
 
+      if (modeltype) {
+        urlSearchParams.append("modeltype", modeltype);
+      }
+
       // if (isCvType) {
       //   if (imageSize.width) {
       //     urlSearchParams.append("image_width", imageSize.width);
@@ -665,7 +679,7 @@ const ModelPreview = (props: IModelPreviewProps) => {
     return () => {
       controller?.abort("Params changed");
     }
-  }, [api, gpuListIds, isFetchComputes, modelID, projectID, setDisableSubmit, framework]);
+  }, [api, gpuListIds, isFetchComputes, modelID, projectID, setDisableSubmit, framework, modeltype]);
 
   const totalCost = useMemo(() => {
     if (model?.price > 0) {
@@ -904,6 +918,23 @@ const ModelPreview = (props: IModelPreviewProps) => {
           </div>
         </div>
       </div>
+      
+      {!isDeploy && (
+        <div className={"c-model-preview__group"}>
+        <div className={"c-model-preview__row"}>
+          <div className={"c-model-preview__input-column"}>
+            <label>Model Type: </label>
+            <Select
+              className={"c-model-preview__select"}
+              defaultValue={dataModelType[0]["options"].find(o => o.value === modeltype)}
+              data={dataModelType}
+              onChange={o => setModelType(o.value)}
+            />
+          </div>
+        </div>
+      </div>
+      )}
+      
       {/*{isCvType && (
         <div className="c-model-preview__row">
           <React.Fragment >

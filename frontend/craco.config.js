@@ -2,10 +2,44 @@ const fs = require("fs");
 const evalSourceMap = require("react-dev-utils/evalSourceMapMiddleware");
 const redirectServedPath = require("react-dev-utils/redirectServedPathMiddleware");
 const noopServiceWorker = require("react-dev-utils/noopServiceWorkerMiddleware");
+const webpack = require("webpack");
 const CracoAlias = require("craco-alias");
 
 module.exports = {
-  devServer: (devServerConfig, {env, paths}) => {
+  webpack: {
+    configure: (webpackConfig) => {
+      console.log()
+      // Add Node.js module polyfills for browser compatibility
+      webpackConfig.resolve.fallback = {
+        assert: require.resolve("assert"),
+        buffer: require.resolve("buffer"),
+        stream: require.resolve("stream-browserify"),
+      };
+
+      webpackConfig.plugins = [
+        ...(webpackConfig.plugins || []),
+        new webpack.ProvidePlugin({
+          Buffer: ["buffer", "Buffer"],
+        }),
+      ];
+
+      return {
+        ...webpackConfig,
+        ignoreWarnings: [/Failed to parse source map/],
+      };
+    },
+  },
+  style: {
+    css: {
+      preprocessorOptions: {
+        sass: {
+          api: 'modern',
+        },
+      },
+    },
+  },
+  devServer: (devServerConfig, { env, paths }) => {
+    // Extend the devServer configuration
     devServerConfig = {
       devMiddleware: {
         publicPath: "/ui/",
@@ -39,8 +73,8 @@ module.exports = {
       options: {
         source: "tsconfig",
         baseUrl: ".",
-        tsConfigPath: "./tsconfig.json"
-      }
-    }
+        tsConfigPath: "./tsconfig.json",
+      },
+    },
   ],
 };

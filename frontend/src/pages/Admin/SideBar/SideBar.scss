@@ -10,7 +10,7 @@
   border-right:1px solid rgba(0,0,0,0.1);
   //padding: 10px 15px 10px 15px;
   width: 256px;
-  padding: 24px;
+  padding: 16px;
 
   &__logo img {
     width: 100%;
@@ -25,17 +25,24 @@
 
   &__submenu-item {
     width: auto;
-    padding: 5px 5px;
+    padding: 4px 8px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 7px;
-    line-height: 34px;
     margin: 5px 0px 0px -35px;
     color: #4e4b66;
     cursor: pointer;
-    font-size: .85em;
+    font-size: 12px;
+    background-color: white;
+    transition: background-color, color, border-color 250ms linear;
 
     &:not(.active) {
       font-weight: 400;
+    }
+
+    &:hover {
+      //background-color: #E7E9FF;
+      color: #2A46FF;
+      border: 1px solid #2A46FF;
     }
   }
 
@@ -47,14 +54,15 @@
 
   &__menu-item {
     padding: 8px 16px;
-    font-size: 15px;
+    font-size: 14px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    margin: 8px 0 24px 0;
+    margin: 8px 0 16px 0;
     border-radius: 7px;
     line-height: 34px;
     color: #4e4b66;
     font-weight: 500;
     cursor: pointer;
+    transition: background-color, color, border-color 250ms linear;
 
     &:hover {
       background-color: #E7E9FF;

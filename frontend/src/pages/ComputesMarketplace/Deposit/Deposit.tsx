@@ -1,33 +1,47 @@
-import {Fragment, useEffect, useMemo /*, useState*/} from "react";
+import { Fragment, useEffect, useMemo /*, useState*/ } from "react";
 import "./Deposit.scss";
-import { IconArrowLeft, IconDeleteComputes, IconInfoBlack } from "@/assets/icons/Index";
-import {DEPOSIT_STEP, PRICE_FP} from "@/constants/projectConstants";
-import IconCircleChecked from "@/assets/icons/IconCircleChecked";
-import Select, { DataSelect } from "@/components/Select/Select";
-import { compute_types } from "@/constants/computeType";
-import InputBase from "@/components/InputBase/InputBase";
-import IconAddComputes from "@/assets/icons/IconAddComputes";
-import {useNavigate} from "react-router-dom";
-import {SelectedOption} from "../Index";
-import {formatFloat} from "@/utils/customFormat";
-import Topup from "@/components/Topup/Topup";
-import {TComputeMarketplaceCartDiskSizes} from "../../ComputesMarketplaceV2/Index";
+import {
+  IconArrowLeft,
+  IconDeleteComputes,
+  IconInfoBlack,
+} from "../../../assets/icons/Index";
+import { DEPOSIT_STEP, PRICE_FP } from "../../../constants/projectConstants";
+import IconCircleChecked from "../../../assets/icons/IconCircleChecked";
+import Select, { DataSelect } from "../../../components/Select/Select";
+import { compute_types } from "../../../constants/computeType";
+import InputBase from "../../../components/InputBase/InputBase";
+import IconAddComputes from "../../../assets/icons/IconAddComputes";
+import { useNavigate } from "react-router-dom";
+import { SelectedOption } from "../Index";
+import { formatFloat } from "../../../utils/customFormat";
+import Topup from "../../../components/Topup/Topup";
+import { TComputeMarketplaceCartDiskSizes } from "../../ComputesMarketplaceV2/Index";
 
 export interface TDeposit {
   totalHours: number;
   priceDetailGPU: number;
   onHandleRent: () => void;
+  onHandleRentCrypto?: () => void;
   customTitle?: string;
   customNote?: string;
   listCardCharge?: SelectedOption[];
   setIsDeposit?: (isDeposit: boolean) => void;
   onHandleDeleteCard?: (id: string) => void;
   isMarketPleaces?: boolean;
-  balance?: number,
-  diskSizes?: TComputeMarketplaceCartDiskSizes,
+  balance?: number;
+  diskSizes?: TComputeMarketplaceCartDiskSizes;
 }
 
-const Deposit = ({priceDetailGPU, onHandleRent, listCardCharge, setIsDeposit, onHandleDeleteCard, isMarketPleaces = false, diskSizes = {}}: TDeposit) => {
+const Deposit = ({
+  priceDetailGPU,
+  onHandleRent,
+  listCardCharge,
+  setIsDeposit,
+  onHandleDeleteCard,
+  isMarketPleaces = false,
+  diskSizes = {},
+  onHandleRentCrypto,
+}: TDeposit) => {
   const navigate = useNavigate();
   const dataSelect = [{ label: compute_types.label, options: compute_types.options }];
 
@@ -173,10 +187,18 @@ const Deposit = ({priceDetailGPU, onHandleRent, listCardCharge, setIsDeposit, on
               </div>
             </>
           }*/}
-          <Topup amount={totalPrice} onFinish={() => {
-            setIsDeposit?.(false);
-            onHandleRent();
-          }} />
+          <Topup
+            amount={totalPrice}
+            onFinish={() => {
+              setIsDeposit?.(false);
+              onHandleRent();
+            }}
+            onFinishCrypto={() => {
+              if (onHandleRentCrypto) {
+                onHandleRentCrypto();
+              }
+            }}
+          />
         </div>
       </div>
     </>

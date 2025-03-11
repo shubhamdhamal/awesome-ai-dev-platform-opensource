@@ -148,3 +148,19 @@ export const formatBytesOrGB = (
     return inputNumber.toFixed(decimalPlaces);
   }
 };
+
+export const formatWalletAddress = (address: string): string => {
+  if (!address.length) {
+    return "Not connected";
+  }
+  return `${address.slice(0, 10)}...${address.slice(-10)}`;
+};
+
+
+export const formatOnchainBalance = (
+  balance: string | number,
+  decimal: number = 9
+): string => {
+  const sol = Number(balance) / Math.pow(10, decimal);
+  return sol.toFixed(2).toString();
+};

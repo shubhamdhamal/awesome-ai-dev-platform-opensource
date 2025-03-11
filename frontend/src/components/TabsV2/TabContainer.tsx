@@ -4,6 +4,9 @@ import Tab from './Tab';
 import TabContent from './TabContent';
 import IconArrowLeft from '../../assets/icons/IconArrowLeft';
 import { SetURLSearchParams } from 'react-router-dom';
+import Button from "@/components/Button/Button"; // Import Button
+import ModelSourceDialog from "../../pages/Flow/Shared/Model/ModelSourceDialogv2";
+import {TProjectModel} from "@/models/project";
 
 export type TabV2 = {
   label: string;
@@ -17,13 +20,15 @@ export type TabsProps = {
   setCurrentTab: React.Dispatch<React.SetStateAction<number | undefined>>,
   searchParams: URLSearchParams,
   setSearchParams: SetURLSearchParams,
+  project?: TProjectModel | null;
 }
 
-const TabContainer: React.FC<TabsProps> = ({ tabs, setCurrentTab, searchParams, setSearchParams }) => {
+const TabContainer: React.FC<TabsProps> = ({ tabs, setCurrentTab, searchParams, setSearchParams, project }) => {
   const tabActive = searchParams.get("tab");
   const [activeTab, setActiveTab] = useState<number>(Number(tabActive));
   const [currentPage, setCurrentPage] = useState(0);
   const [tabFrom, setTabFrom] = useState<number>(tabs[0].key);
+  const [showAddModel, setShowAddModel] = useState(false); // State để mở ModelSourceDialog
   const tabsPerPage = 5;
 
   const handleTabClick = (key: number, mlId: number) => {
@@ -81,10 +86,18 @@ const TabContainer: React.FC<TabsProps> = ({ tabs, setCurrentTab, searchParams, 
             <IconArrowLeft width={14} height={14} />
           </button>
         </div>
+        <div>
+          <Button className="open-model-button" onClick={() => setShowAddModel(true)}>
+            +
+          </Button>
+        </div>
+
         <div className="tabs-heading__page">
           {`${tabFrom} - ${tabs.length}`}
         </div>
+        
       </div>
+
       {tabs.map((tab, index) => (
         <TabContent
           key={`key-${tab.label}-${index}`}
@@ -93,6 +106,15 @@ const TabContainer: React.FC<TabsProps> = ({ tabs, setCurrentTab, searchParams, 
           isActive={activeTab === tab.netWorkId}
         />
       ))}
+
+      {showAddModel && project && (
+        <ModelSourceDialog
+          project={project}
+          isOpen={true}
+          onAdded={() => setShowAddModel(false)}
+          onClose={() => setShowAddModel(false)}
+        />
+      )}
     </div>
   );
 };

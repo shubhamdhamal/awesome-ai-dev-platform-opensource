@@ -16,6 +16,8 @@ import { default as Computes } from "./pages/Computes/Index";
 import { default as AccountSetting } from "./pages/AccountSetting/AccountInfo/AccountInfo";
 import { default as Organization } from "./pages/Admin/Organization/Organization";
 import { default as User } from "./pages/Admin/User/User";
+import { default as Activity } from "./pages/Admin/Activity/Activity";
+import { default as CryptoPayment } from "./pages/Admin/CryptoPayment/CryptoPayment";
 import {default as ProjectSettings, GotoGeneralSettings} from "./pages/Project/Settings/Index";
 import {UsersProvider} from "./providers/UsersProvider";
 import {default as ComputeOptions} from "./pages/Computes/ComputeOptions/Index";
@@ -67,6 +69,8 @@ import NotificationProvider from "./providers/NotificationProvider";
 import ModelsMarketplaceV2Detail from "./pages/ModelsMarketplaceV2/ModelsMarketplaceV2Detail";
 import OAuthApplications from "./pages/Admin/OAuthApplications/OAuthApplications";
 import ModelSellerForm from "@/pages/ModelsSellerV2/ModelSellerForm";
+import ModelTasks from "@/pages/Admin/Model/Tasks/Tasks";
+import AdminOrders from "@/pages/Admin/Orders/AdminOrders";
 
 const Providers = composeProviders([
   { provider: PayPalScriptProvider, props: { options: { clientId: window.APP_SETTINGS.paypalClientId } } },
@@ -174,10 +178,13 @@ const router = createBrowserRouter(
           <Route path="template" element={<Template />} />
           <Route path="organization" element={<Organization />} />
           <Route path="user" element={<User />} />
+          <Route path="activity" element={<Activity />} />
+          <Route path="crypto-payment" element={<CryptoPayment />} />
           <Route path="compute/catalog" element={<CatalogCompute />} />
           <Route path="compute/computes" element={<ComputesCompute />} />
           <Route path="model/catalog" element={<CatalogModel />} />
           <Route path="model/models" element={<ModelsModel />} />
+          <Route path="model/tasks" element={<ModelTasks />} />
           <Route path="subscription/plan" element={<Plan />} />
           <Route path="subscription/subscription" element={<Subscription />} />
           <Route path="tutorial" element={<Tutorial />} handle={{ title: 'Tutorials' }}/>
@@ -185,6 +192,7 @@ const router = createBrowserRouter(
           <Route path="rewards/history" element={<RewardsHistory />} handle={{ title: 'Rewards history' }}/>
           <Route path="rewards/actions" element={<RewardActions />} handle={{ title: 'Reward actions' }}/>
           <Route path="oauth" element={<OAuthApplications />} handle={{ title: 'OAuth Application' }}/>
+          <Route path="orders" element={<AdminOrders />} handle={{ title: 'Orders' }}/>
         </Route>
 				{/*<Route path="/create-project" element={<CreateProject />} handle={{ title: 'Create Project' }} />*/}
 				

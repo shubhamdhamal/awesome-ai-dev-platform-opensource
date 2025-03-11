@@ -101,6 +101,7 @@ export type TComputeMarketplaceRentedCard = {
   provider_id?: number | null;
   schema?: string | null;
   new_notifications_count: number;
+  payment_method?: string | null;
 };
 
 export type TRentedGpuResponse = {

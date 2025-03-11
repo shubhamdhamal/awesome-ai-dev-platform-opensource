@@ -13,6 +13,8 @@ import styles from "./ModelSource.module.scss";
 import Checkpoint, {TCheckpointData} from "./Checkpoint";
 import Framework, {TFramework} from "./Framework";
 import useComputeParameters from "@/hooks/computes/useComputeParameters";
+import ModelType, {TModelType} from "./ModelType"
+import MLNetwork, {Option} from "./MLNetwork"
 
 export type TProps = {
   project: TProjectModel;
@@ -21,16 +23,19 @@ export type TProps = {
   hasCheckpoint?: boolean;
   disallowedSources?: TModelSources[];
   hasFramework?: boolean;
+  isNetwork?: boolean;
 }
 
-export default function ModelSource({project, onAdded, onClose, hasCheckpoint, disallowedSources, hasFramework}: TProps) {
+export default function ModelSource({project, onAdded, onClose, hasCheckpoint, disallowedSources, hasFramework, isNetwork=false}: TProps) {
   const {loading, refresh, gpusListModel} = useGetListMarketplaceGpus(project.id, "0", "model-training");
+  const isDeploy = project?.flow_type === "deploy";
   const [name, setName] = React.useState("");
   const [nameError, setNameError] = React.useState("");
   const [sourceData, setSourceData] = React.useState<TSourceData>({});
   const {call} = useApi();
   const {addPromise} = usePromiseLoader();
   const [adding, setAdding] = React.useState(false);
+  const api = useApi();
 
   const [selectedComputes, setSelectedComputes] = React.useState<TSelectedComputes>({
     cpus: [],
@@ -54,6 +59,9 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
   });
 
   const [framework, setFramework] = React.useState<TFramework | undefined>(undefined);
+  const [modelType, setModelType] = React.useState<TModelType | 'training'>('training');
+  const [mlId, setMlId] = React.useState<number | 0>(0);
+  const [availableOptions, setAvailableOptions] = React.useState<Option[]>([]);
 
   const onSourceChange = React.useCallback((d: TSourceData) => {
     setSourceData(d);
@@ -72,6 +80,14 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
     setFramework(f);
   }, []);
 
+  const onModeltypeChange = React.useCallback((f: TModelType) => {
+    setModelType(f);
+  }, []);
+
+  const onMltypeChange = (newId: number) => {
+    setMlId(newId);
+  };
+
   const refreshComputes = React.useCallback(() => {
     refresh();
     setSelectedComputes({cpus: [], gpus: []});
@@ -82,7 +98,7 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
   const addModel = React.useCallback(() => {
     const errors: string[] = [];
 
-    if (name.trim() === "") {
+    if (!isNetwork && name.trim() === "") {
       setNameError("Please specify the name of the model.");
       errors.push("- Specify the name of the model.");
     }
@@ -91,7 +107,7 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
       errors.push("- Select the computer(s) that will be used to initially compute the parameters.");
     }
 
-    if (!isValidSourceData(sourceData)) {
+    if (!isNetwork && !isValidSourceData(sourceData)) {
       errors.push("- Specify the model source.");
     }
 
@@ -109,7 +125,7 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
       }
     }
 
-    if (errors.length > 0) {
+    if (!isNetwork && errors.length > 0) {
       toastError(
         <>
           <div>Please complete the following:</div>
@@ -166,6 +182,17 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
       f.append("framework", framework);
     }
 
+    // console.log("=====", isDeploy)
+    if (!isDeploy){
+      f.append("model_type", modelType);
+    } else{
+      f.append("model_type", "inference");
+    }
+
+    if (isNetwork && mlId){
+      f.append("network_id", mlId.toString());
+    }
+
     if (hasCheckpoint) {
       f.append("checkpoint_source", checkpointData.checkpoint_source ?? "");
       f.append("checkpoint_id", checkpointData.checkpoint_id ?? "");
@@ -174,70 +201,135 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
       f.append("checkpoint_path", checkpointData.checkpoint_path ?? "");
     }
 
-    const ar = call("addModel", {
-      body: f,
-    });
+    if (isNetwork){
+      const ar = call("updateNetWork", {
+        body: f,
+      });
 
-    addPromise(ar.promise, "Adding model...");
+      addPromise(ar.promise, "Updating network...");
 
-    ar.promise
-      .then(async r => {
-        if (r.ok) {
-          onAdded?.();
-          return;
-        }
+      ar.promise
+        .then(async (r: Response) => {
+          if (r.ok) {
+            onAdded?.();
+            window.location.reload();
+            return;
+          } else {
+            const data = await r.json();
+            console.error("Update network error:", data);
+          }
+        })
+        .catch((err: Error) => {
+          console.error("Update network request failed:", err);
+        }).finally(() => {
+          setAdding(false);
+        });
+        
+    }else{
+      const ar = call("addModel", {
+        body: f,
+      });
 
-        const data = await r.json();
+      addPromise(ar.promise, "Adding model...");
 
-        if ("messages" in data) {
-          if (typeof data["messages"] === "object") {
-            const ks = Object.keys(data["messages"]);
-
-            if (ks.length > 0) {
-              const errors = [<div key="errors">Error(s) occurred while adding model:</div>];
-
-              for (let k in data["messages"]) {
-                errors.push(<div key={"error-" + k}>- {data["messages"][k]}</div>);
-              }
-
-              toastError(<div>{errors}</div>);
-              return;
-            }
-          } else if (typeof data["messages"] === "string") {
-            toastError(data["messages"]);
+      ar.promise
+        .then(async r => {
+          if (r.ok) {
+            onAdded?.();
             return;
           }
-        }
-        if (window.APP_SETTINGS.debug) {
-          console.error("An error occurred while adding model. Error: " + r.status + " " + r.statusText);
-        }
-        // toastError("An error occurred while adding model. Error: " + r.status + " " + r.statusText);
-        return;
-      })
-      .catch(e => {
-        if (window.APP_SETTINGS.debug) {
-          console.error(e);
-        }
 
-        // toastError("An error occurred while adding model. Error: " + e?.toString());
-      })
-      .finally(() => {
-        setAdding(false);
-      });
-  }, [addPromise, calculatedComputeGpu, call, checkpointData.checkpoint_id, checkpointData.checkpoint_source, checkpointData.checkpoint_token, hasCheckpoint, name, onAdded, project.id, selectedComputes.cpus, selectedComputes.gpus, sourceData, framework, hasFramework, checkpointData.checkpoint_username, checkpointData.checkpoint_path]);
+          const data = await r.json();
+
+          if ("messages" in data) {
+            if (typeof data["messages"] === "object") {
+              const ks = Object.keys(data["messages"]);
+
+              if (ks.length > 0) {
+                const errors = [<div key="errors">Error(s) occurred while adding model:</div>];
+
+                for (let k in data["messages"]) {
+                  errors.push(<div key={"error-" + k}>- {data["messages"][k]}</div>);
+                }
+
+                toastError(<div>{errors}</div>);
+                return;
+              }
+            } else if (typeof data["messages"] === "string") {
+              toastError(data["messages"]);
+              return;
+            }
+          }
+          if (window.APP_SETTINGS.debug) {
+            console.error("An error occurred while adding model. Error: " + r.status + " " + r.statusText);
+          }
+          // toastError("An error occurred while adding model. Error: " + r.status + " " + r.statusText);
+          return;
+        })
+        .catch(e => {
+          if (window.APP_SETTINGS.debug) {
+            console.error(e);
+          }
+
+          // toastError("An error occurred while adding model. Error: " + e?.toString());
+        })
+        .finally(() => {
+          setAdding(false);
+        });
+    }
+  }, [isNetwork, name, calculatedComputeGpu, sourceData, hasCheckpoint, project.id, selectedComputes.gpus, selectedComputes.cpus, hasFramework, framework, isDeploy, mlId, checkpointData.checkpoint_source, checkpointData.checkpoint_username, checkpointData.checkpoint_path, checkpointData.checkpoint_id, checkpointData.checkpoint_token, modelType, call, addPromise, onAdded]);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      // setLoading(true);
+      try {
+        const ar = await api.call("mlNetWork", {
+          query: new URLSearchParams({
+            project_id: project.id.toString(),
+          }),
+        });
+        ar.promise
+          .then((response: Response) => response.json())
+          .then((data: { ml_network: Array<{ name: string; id: number }> }) => {
+            if (data && data.ml_network) {
+              // Chuyển đổi dữ liệu từ API thành mảng Option
+              const options = data.ml_network.map(item => ({
+                label: item.name,
+                value: item.id,
+              }));
+              // Tạo option mặc định "New Network"
+              const newNetworkOption: Option = { label: "New Network", value: 0 };
+              // Ghép option mặc định vào đầu mảng
+              setAvailableOptions([newNetworkOption, ...options]);
+            }
+          })
+          .catch((err: Error) => {
+            console.error("Lỗi khi xử lý dữ liệu JSON:", err);
+          });
+      } catch (error) {
+        console.error("Lỗi khi gọi API mlNetWork:", error);
+      } finally {
+        // setLoading(false);
+      }
+    }
+    fetchData();
+  }, [api, project.id]);
 
   return (
     <div>
-      <InputBase
-        autoFocus
-        label="Title"
-        isControlledValue={true}
-        isRequired
-        value={name}
-        error={nameError.length > 0 ? nameError : undefined}
-        onChange={onNameChange}
-        disabled={adding}
-      />
+      {!isNetwork && (
+        <InputBase
+          autoFocus
+          label="Title"
+          isControlledValue={true}
+          isRequired
+          value={name}
+          error={nameError.length > 0 ? nameError : undefined}
+          onChange={onNameChange}
+          disabled={adding}
+        />
+      )}
+      
       <div className={styles.compute}>
         <button
           className={styles.refreshComputes}
@@ -272,17 +364,44 @@ export default function ModelSource({project, onAdded, onClose, hasCheckpoint, d
           />
         </div>
       )}
-      <div className={styles.source}>
-        <Source
-          label={hasCheckpoint ? "Model source" : "Source code"}
-          data={sourceData}
-          onChange={onSourceChange}
-          disallowedSources={disallowedSources}
-          isProcessing={adding}
-          isRequired={true}
-          isSourceCode={!hasCheckpoint}
-        />
-      </div>
+
+      {!isDeploy && isNetwork && (
+        <div className={styles.modeltype} style={{ marginTop: '16px' }}>
+          <MLNetwork
+            framework={mlId}
+            frameworks={availableOptions}
+            onChange={onMltypeChange}
+            isProcessing={loading}
+            isRequired={true}
+          />
+        </div>
+      )}
+
+      {!isDeploy && (mlId === 0 || mlId === undefined )&& (
+        <div className={styles.modeltype} style={{ marginTop: '16px' }}>
+          <ModelType
+            model_type={modelType}
+            onChange={onModeltypeChange}
+            isProcessing={adding}
+            isRequired={true}
+          />
+        </div>
+      )}
+      
+      {!isNetwork && (
+        <div className={styles.source}>
+          <Source
+            label={hasCheckpoint ? "Model source" : "Source code"}
+            data={sourceData}
+            onChange={onSourceChange}
+            disallowedSources={disallowedSources}
+            isProcessing={adding}
+            isRequired={true}
+            isSourceCode={!hasCheckpoint}
+          />
+        </div>
+      )}
+      
       {hasCheckpoint && (
         <div className={styles.source}>
           <Checkpoint

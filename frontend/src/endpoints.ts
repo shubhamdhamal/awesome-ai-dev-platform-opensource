@@ -109,6 +109,7 @@ const Endpoints: { [k: string]: string } = {
   createComputeByUser: "POST:api/compute_marketplace/user/create/",
   rentComputeApi: "PATCH:api/compute_marketplace/rent/:id",
   rentComputeV2Api: "POST:api/compute_marketplace/rent/",
+  rentComputeV2ApiCrypto: "POST:api/crypto-payment/create-order",
   updateModelMarketplace: "PATCH:api/model_marketplace/update/:id",
   computeMkpCreateUser: "POST:api/compute_marketplace/user/create",
   createFull: "POST:api/compute_marketplace/user/create-full/",
@@ -172,6 +173,15 @@ const Endpoints: { [k: string]: string } = {
   // Admin Users list
   adminUsersList: "GET:api/admin/users",
 
+  // Admin Activity list
+  adminActivityList: "GET:api/activity-log",
+
+  // Admin view current payment balance
+  adminCryptoPaymentBalance: "GET:api/crypto-payment/balance",
+
+  // Admin withdraw
+  adminWithdrawCrypto: "POST:api/crypto-payment/withdraw",
+
   // Rewards
   userRewards: "GET:api/reward_point/user/user_action_history/",
   createUserReward: "POST:api/reward_point/user/user_action_history/",
@@ -211,6 +221,7 @@ const Endpoints: { [k: string]: string } = {
   startTrain: "POST:api/ml/:id/train",
   disconectNetWork: "POST:api/ml/ml-network/disconnect/:network_id",
   joinNetWork: "POST:api/ml/ml-network/join/:network_id",
+  updateNetWork: "POST:api/ml/ml-network/add-compute",
 
   //Preference
   getComputePreference: "GET:api/compute_marketplace/computes-preference/:id",
@@ -237,6 +248,7 @@ const Endpoints: { [k: string]: string } = {
   // Rented GPUs
   listRentedGpu: "GET:api/compute_marketplace/list-rented-card",
   deleteRentedGpu: "DELETE:api/compute_marketplace/list-rented-card/:id",
+  deleteRentedGpuCrypto: "POST:api/crypto-payment/refund-order",
 
   // Verify email address
   verifyEmail: "POST:api/users/send_verification_email/",
@@ -313,6 +325,12 @@ const Endpoints: { [k: string]: string } = {
   deleteModelTasks: "DELETE:api/model_tasks/:id",
   assignModelTasks: "POST:api/model_marketplace_tasks/:model_id",
   unassignModelTasks: "DELETE:api/model_marketplace_tasks/:model_id",
+
+  // Transactions
+  userTransactions: "GET:api/user/transaction",
+
+  // Orders
+  adminOrders: "GET:api/orders/",
 };
 
 export default Endpoints;

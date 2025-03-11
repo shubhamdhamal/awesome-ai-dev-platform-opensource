@@ -74,7 +74,8 @@ export interface IModelData {
   estimate_time: string;
   estimate_cost: string;
   rent_cost: string;
-  rent_time: string
+  rent_time: string;
+  modeltype: string;
 }
 
 const ModelDetail = () => {

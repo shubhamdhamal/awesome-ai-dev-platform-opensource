@@ -1,26 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IconBook from "@/assets/icons/IconBook";
 import IconDePoSit from "@/assets/icons/IconDePoSit";
 import IconWithDraw from "@/assets/icons/IconWithDraw";
-import Checkbox from "@/components/Checkbox/Checkbox";
+// import Checkbox from "@/components/Checkbox/Checkbox";
 import { useUserLayout } from "@/layouts/UserLayout";
-// import Pagination from "./Pagination";
 import "./index.scss";
 import DepositModal from "./modal/DepositModal";
 import WithdrawModal from "./modal/WithdrawModal";
-import useUserPortfolio from "@/hooks/user/useUserPortfolio";
+import useUserPortfolio from "../../hooks/user/useUserPortfolio";
 import {PRICE_FP, TOKEN_SYMBOL_DEFAULT} from "@/constants/projectConstants";
+import {
+  formatFloat,
+  formatWalletAddress,
+  formatOnchainBalance,
+} from "@/utils/customFormat";
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
+import { toastError, toastInfo } from "@/utils/toast";
+import solanaRPC from "../../solanaRPC";
+import { IProvider } from "@web3auth/base";
+import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
+import { USDC } from "@/utils/solanaAddress";
+import useUserTransactionsHook from "@/hooks/user/useUseTransactionsHook";
 import Pagination from "@/components/Pagination/Pagination";
-import {formatFloat} from "@/utils/customFormat";
+import EmptyContent from "@/components/EmptyContent/EmptyContent";
+import {formatDate} from "@/utils/formatDate";
+import CustomAmount from "@/components/Topup/CustomAmount";
+import IconPlusCircle from "@/assets/icons/IconPlusCircle";
+import { infoDialog } from "@/components/Dialog";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import { VIDEO_URL } from "@/constants/projectConstants";
+export interface IOnchainBalance {
+  solBalance: string;
+  usdcBalance: string;
+}
 
 const WalletPage = () => {
-  const [page, setPage] = useState(1);
   const [openDepositModal, setOpenDepositModal] = useState(false);
   const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
   const userLayout = useUserLayout();
   const navigate = useNavigate();
-  const {balance} = useUserPortfolio(TOKEN_SYMBOL_DEFAULT);
+  const portfolio = useUserPortfolio(TOKEN_SYMBOL_DEFAULT);
+  const { status, connect, provider, logout: walletLogout } = useWeb3Auth();
+  const [walletAddress, setWalletAddress] = useState("");
+  const [onchainBalance, setOnchainBalance] = useState<IOnchainBalance>({
+    solBalance: "0",
+    usdcBalance: "0",
+  });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [copiedText, copy] = useCopyToClipboard();
+  const {list, page, setPage, pageSize, loading, loadingError, total, refresh} = useUserTransactionsHook();
+  const [isCustomAmount, setIsCustomAmount] = React.useState(false);
 
   React.useEffect(() => {
     userLayout.setBreadcrumbs([{ label: "Payment" }]);
@@ -28,9 +58,22 @@ const WalletPage = () => {
     userLayout.setActions([
       // Todo: wait logic when click button
       {
+        icon: <IconPlusCircle />,
+        label: "Fiat balance",
+        onClick: () => setIsCustomAmount(true),
+      },
+      {
         icon: <IconBook />,
-        label: "Guidline: how to add your wallet?",
-        onClick: () => 0,
+        label: "Wallet setup tutorial",
+        onClick: () => {
+          infoDialog({
+            cancelText: null,
+            className: "model-demo-video",
+            message: (
+              <VideoPlayer url={VIDEO_URL.WALLET_SETUP} />
+            ),
+          });
+        },
       },
     ]);
     return () => {
@@ -40,81 +83,155 @@ const WalletPage = () => {
     };
   }, [userLayout, navigate]);
 
+  const login = async () => {
+    if (status === "connected") {
+      await walletLogout();
+      return;
+    }
+    try {
+      await connect();
+    } catch (e: any) {
+      toastError(e.message || "Connect wallet failed");
+    }
+  };
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        if (!provider) {
+          setWalletAddress("");
+          setOnchainBalance({
+            solBalance: "0",
+            usdcBalance: "0",
+          });
+          return;
+        }
+        if (status === "connected") {
+          const rpc = new solanaRPC(provider as IProvider);
+          const address = await rpc.getAccounts();
+          setWalletAddress(address);
+          const [solBalance, usdcBalance] = await Promise.all([
+            rpc.getBalance(),
+            rpc.getTokenBalance(address, USDC.address),
+          ]);
+          setOnchainBalance({
+            solBalance,
+            usdcBalance,
+          });
+        }
+      } catch (error) {
+        toastError("Get wallet address failed");
+      }
+    };
+
+    init();
+  }, [provider, status, openWithdrawModal]);
+
+  const copyAddress = () => {
+    if (walletAddress === "") return;
+    copy(walletAddress);
+    toastInfo("Copied to clipboard");
+  };
+
   return (
     <div className="wallet-container">
       <div className="left-side">
         <div className="left-side-list">
-          <div className="left-side-list-search">
+          {/*<div className="left-side-list-search">
             <input placeholder="Search asset" />
-          </div>
-          <div className="left-side-list-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <Checkbox label="" size="sm" />
-                  </th>
-                  <th>Table Name</th>
-                  <th style={{ width: "130px" }}>Status</th>
-                  <th>Email</th>
-                  <th>Method</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* <tr>
-                  <td>
-                    <Checkbox label="" size="md" />
-                  </td>
-                  <td className="left-side-list-table__name">
-                    <div>Mastercard **** 6442</div>
-                    <div>Card payment</div>
-                  </td>
-                  <td className="left-side-list-table__status">
-                    <span className="done">Done</span>
-                  </td>
-                  <td className="left-side-list-table__email">
-                    <div>$99.00</div>
-                    <div>Jan 17, 2022</div>
-                  </td>
-                  <td className="left-side-list-table__method">
-                    <span>Bank </span>
-                    <span>• Supporting text</span>
-                  </td>
-                </tr> */}
-              </tbody>
-            </table>
-          </div>
-          <div className="left-side-pagination">
-            <Pagination
-              total={6548}
-              page={page}
-              pageSize={10}
-              setPage={setPage}
-              target="user/wallet"
-            />
-          </div>
+          </div>*/}
+          {loading
+            ? <EmptyContent message="Getting transactions..." />
+            : loadingError
+              ? (
+                <EmptyContent
+                  message={loadingError}
+                  buttons={[
+                    {children: "Retry", onClick: refresh},
+                  ]}
+                />
+              )
+              : (
+                <>
+                  <div className="left-side-list-table">
+                    <table>
+                      <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {list.length === 0 && (
+                        <tr>
+                          <td colSpan={4} style={{ textAlign: "center" }}>
+                            <em>(empty list)</em>
+                          </td>
+                        </tr>
+                      )}
+                      {list.map(t => (
+                        <tr key={"transaction-" + t.id}>
+                          <td className="left-side-list-table__name">
+                            <div>Transaction #{t.id}</div>
+                            <div>{t.type ?? <em>(no type)</em>}</div>
+                          </td>
+                          <td className="left-side-list-table__email">
+                            <div>
+                              {t.amount ? <code>{t.amount > 0 ? "+" : ""}{t.amount}</code> : <em>(no amount)</em>}
+                            </div>
+                            <div>{formatDate(t.created_at, "MMM. D, YYYY")}</div>
+                          </td>
+                          <td className="left-side-list-table__status">
+                            <span className="done">{t.unit ? t.unit.toUpperCase() : <em>(no unit)</em>}</span>
+                          </td>
+                          <td className="left-side-list-table__method">
+                            <span>{t.network ?? <em>(no network)</em>} </span>
+                            <span>• {t.description ?? <em>(no description)</em>}</span>
+                          </td>
+                        </tr>
+                      ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="left-side-pagination">
+                    <Pagination
+                      total={total}
+                      page={page}
+                      pageSize={pageSize}
+                      setPage={setPage}
+                      target="user/wallet"
+                    />
+                  </div>
+                </>
+              )
+          }
         </div>
       </div>
       <div className="right-side">
         <div className="right-side-price">
           <div className="right-side-price-earning right-side-price__frame">
-            <div className="right-side-price__title">Total Earning</div>
-            <div className="right-side-price__price">$0</div>
-          </div>
-        </div>
-        <div className="right-side-currency-box">
-          <div className="right-side-currency-box-price">
-            <div className="right-side-currency-box-price-icon"></div>
-            <div className="right-side-currency-box-price-content">
-              <div className="right-side-currency-box-price-content-title">
-                ${formatFloat(balance, PRICE_FP)}
-              </div>
-              <div className="right-side-currency-box-price-content-des">
-                Your balance is equivalent
-              </div>
+          <div className="right-side-price__title">Wallet Address (Solana network)</div>
+          <div
+            className="right-side-price-earning right-side-price__frame"
+            onClick={copyAddress}
+          >
+            <div className="right-side-price__title">
+              {formatWalletAddress(walletAddress)}
             </div>
           </div>
+          </div>
           <div className="right-side-currency-box-bottom">
+            <div
+              className="right-side-currency-box-bottom-connect-wallet-item"
+              onClick={login}
+            >
+              <IconDePoSit />
+              <span>
+                {status === "connected" ? "Disconnect" : "Connect wallet"}
+              </span>
+            </div>
             <div
               className="right-side-currency-box-bottom-item"
               onClick={() => setOpenDepositModal(true)}
@@ -131,9 +248,44 @@ const WalletPage = () => {
             </div>
           </div>
         </div>
+        
+        <div className="right-side-price">
+          <div className="right-side-price-earning right-side-price__frame">
+            <div className="right-side-price__title">Total Earning</div>
+            <div className="right-side-price__price">$0</div>
+          </div>
+        </div>
+        <div className="right-side-currency-box">
+          <div className="right-side-currency-box-price">
+            <div className="right-side-currency-box-price-icon"></div>
+            <div className="right-side-currency-box-price-content">
+              <div className="right-side-currency-box-price-content-title">
+                ${formatFloat(portfolio.balance, PRICE_FP)}
+              </div>
+              <div className="right-side-currency-box-price-content-title">
+                {formatOnchainBalance(onchainBalance.solBalance)} SOL
+              </div>
+              <div className="right-side-currency-box-price-content-title">
+                {onchainBalance.usdcBalance} USDC
+              </div>
+              <div className="right-side-currency-box-price-content-des">
+                Your balance is equivalent
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </div>
-      <DepositModal open={openDepositModal} onCancel={setOpenDepositModal} />
+      <DepositModal walletAddress={walletAddress} open={openDepositModal} onCancel={setOpenDepositModal} />
       <WithdrawModal open={openWithdrawModal} onCancel={setOpenWithdrawModal} />
+      <CustomAmount
+        isOpen={isCustomAmount}
+        onClose={() => setIsCustomAmount(false)}
+        onFinish={() => {
+          portfolio.refresh();
+          refresh();
+        }}
+      />
     </div>
   );
 };

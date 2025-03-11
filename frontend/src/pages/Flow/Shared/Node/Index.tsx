@@ -23,7 +23,7 @@ import {Tooltip} from "react-tooltip";
 import FormConfig from "./FormConfig/Index";
 import {TProjectModel} from "@/models/project";
 import {TUseProjectHook} from "@/hooks/project/useProjectHook";
-import { toastError } from "@/utils/toast";
+// import { toastError } from "@/utils/toast";
 
 interface IManageProps {
   data: TMLBackend;
@@ -491,10 +491,10 @@ const NodeML: React.FC<IManageProps> = ({
   ]);
 
   const startTraining = useCallback(() => {
-    if (!project.checkpoint_storage) {
-      toastError("Please go to the Settings page to set up your checkpoint storage location first.");
-      return;
-    }
+    // if (!project.checkpoint_storage) {
+    //   toastError("Please go to the Settings page to set up your checkpoint storage location first.");
+    //   return;
+    // }
 
     setLoading(true);
     const ar = api.call("startTrain", {
@@ -515,7 +515,7 @@ const NodeML: React.FC<IManageProps> = ({
         if (ar.controller.signal.aborted) return;
         setLoading(false);
       })
-  }, [api, dataMl.id, project.checkpoint_storage, refresh]);
+  }, [api, dataMl.id, refresh]);
 
   const onStopOrRejectTraining = useCallback(async () => {
     setLoading(true);

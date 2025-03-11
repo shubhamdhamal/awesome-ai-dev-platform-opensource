@@ -15,8 +15,8 @@ import SkeletonBox from "@/components/SkeletonBox/SkeletonBox";
 import {openNewTab} from "@/utils/openNewTab";
 import IconEdit from "@/assets/icons/IconEdit";
 import {useNavigate} from "react-router-dom";
-import {useCentrifuge} from "@/providers/CentrifugoProvider";
-import {useAuth} from "@/providers/AuthProvider";
+import {useCentrifuge} from "../../../providers/CentrifugoProvider";
+import {useAuth} from "../../../providers/AuthProvider";
 
 export type TProps = {
   compute_id: number,
@@ -53,6 +53,8 @@ export type TProps = {
   onNotificationClick?: () => void,
   history_id: number;
   new_notification_count?: number;
+  onDeleteComputeCrypto?: (historyId: number) => void,
+  payment_method?: string | null
 }
 
 export default function RentedComputeItem(props: TProps) {
@@ -90,6 +92,17 @@ export default function RentedComputeItem(props: TProps) {
         hoverText="Delete Compute"
         icon={<IconTrash/>}
         onClick={() => props.onDeleteCompute?.(props.history_id)}
+        disabled={props.payment_method === "crypto" ? true : false}
+      />
+    );
+
+    const deleteCryptoButton = (
+      <Button
+        isBlock={true}
+        hoverText="Delete Compute by Crypto"
+        icon={<IconTrash/>}
+        disabled={props.payment_method === "crypto" ? false : true}
+        onClick={() => props.onDeleteComputeCrypto?.(props.history_id)}
       />
     );
 
@@ -163,9 +176,10 @@ export default function RentedComputeItem(props: TProps) {
         color: "blue",
         text: "Installing",
         actions: [
-          deleteButton,
+          // deleteButton,
           // pauseButton,
-          notificationButton
+          notificationButton,
+          // deleteCryptoButton
         ],
       };
     } else if (props?.installStatus === "wait_verify") {
@@ -176,7 +190,8 @@ export default function RentedComputeItem(props: TProps) {
           deleteButton,
           notificationButton,
           editVerifyButton,
-          copyVerifyCommandButton
+          copyVerifyCommandButton,
+          deleteCryptoButton
         ],
       };
     } else if (props?.installStatus === "failed") {
@@ -185,7 +200,8 @@ export default function RentedComputeItem(props: TProps) {
         text: "Failed",
         actions: [
           deleteButton,
-          notificationButton
+          notificationButton,
+          deleteCryptoButton
         ],
       };
     } else if (props?.installStatus === "completed") {
@@ -195,7 +211,8 @@ export default function RentedComputeItem(props: TProps) {
         actions: [
           deleteButton,
           // pauseButton,
-          notificationButton
+          notificationButton,
+          deleteCryptoButton
         ],
       };
     } else if (props?.installStatus === "wait_crypto") {

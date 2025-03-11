@@ -14,9 +14,14 @@ import {infoDialog} from "@/components/Dialog";
 import {useApi} from "@/providers/ApiProvider";
 import {usePromiseLoader} from "@/providers/LoaderProvider";
 import {useNavigate, useParams} from "react-router-dom";
-import EmptyContent from "@/components/EmptyContent/EmptyContent";
-import Button from "@/components/Button/Button";
-import useUrlQuery from "@/hooks/useUrlQuery";
+import EmptyContent from "../../components/EmptyContent/EmptyContent";
+import Button from "../../components/Button/Button";
+import useUrlQuery from "../../hooks/useUrlQuery";
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
+import { toastError, toastSuccess } from "../../utils/toast";
+import solanaRPC, { ITransactionResponse } from "../../solanaRPC";
+import { IProvider } from "@web3auth/base";
+import { USDC } from "@/utils/solanaAddress";
 
 export type TComputeMarketplaceCartDiskSizes = {[k: string]: string};
 
@@ -54,6 +59,7 @@ export default function ComputesMarketplaceV2() {
   const {addPromise} = usePromiseLoader()
   const navigate = useNavigate();
   const [diskSizes, setDiskSizes] = React.useState<TComputeMarketplaceCartDiskSizes>({});
+  const { status, provider } = useWeb3Auth();
 
   useEffect(() => {
     if (queries.has("tflops")) {
@@ -264,6 +270,167 @@ export default function ComputesMarketplaceV2() {
     });
   };
 
+  const rentComputeCrypto = async () => {
+    if (!user) {
+      return;
+    }
+
+    const computeGPUs: {
+      id: string;
+      hours: number;
+      type: string;
+      price: number;
+      diskSize: number;
+    }[] = [];
+    const computeVast: {
+      id: string;
+      hours: number;
+      type: string;
+      price: number;
+      diskSize: number;
+    }[] = [];
+    const computeCPU: {
+      id: string;
+      hours: number;
+      type: string;
+      price: number;
+      diskSize: number;
+    }[] = [];
+    const computeExabit: {
+      id: string;
+      hours: number;
+      type: string;
+      price: number;
+      diskSize: number;
+    }[] = [];
+
+    cart.forEach((c) => {
+      console.log(c);
+      if (c.is_cpu) {
+        computeCPU.push({
+          id: c.id,
+          hours: c.hours,
+          type: c.services,
+          price: c.price,
+          diskSize: parseFloat(diskSizes[c.id]),
+        });
+        return;
+      }
+
+      if (c.vast_contract_id) {
+        computeVast.push({
+          id: c.id,
+          hours: c.hours,
+          type: c.services,
+          price: c.price,
+          diskSize: parseFloat(diskSizes[c.id]),
+        });
+        return;
+      }
+
+      if (c.provider_name === "Exabit") {
+        computeExabit.push({
+          id: c.id,
+          hours: c.hours,
+          type: c.services,
+          price: c.price,
+          diskSize: parseFloat(diskSizes[c.id]),
+        });
+        return;
+      }
+
+      for (let i = 0; i < Math.min(c.quantity, c.ids.length); i++) {
+        computeGPUs.push({
+          id: c.ids[i],
+          hours: c.hours,
+          type: c.services,
+          price: c.price,
+          diskSize: parseFloat(diskSizes[c.id]),
+        });
+      }
+    });
+
+    if (!provider || status !== "connected") {
+      toastError("Wallet is not connected yet. Please connect your wallet.");
+      navigate("/user/wallet");
+      return;
+    }
+
+    try {
+      const rpc = new solanaRPC(provider as IProvider);
+      const address = await rpc.getAccounts();
+
+      const totalPrice = cart.reduce((v, c) => v + c.price * c.quantity * c.hours, 0);
+      if (totalPrice <= 0) {
+        toastError("Amount must be greater than 0");
+        return;
+      }
+      const currentBalance = await rpc.getTokenBalance(address, USDC.address);
+      if(parseFloat(currentBalance) < totalPrice) {
+        toastError("Insufficient USDC balance");
+        return;
+      }
+      const body = {
+        token_name: "crypto",
+        token_symbol: "USDC",
+        price: cart.reduce((v, c) => v + c.price * c.quantity * c.hours, 0),
+        account: user.id,
+        compute_gpus_rent: computeGPUs,
+        compute_rent_vast: computeVast,
+        compute_rent_exabit: computeExabit,
+        compute_cpus_rent: computeCPU,
+        walletAddress: address,
+      };
+
+      if (body.price <= 0) {
+        toastError("Amount must be greater than 0");
+        return;
+      }
+
+      const ar = api.call("rentComputeV2ApiCrypto", { body });
+
+      const response = await ar.promise;
+      if (!response.ok) {
+        toastError("Send transaction error");
+        return;
+      }
+      console.log("response", response);
+
+      const data: ITransactionResponse = await response.json();
+      const sendTransaction = await rpc.signAndSendTransaction(data);
+      console.log("sendTransaction", sendTransaction);
+      toastSuccess("Send transaction successfully");
+
+      setCart([]);
+      localStorage.removeItem("selectedCard");
+      navigate("/infrastructure/gpu/from-marketplace");
+
+      infoDialog({
+        title: "Your compute is being provisioned",
+        message: (
+          <>
+            <p>
+              While we prepare your compute environment, we are setting up the
+              necessary software.
+            </p>
+            <p>
+              This process usually takes a few minutes per compute, but the time
+              may vary depending on the internet connection.
+            </p>
+            <p>
+              The compute list page will refresh automatically when the setup is
+              finished.
+            </p>
+            <p>We appreciate your patience!</p>
+          </>
+        ),
+      });
+    } catch (error) {
+      console.log("sendTransaction error", error);
+      toastError("Send transaction error");
+    }
+  };
+
   useEffect(() => {
     clearTimeout(filterTimeout.current);
 
@@ -332,6 +499,7 @@ export default function ComputesMarketplaceV2() {
         onHandleDeleteCard={removeCartItem}
         balance={balance}
         diskSizes={diskSizes}
+        onHandleRentCrypto={rentComputeCrypto}
       />
     );
   }

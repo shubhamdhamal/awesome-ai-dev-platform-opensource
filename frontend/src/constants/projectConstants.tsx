@@ -231,9 +231,10 @@ export const DEPOSIT_STEP = [
 export const PRICE_FP = 3;
 
 export const VIDEO_URL = {
-  WATCH_DEMO: "https://www.youtube.com/watch?v=PU6a8lJwpUg",
+  WATCH_DEMO: "https://youtu.be/2hSdSyndvu0",
   SETUP_COMPUTE: "https://www.youtube.com/watch?v=kWfoIjEEDRU",
   BUILD_AI: "https://www.youtube.com/watch?v=kWfoIjEEDRU&t=163s",
   COMMERCIALIZE: "https://www.youtube.com/watch?v=kWfoIjEEDRU&t=382s",
   RENT_OUT_COMPUTE: "https://www.youtube.com/watch?v=kWfoIjEEDRU&t=420s",
+  WALLET_SETUP: "https://youtu.be/_RvRDlC4ciY",
 }

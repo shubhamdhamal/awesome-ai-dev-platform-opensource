@@ -78,7 +78,7 @@ export default function ModelsList({canConfigure}: TProps) {
             resize: "none",
           } }
         />
-        <div style={ { margin: 8 } }>Upload source code (.zip, .zar format)</div>
+        {/* <div style={ { margin: 8 } }>Upload source code (.zip, .zar format)</div> */}
         <Upload
           accept=".zip,.zar,application/zip,application/x-zip-compressed,application/octet-stream"
           onUpload={ f => source = f }

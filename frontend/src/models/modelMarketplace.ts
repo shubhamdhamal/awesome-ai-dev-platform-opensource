@@ -6,7 +6,7 @@ export type TModelTask = {
   id: number,
   name: string,
   description?: string,
-  created_at: string,
+  created_at?: string,
   updated_at?: string,
 }
 
@@ -16,13 +16,12 @@ export const modelTaskSchema: JSONSchemaType<TModelTask> = {
     id: { type: "number" },
     name: { type: "string" },
     description: { type: "string", nullable: true },
-    created_at: { type: "string" },
+    created_at: { type: "string", nullable: true },
     updated_at: { type: "string", nullable: true },
   },
   required: [
     "id",
     "name",
-    "created_at",
   ],
   additionalProperties: true,
 };

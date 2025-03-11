@@ -1,15 +1,16 @@
 import React from "react";
 import IconCopy from "@/assets/icons/IconCopy";
 import IconDashArrowLeft from "@/assets/icons/IconDashArrowLeft";
-import IconTwoArrow from "@/assets/icons/IconTwoArrow";
 import Modal from "@/components/Modal/Modal";
 import "./DepositWithAXBModal.scss";
 import IconChecked from "@/assets/icons/IconChecked";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
+import { QRCodeSVG } from "qrcode.react";
 
 type DepositWithAXBModalProps = {
   open: boolean;
   onCancel: (open: boolean) => void;
+  walletAddress: string;
 };
 
 const DepositWithAXBModal = (props: DepositWithAXBModalProps) => {
@@ -18,40 +19,48 @@ const DepositWithAXBModal = (props: DepositWithAXBModalProps) => {
 
   return (
     <Modal
-      title="Deposit with AXB"
+      title="Deposit with SOL/USDC"
       open={props.open}
       onCancel={() => props.onCancel(false)}
       className="deposit-axb"
     >
       <div className="deposit-axb-modal">
-        <img
+        <QRCodeSVG value={props.walletAddress} className="qrcode-img"/>
+        {/* <img
           src={require("@/assets/images/DepositQR.png")}
           alt="Deposit with AXB"
-        />
+        /> */}
         <div className="deposit-axb-modal-item">
           <div className="deposit-axb-modal-item-content">
-            <div className="deposit-axb-modal-item-content-title">Network</div>
-            <div className="deposit-axb-modal-item-content-name">AXB</div>
-            <div className="deposit-axb-modal-item-content-des">
+            <div className="deposit-axb-modal-item-content-title">
+              <span className="highlight">Network</span>
+            </div>
+            <div className="deposit-axb-modal-item-content-name">Solana</div>
+          </div>
+          <div className="deposit-axb-modal-item-note">
+            Be sure to only deposit USDC/SOL on Solana network to this address for now.
+          </div>
+            {/* <div className="deposit-axb-modal-item-content-des">
               <span>Free 1.00 USDT</span>
               <span>Minimum withdrawal 10 USDT</span>
               <span>Arrival time = 2 mins</span>
-            </div>
-          </div>
-          <div className="deposit-axb-modal-item-icon">
+            </div> */}
+          {/* </div> */}
+          {/* <div className="deposit-axb-modal-item-icon">
             <IconTwoArrow />
-          </div>
+          </div> */}
         </div>
         <div className="deposit-axb-modal-item">
           <div className="deposit-axb-modal-item-content">
             <div className="deposit-axb-modal-item-content-title">
-              Deposit Address
+              {/* Deposit Address */}
+              Deposit SOL/USDC
             </div>
             <div
               className="deposit-axb-modal-item-content-name"
               ref={depositAddressRef}
             >
-              TPSuasdfnljna234jnasd092bdfa-34dfbasd9
+              {props.walletAddress}
             </div>
           </div>
           <div
