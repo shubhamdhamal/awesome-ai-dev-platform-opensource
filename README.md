@@ -1,4 +1,4 @@
-**Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
+d**Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
 
 # AIxBlock
 
@@ -38,7 +38,6 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
   - Decentralized labelers from over 100 countries. (coming soon)
   - Decentralized pre-trained models for auto-labeling, fine-tuning, and deployment.
   - - **Training DDP (Distributed Data Parallel)**: One of the core technology backbones of AIxBlock is **Distributed Data Parallel (DDP)** training. This allows models, including large language models (LLMs), to be trained across multiple nodes, significantly accelerating the training process and reducing computation bottlenecks. As of now, we support both Pytorch and Tensorflow DDP.
-- **Instant Self-Hosting**: Deploy on-premise in minutes with zero complex configurations.
 - **Monetization Opportunities**: Monetize your models, AI agents or idle compute resources with just a few clicks through our integrated marketplaces.
 
 ---
