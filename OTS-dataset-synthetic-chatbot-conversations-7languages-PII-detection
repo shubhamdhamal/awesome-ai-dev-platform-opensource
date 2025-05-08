@@ -1,0 +1,3 @@
+This dataset consists of realistic, human-generated synthetic chatbot conversations between customer support agents and customers across various domains. The dialogues include authentic formats of personally identifiable information (PII), such as names, addresses, phone numbers, and ID numbers, reflecting real-world usage patterns. The dataset was created by native speakers from several countries, including the USA, Canada, India, the UK, Spain, Germany, and France.
+
+It is designed to support training models for PII detection. Importantly, the data was created entirely by humans, prior to the advent of ChatGPT or similar AI tools, ensuring that it is 100% human-generated. All conversations have undergone thorough quality checks to ensure accuracy and realism.
