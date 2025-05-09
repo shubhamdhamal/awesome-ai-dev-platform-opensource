@@ -12,7 +12,6 @@ d**Breaking: AIxBlock transitions to open-source. Please follow us for more upda
 AIxBlock is the first on-chain, open-source, comprehensive AI development platform designed to enable AI developers and businesses to:
 - **Develop and Productize AI Models** effortlessly and cost-effectively.
 - Access **Decentralized Marketplaces** of compute resources, datasets, pre-trained models, and labelers, saving up to 90% on costs.
-- Build and monetize **Multi-AI Agent Teams**: Create AI teams where each agent has specific roles, tools, and goals, working together to automate any workflows, bringing unprecedented efficiency and scalability to your operations. (This one is in the dev phase, so we haven't opened source this yet.
 - Maintain **Full Privacy Control** with seamless self-hosting capabilities.
 
 ---
@@ -21,11 +20,10 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
 
   - **End-to-End AI Development Lifecycle** (fully open): From data crawling, labeling, training, real-time demos, to deployment.
   - **Supports a Diversity of AI Models and a wide range of data formats**: The platform is highly versatile and supports a wide range of model types, including: CV, ASR, NLP, LLM, Generative AI.
-  - **Multi-AI Agent Infrastructure** (will open soon): Build AI teams where each agent has specific roles, tools, and goals. These agents work together seamlessly to automate complex workflows, enabling businesses to streamline operations with efficiency and flexibility.
   - **Flexibly Customizable**: AIxBlock allows users to tailor workflows and features to meet their unique requirements.
   - **Decentralized Marketplaces**:
   - Globally distributed, high-end, and on-demand GPU resources.
-  - Diverse, high-quality decentralized datasets (*coming soon*).
+  - Diverse, high-quality decentralized datasets .
   -     This Decentralized Dataset Pool is A rich collection of data types, including but not limited to:
               - Thousands of real-world call center audio datasets in multiple languages and accents across various domains and industries (redacted for PII and PHI).
               - Doctor-patient conversations in English (redacted for sensitive information).
@@ -35,10 +33,9 @@ AIxBlock is the first on-chain, open-source, comprehensive AI development platfo
               - Hundreds of thousands of real-world facial recognition datasets representing multiple ethnicities, all collected with consent forms.
               - Many other unique and high-quality datasets.
               - The pool is continuously enriched by contributions from new contributors globally.
-  - Decentralized labelers from over 100 countries. (coming soon)
   - Decentralized pre-trained models for auto-labeling, fine-tuning, and deployment.
   - - **Training DDP (Distributed Data Parallel)**: One of the core technology backbones of AIxBlock is **Distributed Data Parallel (DDP)** training. This allows models, including large language models (LLMs), to be trained across multiple nodes, significantly accelerating the training process and reducing computation bottlenecks. As of now, we support both Pytorch and Tensorflow DDP.
-- **Monetization Opportunities**: Monetize your models, AI agents or idle compute resources with just a few clicks through our integrated marketplaces.
+- **Monetization Opportunities**: Monetize your models, idle compute resources with just a few clicks through our integrated marketplaces.
 
 ---
 
@@ -157,6 +154,7 @@ If the total points were below the threshold (e.g., 400 points):
 - **YouTube**: [Watch Our Channel](https://www.youtube.com/@AIXBlock)
 - **Website**: https://aixblock.io
 - **Platform**: https://app.aixblock.io
+- **Huggingface**: https://huggingface.co/AIxBlock
 
 ---
 ## 🔖 Keywords
