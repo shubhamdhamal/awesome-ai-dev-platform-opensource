@@ -1,41 +1,78 @@
-d**Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
+**Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
 
 # AIxBlock
 
 
-**An On-Chain Open-Source Platform for Rapid AI Model Development and Productization Using Decentralized Resources with Flexibility and Scalability**
+**The first unified platform for end-to-end Al development and automation workflows — MCP compatible**
 
 ---
 
-## 🚀 Why AIxBlock?
+## 🚀 What is AIxBlock?
+AIxBlock is the first unified platform for end-to-end AI development and workflow automation — modular, interconnected, and built for custom AI. Powered by MCP and decentralized resources, it lets you build & deploy custom models, automate AI workflows, and monetize every step.
+Modular, interconnected, and built for custom AI, it's designed for AI engineers and dev teams who want everything in one stack:
+- **Data Engine**:
+Unified pipeline for data crawling, curation, and automated large-scale labeling with humans in the loop, supporting any kinds of models including multimodal.
+- **Low-Code AI Workflow Automation**: (will opensource soon in 1-2weeks)
+Create and manage any AI workflow automation.
+- **Distributed Parallel Training (with MoE Support)**:
+Train AI models across decentralized compute nodes with auto-configuration, MoE model support.
+- **Decentralized Compute Marketplace**:
+Access a global pool of underutilized GPU resources at zero margin, enabling cost-effective, scalable AI training.
+- **Decentralized Model Marketplace**: 
+Buy, sell, and reuse fine-tuned models within a peer-powered ecosystem — accelerating innovation and monetization.
+- **Decentralized automation workflow templates Pool**:
+AIxBlock lets you monetize your AI automation workflows—whether they're built on AIxBlock, Make.com, Zapier, or n8n.
+- **MCP Integration Layer**:
+Easily connect AIxBlock’s AI ecosystem to third-party environments and dev platforms that support MCP — enabling flexible workflows across apps and IDEs.
 
-AIxBlock is the first on-chain, open-source, comprehensive AI development platform designed to enable AI developers and businesses to:
-- **Develop and Productize AI Models** effortlessly and cost-effectively.
-- Access **Decentralized Marketplaces** of compute resources, datasets, pre-trained models, and labelers, saving up to 90% on costs.
-- Maintain **Full Privacy Control** with seamless self-hosting capabilities.
 
 ---
 
-## 🌟 Features
+## 🌟 How Does It Work ?
+ [Data] → [Label] → [Train] → [Deploy] → [Use/Automate]  → [Monetize]
+①  Bring Your Data or Use our Crawler
+- Collect, curate, and label structured or unstructured data — all in one place.
+- Use our built-in Data Crawler or pull from data from: local files, your storage, GitHub, Hugging Face, Roboflow, Kaggle, and any other apps
+- Tap into a global workforce of 170,000+ labelers
+Coming soon: Decentralized data pool
 
-  - **End-to-End AI Development Lifecycle** (fully open): From data crawling, labeling, training, real-time demos, to deployment.
-  - **Supports a Diversity of AI Models and a wide range of data formats**: The platform is highly versatile and supports a wide range of model types, including: CV, ASR, NLP, LLM, Generative AI.
-  - **Flexibly Customizable**: AIxBlock allows users to tailor workflows and features to meet their unique requirements.
-  - **Decentralized Marketplaces**:
-  - Globally distributed, high-end, and on-demand GPU resources.
-  - Diverse, high-quality decentralized datasets .
-  -     This Decentralized Dataset Pool is A rich collection of data types, including but not limited to:
-              - Thousands of real-world call center audio datasets in multiple languages and accents across various domains and industries (redacted for PII and PHI).
-              - Doctor-patient conversations in English (redacted for sensitive information).
-              - Real-world medical dictation audio in English.
-              - Real-world medical datasets in DICOM format.
-              - Real-world utterances in multiple languages.
-              - Hundreds of thousands of real-world facial recognition datasets representing multiple ethnicities, all collected with consent forms.
-              - Many other unique and high-quality datasets.
-              - The pool is continuously enriched by contributions from new contributors globally.
-  - Decentralized pre-trained models for auto-labeling, fine-tuning, and deployment.
-  - - **Training DDP (Distributed Data Parallel)**: One of the core technology backbones of AIxBlock is **Distributed Data Parallel (DDP)** training. This allows models, including large language models (LLMs), to be trained across multiple nodes, significantly accelerating the training process and reducing computation bottlenecks. As of now, we support both Pytorch and Tensorflow DDP.
-- **Monetization Opportunities**: Monetize your models, idle compute resources with just a few clicks through our integrated marketplaces.
+② Label It Your Way
+- Define your own input/output dataset formats. Customize your labeling UI including multimodal.
+- Support  all data format, including multimodals (Images | Text | Audio | Video | Multimodal).
+
+③  Train at Scale
+- Train your custom models at scale — without setting up your own infrastructure.
+- Distributed Data Parallel (DDP) built-in
+- Built in MLOps tools
+- Auto training & active learning optimization
+- Connect to Hugging Face, Git, Roboflow, S3, etc — pull and store models easily
+
+④ Use Decentralized Resources
+- On-Demand High-End Compute at up to 90% cheaper
+- Global Labeling Workforce across 100+ Countries
+- Pre-trained AI/ML Models Marketplace 
+- AI automation workflow templates
+- AI Dataset Pool (soon)
+⑤  Deploy models
+- Test models in a built-in real-time demo environment & Deploy them
+- Or Use it on any MCP-compatible clients:
+Cursor
+Claude
+WindSurf
+Any of your own MCP clients
+
+⑥ Automate Workflows
+- Build AI automation workflows with your custom models:
+- Use our our built-in AI automation workflow builder to connect models to APIs, CRMs, and any apps/environment of your choice
+- Run your own models or rent from the marketplace — full flexibility, zero vendor lock-in
+
+⑦ Monetize It All
+- Turn every part of your workflow into income.
+- Monetize your models
+- Rent out idle GPU compute
+- Offer services (labeling, fine-tuning, automation)
+- Monetize AI automation workflow templates no matter where did you build it (n8n, make.com, zapier, etc)
+- (Coming soon) Contribute datasets
 
 ---
 
