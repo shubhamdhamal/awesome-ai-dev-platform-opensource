@@ -20,7 +20,7 @@ Funded by [optional]: AIxBlock
 
 Shared by [optional]: AIxBlock
 
-License: MIT.
+License: CC-by-nc-4.0
 
 Dataset Sources [optional]
 
