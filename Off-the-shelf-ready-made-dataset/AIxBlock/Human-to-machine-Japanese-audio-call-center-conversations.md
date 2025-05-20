@@ -14,7 +14,7 @@ Shared by [optional]: AIxBlock (aixblock.io)
 
 Language(s) (NLP): Japanese
 
-License: MIT
+License: CC-by-nc-4.0
 
 This dataset contains synthetic audio conversations between human customers and machine agents, simulating real-world call center scenarios. 
 Each conversation is designed to reflect natural interaction patterns across a variety of customer service topics.
