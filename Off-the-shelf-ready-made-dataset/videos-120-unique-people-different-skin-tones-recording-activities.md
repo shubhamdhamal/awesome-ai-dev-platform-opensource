@@ -4,4 +4,8 @@ These videos are designed for training computer vision (CV) models to recognize 
 
 Follow us on both HF and Git to stay updated as we continue releasing more high-quality datasets in the near future. Some datasets maybe only uploaded on HF.
 
-Due to the dataset's large size, we are unable to upload it directly to Github. Please download it here: https://drive.google.com/drive/folders/0B0AFzgcOeKn1fjJkTFlrekl3aDhQMGpUVlNVLUdJaDRsdm9NdWQ1X25na3E5R1lWWmphdVE?resourcekey=0-vqQcyqtn4L8lEC_b8Ou66w&usp=drive_link 
+Due to the dataset's large size, we are unable to upload it directly to Github. Please download it here: 
+
+https://drive.google.com/drive/folders/0B0AFzgcOeKn1fjJkTFlrekl3aDhQMGpUVlNVLUdJaDRsdm9NdWQ1X25na3E5R1lWWmphdVE?resourcekey=0-vqQcyqtn4L8lEC_b8Ou66w&usp=drive_link 
+
+Licence: CC-by-nc-4.0
