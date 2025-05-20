@@ -28,7 +28,7 @@ Shared by [optional]: AIxBlock
 
 Language(s) (NLP): English, USA accent
 
-License: MIT
+License: CC-by-nc-4.0
 
 Dataset Sources [optional]
 
