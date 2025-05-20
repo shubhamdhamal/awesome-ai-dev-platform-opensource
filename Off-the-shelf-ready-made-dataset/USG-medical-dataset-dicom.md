@@ -17,7 +17,7 @@ Funded by [optional]: AIxBlock
 Shared by [optional]: AIxBlock
 License: MIT.
 Dataset Sources [optional]
-Repository: https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public/tree/main/Off-the-shelf-ready-made-dataset
+Repository: https://huggingface.co/datasets/AIxBlock/USG-medical-dataset-dicom-format/blob/main/README.md 
 Uses
 Direct Use
 This dataset is intended to support the medical AI research community in advancing ultrasound-based diagnostics and building high-quality, real-world AI models.
