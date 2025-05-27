@@ -30,6 +30,7 @@ Easily connect AIxBlock’s AI ecosystem to third-party environments and dev pla
 
 ## 🌟 How Does It Work ?
  [Data] → [Label] → [Train] → [Deploy] → [Use/Automate]  → [Monetize]
+ 
 ①  Bring Your Data or Use our Crawler
 - Collect, curate, and label structured or unstructured data — all in one place.
 - Use our built-in Data Crawler or pull from data from: local files, your storage, GitHub, Hugging Face, Roboflow, Kaggle, and any other apps
