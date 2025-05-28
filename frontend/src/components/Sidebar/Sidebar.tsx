@@ -58,6 +58,46 @@ const sidebarItems: SidebarItem[] = [
   //   },
   // },
   {
+    path: "/workflows",
+    icon: <IconFolder />,
+    label: SIDEBAR_ITEM_LABELS.WORKFLOWS,
+    activeChecker: (path: string) => {
+      return path.startsWith("/workflows") || path.startsWith("/marketplace/workflow");
+    },
+    children: [
+      {
+        path: "/workflows/flows",
+        icon: <IconDocument />,
+        label: SIDEBAR_ITEM_LABELS.WORKFLOWS_FLOWS,
+      },
+      {
+        path: "/workflows/runs",
+        icon: <IconDocument />,
+        label: SIDEBAR_ITEM_LABELS.WORKFLOWS_RUNS,
+      },
+      {
+        path: "/workflows/connections",
+        icon: <IconDocument />,
+        label: SIDEBAR_ITEM_LABELS.WORKFLOWS_CONNECTIONS,
+      },
+      {
+        path: "/workflows/mcp",
+        icon: <IconDocument />,
+        label: SIDEBAR_ITEM_LABELS.WORKFLOWS_MCP,
+      },
+      // {
+      //   path: "/workflows/blocks",
+      //   icon: <IconDocument />,
+      //   label: SIDEBAR_ITEM_LABELS.WORKFLOWS_BLOCKS,
+      // },
+      {
+        path: "/workflows/ai-providers",
+        icon: <IconDocument />,
+        label: SIDEBAR_ITEM_LABELS.WORKFLOWS_AI_PROVIDERS,
+      },
+    ],
+  },
+  {
     path: "/projects?page=1",
     icon: <IconFolder />,
     label: SIDEBAR_ITEM_LABELS.YOUR_PROJECTS,

@@ -121,6 +121,7 @@ export const ROUTE = [
   "lease-out-compute",
   "infrastructure",
   "models-marketplace",
+  "workflows",
 ];
 
 export const GENERAL_ENUM = {

@@ -79,32 +79,66 @@ Any of your own MCP clients
 
 ## 🛠️ Getting Started
 
-1. **Clone the Repository**:
+1. **Requirements:**
+
+   - Python 3.10
+   - [NVM](https://github.com/nvm-sh/nvm)
+   - PostgreSQL
+   - Redis
+
+2. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/<your-org>/aixblock.git
    cd aixblock
    ```
-2. **Install Dependencies**:
+
+3. **Install Dependencies**:
+
    ```bash
    python -m venv venv
    source venv/bin/activate  # On macOS/Linux
    venv\Scripts\activate     # On Windows
    ```
    
-   **Install dependencies from `requirements.txt`**:
+   Install dependencies from `requirements.txt`:
+
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run the Platform**:
-   ```bash
-   # Setup project
-   make setup
+4. **Workflow**:
 
-   # Run the project - open two terminals
-   make worker  # In one terminal
-   make run     # In another terminal
+   Install dependencies for the first time
+
+   ```bash
+   make install-workflow
    ```
+
+   Run workflow
+
+   ```bash
+   make workflow-engine    # 1st terminal
+   make workflow-backend   # 2nd terminal
+   make workflow-frontend  # 3rd terminal
+   ```
+
+5. **Run the Platform**:
+
+   Setup project for the first time
+
+   ```bash
+   make setup
+   ```
+
+   Run the project - open two terminals
+
+   ```bash
+   make worker  # 1st terminal
+   make run     # 2nd terminal
+   ```
+
+   **Note**: Always run the workflow before the platform to avoid database lock.
 
 ---
 

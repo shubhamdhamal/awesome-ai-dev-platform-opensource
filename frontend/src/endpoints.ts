@@ -331,6 +331,9 @@ const Endpoints: { [k: string]: string } = {
 
   // Orders
   adminOrders: "GET:api/orders/",
+
+  // Workflow
+  getWorkflowsToken: "GET:api/workflows-token",
 };
 
 export default Endpoints;

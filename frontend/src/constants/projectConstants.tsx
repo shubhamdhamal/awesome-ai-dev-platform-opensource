@@ -164,6 +164,14 @@ export const SIDEBAR_ITEM_LABELS = {
   ACCOUNT_REWARDS: "Rewards",
   DISCORD: "Contact for support",
   INFRASTRUCTURE: "My infrastructure",
+
+  WORKFLOWS: "Automation Workflows",
+  WORKFLOWS_FLOWS: "Flows",
+  WORKFLOWS_RUNS: "Runs",
+  WORKFLOWS_CONNECTIONS: "Connections",
+  WORKFLOWS_MCP: "MCP",
+  WORKFLOWS_BLOCKS: "Blocks",
+  WORKFLOWS_AI_PROVIDERS: "AI Providers",
 };
 
 export const HOURS = [

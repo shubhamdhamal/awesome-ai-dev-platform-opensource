@@ -71,6 +71,8 @@ import OAuthApplications from "./pages/Admin/OAuthApplications/OAuthApplications
 import ModelSellerForm from "@/pages/ModelsSellerV2/ModelSellerForm";
 import ModelTasks from "@/pages/Admin/Model/Tasks/Tasks";
 import AdminOrders from "@/pages/Admin/Orders/AdminOrders";
+import WorkflowsProvider from "./providers/WorkflowsProvider";
+import Workflows from "./pages/Workflows/Workflows";
 
 const Providers = composeProviders([
   { provider: PayPalScriptProvider, props: { options: { clientId: window.APP_SETTINGS.paypalClientId } } },
@@ -82,6 +84,7 @@ const Providers = composeProviders([
   { provider: CentrifugeProvider },
   { provider: CachedProvider },
   { provider: StripeProvider },
+  { provider: WorkflowsProvider },
 ]).provider;
 
 function TitleChanger() {
@@ -214,6 +217,7 @@ const router = createBrowserRouter(
         {stripeRoutes}
 
         <Route path="/first-time" element={<FirstTime/>} handle={{ title: "Welcome" }}/>
+        <Route path="/workflows/*" element={<Workflows/>} handle={{ title: "Workflow" }}/>
 
 			</Route>
 			<Route path="/user/reset-password" element={<ResetPassword />} handle={{ title: "Reset Password" }} />

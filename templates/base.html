@@ -33,6 +33,7 @@
     </script>
   {% endif %}
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16793370343"></script>
+  <script src="{% if settings.DEBUG or not settings.ASSETS_CDN %}{{settings.HOSTNAME}}{% else %}{{settings.ASSETS_CDN}}{% endif %}/static/pwf.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -106,6 +107,7 @@ src="https://www.facebook.com/tr?id=603804808873652&ev=PageView&noscript=1"
     {% endif %}
     paypalClientId: "{{ settings.PAYPAL_CLIENT_ID }}",
     stripePublicKey: "{{ settings.STRIPE_PUBLIC_KEY }}",
+    workflowEndpoint: "{{ settings.WORKFLOW_ENDPOINT }}",
   }, {% block frontend_settings %}{}{% endblock %});
 </script>
 <script src="{% if settings.DEBUG or not settings.ASSETS_CDN %}{{settings.HOSTNAME}}{% else %}{{settings.ASSETS_CDN}}{% endif %}{{ versions.ui.js }}?v={{ versions.ui.version }}"></script>

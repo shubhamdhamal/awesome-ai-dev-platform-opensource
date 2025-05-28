@@ -22,6 +22,10 @@
     width: 8px;
   }
 
+  &__top {
+    padding-top: 16px;
+  }
+
   &__bottom {
     margin-bottom: 23px;
   }
@@ -44,7 +48,7 @@
       cursor: pointer;
       padding: 14px 8px;
       &.active {
-        margin-bottom: 16px;
+        //margin-bottom: 16px;
         > svg {
           transform: rotate(-90deg);
         }
@@ -76,6 +80,10 @@
         font-weight: 500;
         line-height: 24px;
         color: #40405b;
+      }
+
+      & + .child {
+        margin-top: -10px;
       }
     }
 

@@ -37,6 +37,16 @@ const MemoizedSidebarItem = (props: ISidebarItemProps) => {
     if (item.path === "/switch") {
       e.stopPropagation();
       setMethod?.(true);
+    } else if (item.path.startsWith("/workflows/")) {
+      if (location.pathname.startsWith("/workflows/")) {
+        if (item.path.startsWith("/workflows/blocks")) {
+          window.pwf.navigate({route: "/settings/pieces"});
+        } else {
+          window.pwf.navigate({route: item.path.substring(10)});
+        }
+      } else {
+        navigate(item.path);
+      }
     } else {
       item.path && navigate(item.path);
     }

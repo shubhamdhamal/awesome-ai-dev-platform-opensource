@@ -38,12 +38,14 @@ declare global {
       stripePublicKey: string,
       debugPredictUrl?: string,
       debugML?: boolean,
+      workflowEndpoint: string,
     },
     AIxBlock?: any,
     RIA?: (props: Object, element: HTMLDivElement) => () => void,
 		TDE?: (props: Object, element: HTMLDivElement) => void,
     LLM?: (props: Object, element: HTMLDivElement) => void,
     centrifuge?: Centrifuge,
+    pwf: any,
   }
 
   interface String {
