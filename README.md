@@ -113,7 +113,7 @@ Any of your own MCP clients
    cp .env.example .env
    # Generate a random SECRET_KEY and replace the placeholder in .env
    # For Linux/macOS:
-   sed -i '' -e "/^SECRET_KEY=/s/=.*/=`openssl rand -hex 32`/" .env
+   sed -i '' -e "/^SECRET_KEY=/s/=.*/=`openssl rand -hex 32`/" .env > /dev/null 2>&1
    # For Windows (using PowerShell):
    # (Get-Content .env) -replace '^SECRET_KEY=.*', ("SECRET_KEY=" + (-join ((48..57)+(65..90)+(97..122) | Get-Random -Count 64 | % {[char]$_}))) | Set-Content .env
    ```
