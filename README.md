@@ -232,8 +232,19 @@ If the total points were below the threshold (e.g., 400 points):
 ## 🔖 Keywords
 ai, llm, decentralized-ai, generative-ai, asr, computer-vision, nlp, privacy, security, open-source, distributed-computing, ddp, distributed-training, distributed-data-parrallel, self-hosted-ai platform, decentralized-dataset-pool, self-hosted-labeling-tool, self-hosted-ai-deployment, fine-tuning, ai-development-platform, ai-production-platform
 
-
+---
 ## ⭐ Show Your Support
 
 Give this repository a ⭐ and share it with your network to help grow the AIxBlock community.
-```
+
+---
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
