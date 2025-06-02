@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "vietnv1602",
+      "name": "Viet Nguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72266805?v=4",
+      "profile": "https://github.com/vietnv1602",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "aixblock-ai-dev-platform-public",
+  "projectOwner": "AIxBlock-2023"
+}
