@@ -78,10 +78,6 @@ const routes = [
     path: '/embed/connections',
     element: <EmbeddedConnectionDialog></EmbeddedConnectionDialog>,
   },
-  {
-    path: '/authenticate',
-    element: <AuthenticatePage />,
-  },
   ...ProjectRouterWrapper({
     path: '/flows',
     element: (
@@ -248,46 +244,6 @@ const routes = [
       </DashboardContainer>
     ),
   }),
-  {
-    path: '/forget-password',
-    element: (
-      <PageTitle title="Forget Password">
-        <ResetPasswordPage />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/reset-password',
-    element: (
-      <PageTitle title="Reset Password">
-        <ChangePasswordPage />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/sign-in',
-    element: (
-      <PageTitle title="Sign In">
-        <SignInPage />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/verify-email',
-    element: (
-      <PageTitle title="Verify Email">
-        <VerifyEmail />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/sign-up',
-    element: (
-      <PageTitle title="Sign Up">
-        <SignUpPage />
-      </PageTitle>
-    ),
-  },
   ...ProjectRouterWrapper({
     path: '/settings/general',
     element: (
@@ -326,19 +282,10 @@ const routes = [
   }),
 
   {
-    path: '/invitation',
-    element: (
-      <PageTitle title="Accept Invitation">
-        <AcceptInvitation />
-      </PageTitle>
-    ),
-  },
-
-  {
     path: '/404',
     element: (
       <PageTitle title="Not Found">
-        <NotFoundPage />
+        <NotFoundPage showHomeButton={false} />
       </PageTitle>
     ),
   },
