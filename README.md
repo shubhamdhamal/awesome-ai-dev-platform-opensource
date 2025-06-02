@@ -1,4 +1,7 @@
 **Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # AIxBlock
 
@@ -241,6 +244,20 @@ Give this repository a ⭐ and share it with your network to help grow the AIxBl
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/vietnv1602"><img src="https://avatars.githubusercontent.com/u/72266805?v=4?s=100" width="100px;" alt="Viet Nguyen"/><br /><sub><b>Viet Nguyen</b></sub></a><br /><a href="https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public/commits?author=vietnv1602" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
