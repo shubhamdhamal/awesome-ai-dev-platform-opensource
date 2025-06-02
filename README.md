@@ -88,7 +88,7 @@ Any of your own MCP clients
    - [NVM](https://github.com/nvm-sh/nvm)
    - PostgreSQL
    - Redis
-
+   - Nodejs 18.19.0
 2. **Clone the Repository**:
 
    ```bash
@@ -108,6 +108,24 @@ Any of your own MCP clients
 
    ```bash
    pip install -r requirements.txt
+   ```
+
+   Copy the example environment file and generate a random secret key:
+
+   ```bash
+   cp .env.example .env
+   # Generate a random SECRET_KEY and replace the placeholder in .env
+   
+   sed -i '' -e "/^SECRET_KEY=/s/=.*/=`openssl rand -hex 32`/" .env > /dev/null 2>&1
+   ```
+   Install pnpm
+   ```bash
+   npm install -g pnpm@latest-10
+   ```
+
+   Set max_user_watcher
+   ```bash
+   echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
    ```
 
 4. **Workflow**:
@@ -175,7 +193,7 @@ This section outlines the mechanisms for allocating these tokens, including how 
 
 We dedicate 35% of the ecosystem growth allocation to fund innovative and impactful projects built on top of our ecosystem. These grants are designed to:
 
-* Support developers creating tools, applications, or integrations that expand the ecosystem’s functionality.
+* Support developers creating tools, applications, or integrations that expand the ecosystem's functionality.
 * Encourage research and development of new use cases for the platform.
 * Drive education, community growth, and user adoption through hackathons, tutorials, and outreach efforts.
 
@@ -210,12 +228,12 @@ Example Calculation:
 
 * Monthly Token Pool: 10,000 tokens (for detailed monthly vesting, please check our [whitepaper](https://coda.io/d/AIxBlock-Whitepaper_dobsJ2CuzGN/8-Tokenomics-Plan-Stake-and-Rewards-AxB-token_suP19Gor#_lu8hiyLK)
 * Total Contributor Points: 1,000 points
-* Contributor A’s Points: 100 points → He earns: 100*10000/1000 tokens (equal to 1k tokens)
+* Contributor A's Points: 100 points → He earns: 100*10000/1000 tokens (equal to 1k tokens)
 
 If the total points were below the threshold (e.g., 400 points):
 
 * Only 50% of the monthly token pool (5,000 tokens) would be distributed.
-* Contributor A’s Token Share with reduced distribution. → He earns: 100*5000/400 tokens (equal to 1250 tokens)
+* Contributor A's Token Share with reduced distribution. → He earns: 100*5000/400 tokens (equal to 1250 tokens)
 
 
 ---
