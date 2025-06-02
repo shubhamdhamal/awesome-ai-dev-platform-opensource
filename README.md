@@ -12,7 +12,7 @@ AIxBlock is the first unified platform for end-to-end AI development and workflo
 Modular, interconnected, and built for custom AI, it's designed for AI engineers and dev teams who want everything in one stack:
 - **Data Engine**:
 Unified pipeline for data crawling, curation, and automated large-scale labeling with humans in the loop, supporting any kinds of models including multimodal.
-- **Low-Code AI Workflow Automation**: (will opensource soon in 1-2weeks)
+- **Low-Code AI Workflow Automation**:
 Create and manage any AI workflow automation. You can also train/fine-tune AI models directly on workflows
 - **Distributed Parallel Training (with MoE Support)**:
 Train AI models across decentralized compute nodes with auto-configuration, MoE model support.
