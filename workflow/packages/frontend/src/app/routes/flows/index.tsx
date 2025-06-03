@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { t } from 'i18next';
 import {
+  Calendar,
   CheckIcon,
   ChevronDown,
   EllipsisVertical,
@@ -45,7 +46,8 @@ import { foldersApi } from '@/features/folders/lib/folders-api';
 import { PieceIconList } from '@/features/pieces/components/block-icon-list';
 import { useAuthorization } from '@/hooks/authorization-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
-import { formatUtils, NEW_FLOW_QUERY_PARAM } from '@/lib/utils';
+import { cn, formatUtils, NEW_FLOW_QUERY_PARAM } from '@/lib/utils';
+import { Card, CardContent } from '@/components/ui/card';
 
 const filters = [
   {
@@ -341,20 +343,23 @@ const FlowsPage = () => {
     setRefresh,
     refetch,
   });
+
+  const onRowClick = (flow: PopulatedFlow, newWindow: boolean) => {
+    if (newWindow) {
+      openNewWindow(authenticationSession.appendProjectRoutePrefix(`/flows/${flow.id}`));
+    } else {
+      navigate(authenticationSession.appendProjectRoutePrefix(`/flows/${flow.id}`));
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 grow">
       <TaskLimitAlert />
       <div className="flex flex-col gap-4 w-full grow">
         <div className="flex">
-          <TableTitle
-            description={t('Create and manage your automation flows')}
-          >
-            {t('Flows')}
-          </TableTitle>
+          <TableTitle description={t('Create and manage your automation flows')}>{t('Flows')}</TableTitle>
           <div className="ml-auto flex flex-row gap-2">
-            <PermissionNeededTooltip
-              hasPermission={doesUserHavePermissionToWriteFlow}
-            >
+            <PermissionNeededTooltip hasPermission={doesUserHavePermissionToWriteFlow}>
               <ImportFlowDialog
                 insideBuilder={false}
                 onRefresh={() => {
@@ -362,25 +367,16 @@ const FlowsPage = () => {
                   refetch();
                 }}
               >
-                <Button
-                  disabled={!doesUserHavePermissionToWriteFlow}
-                  variant="outline"
-                  className="flex gap-2 items-center"
-                >
+                <Button disabled={!doesUserHavePermissionToWriteFlow} variant="outline" className="flex gap-2 items-center">
                   <Import className="w-4 h-4" />
                   {t('Import Flow')}
                 </Button>
               </ImportFlowDialog>
             </PermissionNeededTooltip>
 
-            <PermissionNeededTooltip
-              hasPermission={doesUserHavePermissionToWriteFlow}
-            >
+            <PermissionNeededTooltip hasPermission={doesUserHavePermissionToWriteFlow}>
               <DropdownMenu modal={false}>
-                <DropdownMenuTrigger
-                  disabled={!doesUserHavePermissionToWriteFlow}
-                  asChild
-                >
+                <DropdownMenuTrigger disabled={!doesUserHavePermissionToWriteFlow} asChild>
                   <Button
                     disabled={!doesUserHavePermissionToWriteFlow}
                     variant="default"
@@ -403,10 +399,7 @@ const FlowsPage = () => {
                     <span>{t('From scratch')}</span>
                   </DropdownMenuItem>
                   <SelectFlowTemplateDialog>
-                    <DropdownMenuItem
-                      onSelect={(e) => e.preventDefault()}
-                      disabled={isCreateFlowPending}
-                    >
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()} disabled={isCreateFlowPending}>
                       <Workflow className="h-4 w-4 me-2" />
                       <span>{t('Use a template')}</span>
                     </DropdownMenuItem>
@@ -421,32 +414,90 @@ const FlowsPage = () => {
           <div className="w-full">
             <DataTable
               emptyStateTextTitle={t('No flows found')}
-              emptyStateTextDescription={t(
-                'Create a workflow to start automating',
-              )}
+              emptyStateTextDescription={t('Create a workflow to start automating')}
               emptyStateIcon={<Workflow className="size-14" />}
-              columns={columns.filter(
-                (column) =>
-                  !embedState.hideFolders || column.accessorKey !== 'folderId',
-              )}
+              columns={columns.filter((column) => !embedState.hideFolders || column.accessorKey !== 'folderId')}
               page={data}
               isLoading={isLoading}
               filters={filters}
               bulkActions={bulkActions}
-              onRowClick={(row, newWindow) => {
-                if (newWindow) {
-                  openNewWindow(
-                    authenticationSession.appendProjectRoutePrefix(
-                      `/flows/${row.id}`,
-                    ),
+              customContent={() => {
+                if (!data?.data?.length)
+                  return (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <Workflow className="size-14" />
+                      <p className="text-lg font-semibold">{t('No flows found')}</p>
+                      <p className="text-sm text-muted-foreground ">{t('Create a workflow to start automating')}</p>
+                    </div>
                   );
-                } else {
-                  navigate(
-                    authenticationSession.appendProjectRoutePrefix(
-                      `/flows/${row.id}`,
-                    ),
-                  );
-                }
+                return (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {data.data.map((flow) => {
+                      return (
+                        <Card
+                          className={cn(
+                            'overflow-hidden transition-all duration-200 relative border-border cursor-pointer h-full',
+                            'hover:shadow-md hover:border-primary/30 hover:bg-accent/10'
+                          )}
+                          onClick={(e) => {
+                            onRowClick(flow, e.ctrlKey);
+                          }}
+                          onAuxClick={(e) => {
+                            onRowClick(flow, e.ctrlKey);
+                          }}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex flex-col">
+                              <div className="flex items-center justify-between">
+                                <h4 className="font-medium text-foreground truncate text-sm min-w-0 flex-1">{flow.version.displayName}</h4>
+                                <div className="flex items-center space-x-1 text-xs text-muted-foreground flex-shrink-0">
+                                  <Calendar className="h-3 w-3" />
+                                  <span className="whitespace-nowrap">{formatUtils.formatDate(new Date(flow.created))}</span>
+                                </div>
+                              </div>
+                              <div className="w-full mt-3">
+                                <div className="w-full flex items-center gap-2 justify-between">
+                                  <div className="flex items-start py-1 flex-1 min-w-0 overflow-hidden">
+                                    <PieceIconList trigger={flow.version.trigger} maxNumberOfIconsToShow={3} size="md" />
+                                  </div>
+                                  <div className="flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
+                                    <FlowStatusToggle flow={flow} flowVersion={flow.version} />
+                                    <div onClick={(e) => e.stopPropagation()}>
+                                      <FlowActionMenu
+                                        insideBuilder={false}
+                                        flow={flow}
+                                        readonly={false}
+                                        flowVersion={flow.version}
+                                        onRename={() => {
+                                          setRefresh(refresh + 1);
+                                          refetch();
+                                        }}
+                                        onMoveTo={() => {
+                                          setRefresh(refresh + 1);
+                                          refetch();
+                                        }}
+                                        onDuplicate={() => {
+                                          setRefresh(refresh + 1);
+                                          refetch();
+                                        }}
+                                        onDelete={() => {
+                                          setRefresh(refresh + 1);
+                                          refetch();
+                                        }}
+                                      >
+                                        <EllipsisVertical className="h-10 w-10" />
+                                      </FlowActionMenu>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                );
               }}
             />
           </div>

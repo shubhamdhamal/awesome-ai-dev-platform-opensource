@@ -200,7 +200,7 @@ const CreateOrEditConnectionDialogContent = React.memo(
         }
       },
     });
-    return (
+        return (
       <>
         <DialogHeader>
           <DialogTitle>

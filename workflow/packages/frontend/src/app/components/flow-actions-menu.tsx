@@ -163,7 +163,10 @@ const FlowActionMenu: React.FC<FlowActionMenuProps> = ({
             {!insideBuilder && (
               <RenameFlowDialog
                 flowId={flow.id}
-                onRename={onRename}
+                onRename={() => {
+                  setOpen(false);
+                  onRename();
+                }}
                 flowName={flowVersion.displayName}
               >
                 <DropdownMenuItem
@@ -300,6 +303,7 @@ const FlowActionMenu: React.FC<FlowActionMenuProps> = ({
                 mutationFn={async () => {
                   await flowsApi.delete(flow.id);
                   onDelete();
+                  setOpen(false);
                 }}
                 entityName={t('flow')}
               >
