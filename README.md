@@ -264,13 +264,7 @@ Give this repository a ⭐ and share it with your network to help grow the AIxBl
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/vietnv1602"><img src="https://avatars.githubusercontent.com/u/72266805?v=4?s=100" width="100px;" alt="Viet Nguyen"/><br /><sub><b>Viet Nguyen</b></sub></a><br /><a href="https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public/commits?author=vietnv1602" title="Documentation">📖</a></td>
-    </tr>
-  </tbody>
-</table>
+
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
