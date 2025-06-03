@@ -73,6 +73,8 @@ RUN cp -r llm-editor/build/. packages/frontend/public/llm-editor
 
 RUN cp -r general-editor/build/. packages/frontend/public/general-editor
 
+RUN npm run build-embed-sdk
+
 RUN npx nx run-many --target=build --projects=backend-api
 
 # --configuration production

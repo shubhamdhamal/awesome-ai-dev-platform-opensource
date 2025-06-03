@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { t } from 'i18next';
-import { Hammer, Plus } from 'lucide-react';
+import { AlertTriangle, Hammer, Plus, Settings, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { pieceSelectorUtils } from '@/app/builder/pieces-selector/block-selector-utils';
@@ -13,10 +13,7 @@ import { flowsApi } from '@/features/flows/lib/flows-api';
 import { mcpApi } from '@/features/mcp/lib/mcp-api';
 import { mcpHooks } from '@/features/mcp/lib/mcp-hooks';
 import { piecesHooks } from '@/features/pieces/lib/blocks-hook';
-import {
-  PieceStepMetadataWithSuggestions,
-  StepMetadata,
-} from '@/features/pieces/lib/types';
+import { PieceStepMetadataWithSuggestions, StepMetadata } from '@/features/pieces/lib/types';
 import { useAuthorization } from '@/hooks/authorization-hooks';
 import { flagsHooks } from '@/hooks/flags-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
@@ -29,12 +26,21 @@ import {
   Permission,
   PopulatedFlow,
   Trigger,
-  TriggerType
+  TriggerType,
 } from 'workflow-shared';
 
 import { McpToolsSection } from '../../mcp/mcp-tools-section';
 
 import { McpClientTabs } from './mcp-client-tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useState } from 'react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+
+export enum McpTabs {
+  BLOCK = 'block',
+  FLOWS = 'flows',
+}
 
 export default function MCPPage() {
   const { theme } = useTheme();
@@ -47,23 +53,26 @@ export default function MCPPage() {
     searchQuery: '',
     type: 'trigger',
   });
+  const [activeTab, setActiveTab] = useState(McpTabs.BLOCK);
+  const [showInstructionDialog, setShowInstructionDialog] = useState(false);
 
   const { data: mcp, isLoading, refetch: refetchMcp } = mcpHooks.useMcp();
 
-  const { data: flowsData, isLoading: isFlowsLoading, refetch: refetchFlows } = useQuery({
+  const {
+    data: flowsData,
+    isLoading: isFlowsLoading,
+    refetch: refetchFlows,
+  } = useQuery({
     queryKey: ['mcp-flows'],
     queryFn: () => {
       return flowsApi
         .list({
           projectId: authenticationSession.getProjectId()!,
-          limit: 100
+          limit: 100,
         })
         .then((flows) => {
           const flowsData = flows.data.filter(
-            (flow) =>
-              flow.version.trigger.type === TriggerType.PIECE &&
-              flow.version.trigger.settings.blockName ===
-                '@activepieces/piece-mcp',
+            (flow) => flow.version.trigger.type === TriggerType.PIECE && flow.version.trigger.settings.blockName === '@activepieces/piece-mcp'
           );
           return {
             ...flows,
@@ -104,7 +113,7 @@ export default function MCPPage() {
     },
     onSuccess: () => {
       toast({
-        description: t('Piece removed successfully'),
+        description: t('Block removed successfully'),
         duration: 3000,
       });
       refetchMcp();
@@ -114,7 +123,7 @@ export default function MCPPage() {
       toast({
         variant: 'destructive',
         title: t('Error'),
-        description: t('Failed to remove piece'),
+        description: t('Failed to remove block'),
         duration: 5000,
       });
     },
@@ -129,14 +138,8 @@ export default function MCPPage() {
       return flow;
     },
     onSuccess: async (flow) => {
-      const triggerMetadata = metadata?.find(
-        (m) =>
-          (m as PieceStepMetadataWithSuggestions).blockName ===
-          '@activepieces/piece-mcp',
-      );
-      const trigger = (
-        triggerMetadata as PieceStepMetadataWithSuggestions
-      )?.suggestedTriggers?.find((t: any) => t.name === 'mcp_tool');
+      const triggerMetadata = metadata?.find((m) => (m as PieceStepMetadataWithSuggestions).blockName === '@activepieces/piece-mcp');
+      const trigger = (triggerMetadata as PieceStepMetadataWithSuggestions)?.suggestedTriggers?.find((t: any) => t.name === 'mcp_tool');
       assertNotNullOrUndefined(trigger, 'Trigger not found');
       const stepData = pieceSelectorUtils.getDefaultStep({
         stepName: 'trigger',
@@ -163,16 +166,9 @@ export default function MCPPage() {
     },
   });
 
-  const applyOperation = async (
-    flow: PopulatedFlow,
-    operation: FlowOperationRequest,
-  ) => {
+  const applyOperation = async (flow: PopulatedFlow, operation: FlowOperationRequest) => {
     try {
-      const updatedFlowVersion = await flowsApi.update(
-        flow.id,
-        operation,
-        true,
-      );
+      const updatedFlowVersion = await flowsApi.update(flow.id, operation, true);
       return {
         flowVersion: {
           ...flow.version,
@@ -204,10 +200,7 @@ export default function MCPPage() {
     };
   };
 
-  const pieceInfoMap: Record<
-    string,
-    { displayName: string; logoUrl?: string }
-  > = {};
+  const pieceInfoMap: Record<string, { displayName: string; logoUrl?: string }> = {};
   mcp?.pieces?.forEach((piece) => {
     pieceInfoMap[piece.id] = getPieceInfo(piece);
   });
@@ -221,37 +214,15 @@ export default function MCPPage() {
         onClick={() => createFlow()}
       >
         <div className="flex flex-col items-center gap-2">
-          <div
-            className={`rounded-full ${
-              theme === 'dark' ? 'bg-slate-800' : 'bg-slate-100'
-            } p-2.5 mb-1`}
-          >
-            <Plus
-              className={`h-5 w-5 ${
-                theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            />
+          <div className={`rounded-full ${theme === 'dark' ? 'bg-slate-800' : 'bg-slate-100'} p-2.5 mb-1`}>
+            <Plus className={`h-5 w-5 ${theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`} />
           </div>
-          <p
-            className={`font-medium ${
-              theme === 'dark' ? 'text-slate-200' : 'text-slate-800'
-            }`}
-          >
-            {t('Add Flow')}
-          </p>
-          <p
-            className={`text-xs mt-0.5 text-center ${
-              theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
-            }`}
-          >
+          <p className={`font-medium ${theme === 'dark' ? 'text-slate-200' : 'text-slate-800'}`}>{t('Add Flow')}</p>
+          <p className={`text-xs mt-0.5 text-center ${theme === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>
             {t('Let your AI assistant trigger automations')}
           </p>
         </div>
-        <Button
-          className="sr-only"
-          disabled={!doesUserHavePermissionToWriteFlow || isCreateFlowPending}
-          onClick={() => createFlow()}
-        >
+        <Button className="sr-only" disabled={!doesUserHavePermissionToWriteFlow || isCreateFlowPending} onClick={() => createFlow()}>
           {t('Create Your First MCP Flow')}
         </Button>
       </div>
@@ -262,70 +233,74 @@ export default function MCPPage() {
     <div className="w-full flex flex-col items-center justify-center gap-8 pb-12">
       <div className="w-full space-y-8">
         <div className="flex items-center gap-2">
-          <TableTitle
-            beta={true}
-            description={t(
-              'Connect to your hosted MCP Server using any MCP client to communicate with tools',
-            )}
-          >
-            {t('MCP Server')}
-          </TableTitle>
+          <TableTitle description={t('Use any MCP client to connect to your hosted server and access your tools.')}>{t('MCP Server')}</TableTitle>
         </div>
 
-        {/* Client Setup Instructions at the top */}
-        {!isFlowsLoading && !isLoading && (
+        <div className="flex flex-col gap-4 mb-8">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex gap-2 items-center">
+              <Hammer className="h-5 w-5 text-primary" />
+              <span className="text-xl font-bold">{t('Tools')}</span>
+            </div>
+            <div className="flex items-center justify-between cursor-pointer" onClick={() => setShowInstructionDialog(true)}>
+              <div className="flex items-center gap-2">
+                <Settings className="h-5 w-5 text-primary" />
+              </div>
+            </div>
+          </div>
+
+          <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as McpTabs)} className="w-full">
+            <TabsList variant="outline">
+              <TabsTrigger value={McpTabs.BLOCK} variant="outline">
+                {t('Blocks')}
+              </TabsTrigger>
+              <TabsTrigger value={McpTabs.FLOWS} variant="outline">
+                {t('Flows')}
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value={McpTabs.BLOCK}>
+              <McpToolsSection
+                tools={mcp?.pieces || []}
+                emptyMessage={null}
+                isLoading={isLoading}
+                type="pieces"
+                onAddClick={() => {}}
+                onToolDelete={removePiece}
+                pieceInfoMap={pieceInfoMap}
+                canAddTool={true}
+                addButtonLabel={t('Add Block')}
+                isPending={removePieceMutation.isPending}
+                refetchFlows={refetchFlows}
+              />
+            </TabsContent>
+            <TabsContent value={McpTabs.FLOWS}>
+              <McpToolsSection
+                tools={flowsData?.data || []}
+                emptyMessage={emptyFlowsMessage}
+                isLoading={isFlowsLoading}
+                type="flows"
+                onAddClick={() => createFlow()}
+                onToolClick={(flow) => navigate(`/flows/${flow.id}`)}
+                canAddTool={doesUserHavePermissionToWriteFlow}
+                addButtonLabel={t('Create Flow')}
+                isPending={isCreateFlowPending}
+                refetchFlows={refetchFlows}
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+      <Dialog open={showInstructionDialog} onOpenChange={setShowInstructionDialog}>
+        <DialogContent className="max-w-[90%]" onInteractOutside={(event) => event.preventDefault()}>
           <McpClientTabs
             mcpServerUrl={serverUrl}
-            hasTools={
-              (mcp?.pieces?.length || 0) > 0 ||
-              (flowsData?.data?.length || 0) > 0
-            }
+            hasTools={(mcp?.pieces?.length || 0) > 0 || (flowsData?.data?.length || 0) > 0}
             onRotateToken={handleRotateToken}
             isRotating={rotateMutation.isPending}
             hasValidMcp={!!mcp?.id}
           />
-        )}
-
-        <div className="flex flex-col gap-4 mb-8">
-          <div className="flex items-center gap-2">
-            <Hammer className="h-5 w-5 text-primary" />
-            <span className="text-xl font-bold">{t('My Tools')}</span>
-          </div>
-
-          {/* Pieces Section */}
-          <McpToolsSection
-            title={t('Blocks')}
-            tools={mcp?.pieces || []}
-            emptyMessage={null}
-            isLoading={isLoading}
-            type="pieces"
-            onAddClick={() => {}}
-            onToolDelete={removePiece}
-            pieceInfoMap={pieceInfoMap}
-            canAddTool={true}
-            addButtonLabel={t('Add Block')}
-            isPending={removePieceMutation.isPending}
-            refetchFlows={refetchFlows}
-          />
-
-          {/* Flows Section */}
-          <Separator className="w-full my-4" />
-
-          <McpToolsSection
-            title={t('Flows')}
-            tools={flowsData?.data || []}
-            emptyMessage={emptyFlowsMessage}
-            isLoading={isFlowsLoading}
-            type="flows"
-            onAddClick={() => createFlow()}
-            onToolClick={(flow) => navigate(`/flows/${flow.id}`)}
-            canAddTool={doesUserHavePermissionToWriteFlow}
-            addButtonLabel={t('Create Flow')}
-            isPending={isCreateFlowPending}
-            refetchFlows={refetchFlows}
-          />
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

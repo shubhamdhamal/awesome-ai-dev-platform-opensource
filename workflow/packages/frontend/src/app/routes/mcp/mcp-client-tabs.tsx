@@ -1,17 +1,6 @@
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { t } from 'i18next';
-import {
-  AlertTriangle,
-  ChevronDown,
-  ChevronUp,
-  Copy,
-  Eye,
-  EyeOff,
-  Link as LinkIcon,
-  RefreshCw,
-  Server,
-  Zap,
-} from 'lucide-react';
+import { AlertTriangle, ChevronDown, ChevronUp, Copy, Eye, EyeOff, Link as LinkIcon, RefreshCw, Server, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -22,12 +11,7 @@ import { useTheme } from '@/components/theme-provider';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useToast } from '@/components/ui/use-toast';
 
 import { SimpleJsonViewer } from '../../../components/simple-json-viewer';
@@ -51,37 +35,18 @@ const maskToken = (url: string) => {
 type ButtonWithTooltipProps = {
   tooltip: string;
   onClick: (e?: React.MouseEvent) => void;
-  variant?:
-    | 'ghost'
-    | 'outline'
-    | 'default'
-    | 'destructive'
-    | 'secondary'
-    | 'link';
+  variant?: 'ghost' | 'outline' | 'default' | 'destructive' | 'secondary' | 'link';
   icon: React.ReactNode;
   className?: string;
   disabled?: boolean;
 };
 
 // Reusable ButtonWithTooltip component
-const ButtonWithTooltip = ({
-  tooltip,
-  onClick,
-  variant = 'ghost',
-  icon,
-  className = 'h-7 w-7',
-  disabled = false,
-}: ButtonWithTooltipProps) => (
+const ButtonWithTooltip = ({ tooltip, onClick, variant = 'ghost', icon, className = 'h-7 w-7', disabled = false }: ButtonWithTooltipProps) => (
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button
-          variant={variant}
-          size="icon"
-          className={className}
-          onClick={onClick}
-          disabled={disabled}
-        >
+        <Button variant={variant} size="icon" className={className} onClick={onClick} disabled={disabled}>
           {icon}
         </Button>
       </TooltipTrigger>
@@ -116,27 +81,19 @@ const ConfigDisplay = ({
       <div className="rounded-md border overflow-hidden">
         <div className="flex items-center justify-between p-3 border-b bg-background">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">
-              {t('Server Configuration')}
-            </span>
+            <span className="text-sm font-medium">{t('Server Configuration')}</span>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="cursor-pointer">
                     <div className="flex items-center gap-1 text-xs border border-red-200 bg-red-50 dark:bg-red-950/30 dark:border-red-800/50 px-1.5 py-0.5 rounded-sm">
                       <AlertTriangle className="h-3 w-3 text-red-600 dark:text-red-400" />
-                      <span className="text-red-600 dark:text-red-400 font-medium">
-                        {t('Security')}
-                      </span>
+                      <span className="text-red-600 dark:text-red-400 font-medium">{t('Security')}</span>
                     </div>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="text-xs">
-                    {t(
-                      'This URL grants access to your tools and data. Only share with trusted applications.',
-                    )}
-                  </p>
+                  <p className="text-xs">{t('This URL grants access to your tools and data. Only share with trusted applications.')}</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -144,35 +101,19 @@ const ConfigDisplay = ({
 
           <div className="flex gap-2">
             <ButtonWithTooltip
-              tooltip={
-                showToken ? t('Hide sensitive data') : t('Show sensitive data')
-              }
+              tooltip={showToken ? t('Hide sensitive data') : t('Show sensitive data')}
               onClick={toggleTokenVisibility}
               variant="outline"
-              icon={
-                showToken ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )
-              }
+              icon={showToken ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             />
 
             {onRotateToken && (
               <ButtonWithTooltip
-                tooltip={t(
-                  'Create a new URL. The current one will stop working.',
-                )}
+                tooltip={t('Create a new URL. The current one will stop working.')}
                 onClick={onRotateToken}
                 variant="outline"
                 disabled={isRotating || !hasValidMcp}
-                icon={
-                  isRotating ? (
-                    <ReloadIcon className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <RefreshCw className="h-4 w-4" />
-                  )
-                }
+                icon={isRotating ? <ReloadIcon className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
               />
             )}
 
@@ -186,7 +127,7 @@ const ConfigDisplay = ({
                       type === 'npx'
                         ? {
                             command: 'npx',
-                            args: ['-y', "supergateway","--sse",'mcp-remote', maskedUrl,"--allow-http"],
+                            args: ['-y', 'supergateway', '--sse', 'mcp-remote', maskedUrl, '--allow-http'],
                           }
                         : {
                             url: mcpServerUrl,
@@ -213,7 +154,7 @@ const ConfigDisplay = ({
                   type === 'npx'
                     ? {
                         command: 'npx',
-                        args: ['-y', "supergateway","--sse",'mcp-remote', maskedUrl,"--allow-http"],
+                        args: ['-y', 'supergateway', '--sse', 'mcp-remote', maskedUrl, '--allow-http'],
                       }
                     : {
                         url: maskedUrl,
@@ -227,21 +168,13 @@ const ConfigDisplay = ({
   );
 };
 
-export const McpClientTabs = ({
-  mcpServerUrl,
-  hasTools = false,
-  onRotateToken,
-  isRotating = false,
-  hasValidMcp = false,
-}: McpClientTabsProps) => {
+export const McpClientTabs = ({ mcpServerUrl, hasTools = false, onRotateToken, isRotating = false, hasValidMcp = false }: McpClientTabsProps) => {
   const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState('claude');
-  const [isExpanded, setIsExpanded] = useState(!hasTools);
   const [showToken, setShowToken] = useState(false);
   const { toast } = useToast();
 
   const toggleTokenVisibility = () => setShowToken(!showToken);
-  const toggleExpanded = () => setIsExpanded(!isExpanded);
   const maskedServerUrl = showToken ? mcpServerUrl : maskToken(mcpServerUrl);
 
   const tabs = [
@@ -275,138 +208,91 @@ export const McpClientTabs = ({
     switch (activeTab) {
       case 'claude':
         return (
-          <div className="space-y-4">
-            <Alert variant="warning" className="mb-4">
-              <AlertDescription className="text-sm">
-                <p>
-                  {t('Note: MCPs only work with')}{' '}
-                  <Link
-                    to="https://claude.ai/download"
-                    className="underline"
-                    target="_blank"
-                  >
+          <div className="space-y-4 grid grid-cols-2 grid-rows-1 gap-4">
+            <ConfigDisplay mcpServerUrl={mcpServerUrl} type="npx" onRotateToken={onRotateToken} isRotating={isRotating} hasValidMcp={hasValidMcp} />
+            <div>
+              <Alert variant="warning">
+                <AlertDescription className="text-sm">
+                  <p>
+                    {t('Note: MCPs only work with')}{' '}
+                    <Link to="https://claude.ai/download" className="underline" target="_blank">
+                      {t('Claude Desktop')}
+                    </Link>
+                    {t(', not the web version.')}
+                  </p>
+                </AlertDescription>
+              </Alert>
+              <ol className="list-decimal list-inside space-y-3 text-sm text-foreground mb-4">
+                <li>
+                  <span className="font-semibold">{t('Prerequisites:')}</span> {t('Install')}{' '}
+                  <Link to={NODE_JS_DOWNLOAD_URL} className="underline" target="_blank">
+                    {t('Node.js')}
+                  </Link>{' '}
+                  {t('and')}{' '}
+                  <Link to="https://claude.ai/download" className="underline" target="_blank">
                     {t('Claude Desktop')}
                   </Link>
-                  {t(', not the web version.')}
-                </p>
-              </AlertDescription>
-            </Alert>
-            <ol className="list-decimal list-inside space-y-3 text-sm text-foreground mb-4">
-              <li>
-                <span className="font-semibold">{t('Prerequisites:')}</span>{' '}
-                {t('Install')}{' '}
-                <Link
-                  to={NODE_JS_DOWNLOAD_URL}
-                  className="underline"
-                  target="_blank"
-                >
-                  {t('Node.js')}
-                </Link>{' '}
-                {t('and')}{' '}
-                <Link
-                  to="https://claude.ai/download"
-                  className="underline"
-                  target="_blank"
-                >
-                  {t('Claude Desktop')}
-                </Link>
-              </li>
-              <li>
-                <span className="font-semibold">{t('Open Settings:')}</span>{' '}
-                {t('Click the menu and select')}{' '}
-                <strong>{t('Settings')}</strong> →{' '}
-                <strong>{t('Developer')}</strong>
-              </li>
-              <li>
-                <span className="font-semibold">{t('Configure MCP:')}</span>{' '}
-                {t('Click')} <strong>{t('Edit Config')}</strong>{' '}
-                {t('and paste the configuration below')}
-              </li>
-              <li>
-                <span className="font-semibold">{t('Save and Restart:')}</span>{' '}
-                {t('Save the config and restart Claude Desktop')}
-              </li>
-            </ol>
-            <ConfigDisplay
-              mcpServerUrl={mcpServerUrl}
-              type="npx"
-              onRotateToken={onRotateToken}
-              isRotating={isRotating}
-              hasValidMcp={hasValidMcp}
-            />
+                </li>
+                <li>
+                  <span className="font-semibold">{t('Open Settings:')}</span> {t('Click the menu and select')} <strong>{t('Settings')}</strong> →{' '}
+                  <strong>{t('Developer')}</strong>
+                </li>
+                <li>
+                  <span className="font-semibold">{t('Configure MCP:')}</span> {t('Click')} <strong>{t('Edit Config')}</strong>{' '}
+                  {t('and paste the configuration below')}
+                </li>
+                <li>
+                  <span className="font-semibold">{t('Save and Restart:')}</span> {t('Save the config and restart Claude Desktop')}
+                </li>
+              </ol>
+            </div>
           </div>
         );
       case 'cursor':
         return (
-          <div className="space-y-4">
+          <div className="space-y-4 grid grid-cols-2 grid-rows-1 gap-4">
+            <ConfigDisplay mcpServerUrl={mcpServerUrl} type="url" onRotateToken={onRotateToken} isRotating={isRotating} hasValidMcp={hasValidMcp} />
             <ol className="list-decimal list-inside space-y-3 text-sm text-foreground mb-4">
               <li>
-                <span className="font-semibold">{t('Open Settings:')}</span>{' '}
-                {t('Navigate to')} <strong>{t('Settings')}</strong> →{' '}
-                <strong>{t('Cursor Settings')}</strong> →{' '}
-                <strong>{t('MCP')}</strong>
+                <span className="font-semibold">{t('Open Settings:')}</span> {t('Navigate to')} <strong>{t('Settings')}</strong> →{' '}
+                <strong>{t('Cursor Settings')}</strong> → <strong>{t('MCP')}</strong>
               </li>
               <li>
-                <span className="font-semibold">{t('Add Server:')}</span>{' '}
-                {t('Click')} <strong>{t('Add new global MCP server')}</strong>
+                <span className="font-semibold">{t('Add Server:')}</span> {t('Click')} <strong>{t('Add new global MCP server')}</strong>
               </li>
               <li>
-                <span className="font-semibold">{t('Configure:')}</span>{' '}
-                {t('Paste the configuration below and save')}
+                <span className="font-semibold">{t('Configure:')}</span> {t('Paste the configuration below and save')}
               </li>
             </ol>
-            <ConfigDisplay
-              mcpServerUrl={mcpServerUrl}
-              type="url"
-              onRotateToken={onRotateToken}
-              isRotating={isRotating}
-              hasValidMcp={hasValidMcp}
-            />
           </div>
         );
       case 'windsurf':
         return (
-          <div className="space-y-4">
+          <div className="space-y-4 grid grid-cols-2 grid-rows-1 gap-4">
+            <ConfigDisplay mcpServerUrl={mcpServerUrl} type="npx" onRotateToken={onRotateToken} isRotating={isRotating} hasValidMcp={hasValidMcp} />
             <ol className="list-decimal list-inside space-y-3 text-sm text-foreground mb-4">
               <li>
-                <span className="font-semibold">{t('Open Settings:')}</span>{' '}
-                {t('Use either method:')}
+                <span className="font-semibold">{t('Open Settings:')}</span> {t('Use either method:')}
                 <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
                   <li>
-                    {t('Go to')} <strong>{t('Windsurf')}</strong> →{' '}
-                    <strong>{t('Settings')}</strong> →{' '}
-                    <strong>{t('Advanced Settings')}</strong>
+                    {t('Go to')} <strong>{t('Windsurf')}</strong> → <strong>{t('Settings')}</strong> → <strong>{t('Advanced Settings')}</strong>
                   </li>
                   <li>
-                    {t('Open Command Palette and select')}{' '}
-                    <strong>{t('Windsurf Settings Page')}</strong>
+                    {t('Open Command Palette and select')} <strong>{t('Windsurf Settings Page')}</strong>
                   </li>
                 </ul>
               </li>
               <li>
-                <span className="font-semibold">
-                  {t('Navigate to Cascade:')}
-                </span>{' '}
-                {t('Select')} <strong>{t('Cascade')}</strong>{' '}
-                {t('in the sidebar')}
+                <span className="font-semibold">{t('Navigate to Cascade:')}</span> {t('Select')} <strong>{t('Cascade')}</strong> {t('in the sidebar')}
               </li>
               <li>
-                <span className="font-semibold">{t('Add Server:')}</span>{' '}
-                {t('Click')} <strong>{t('Add Server')}</strong> →{' '}
+                <span className="font-semibold">{t('Add Server:')}</span> {t('Click')} <strong>{t('Add Server')}</strong> →{' '}
                 <strong>{t('Add custom server +')}</strong>
               </li>
               <li>
-                <span className="font-semibold">{t('Configure:')}</span>{' '}
-                {t('Paste the configuration below and save')}
+                <span className="font-semibold">{t('Configure:')}</span> {t('Paste the configuration below and save')}
               </li>
             </ol>
-            <ConfigDisplay
-              mcpServerUrl={mcpServerUrl}
-              type="npx"
-              onRotateToken={onRotateToken}
-              isRotating={isRotating}
-              hasValidMcp={hasValidMcp}
-            />
           </div>
         );
       case 'server':
@@ -422,18 +308,12 @@ export const McpClientTabs = ({
                       <div className="cursor-pointer">
                         <div className="flex items-center gap-1 text-xs border border-red-200 bg-red-50 dark:bg-red-950/30 dark:border-red-800/50 px-1.5 py-0.5 rounded-sm">
                           <AlertTriangle className="h-3 w-3 text-red-600 dark:text-red-400" />
-                          <span className="text-red-600 dark:text-red-400 font-medium">
-                            {t('Security')}
-                          </span>
+                          <span className="text-red-600 dark:text-red-400 font-medium">{t('Security')}</span>
                         </div>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
-                      <p className="text-xs">
-                        {t(
-                          'This URL grants access to your tools and data. Only share with trusted applications.',
-                        )}
-                      </p>
+                      <p className="text-xs">{t('This URL grants access to your tools and data. Only share with trusted applications.')}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -443,46 +323,26 @@ export const McpClientTabs = ({
                 <div className="flex items-center gap-3">
                   <div
                     className={`font-mono ${
-                      theme === 'dark'
-                        ? 'bg-muted text-foreground'
-                        : 'bg-muted/30 text-foreground/90'
+                      theme === 'dark' ? 'bg-muted text-foreground' : 'bg-muted/30 text-foreground/90'
                     } cursor-text w-full border rounded-md px-3 py-2.5 text-sm overflow-x-auto`}
                   >
                     {maskedServerUrl}
                   </div>
                   <div className="flex items-center gap-1 flex-shrink-0">
                     <ButtonWithTooltip
-                      tooltip={
-                        showToken
-                          ? t('Hide sensitive data')
-                          : t('Show sensitive data')
-                      }
+                      tooltip={showToken ? t('Hide sensitive data') : t('Show sensitive data')}
                       onClick={toggleTokenVisibility}
                       variant="outline"
                       className="h-9 w-9"
-                      icon={
-                        showToken ? (
-                          <EyeOff className="h-4 w-4" />
-                        ) : (
-                          <Eye className="h-4 w-4" />
-                        )
-                      }
+                      icon={showToken ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     />
                     <ButtonWithTooltip
-                      tooltip={t(
-                        'Create a new URL. The current one will stop working.',
-                      )}
+                      tooltip={t('Create a new URL. The current one will stop working.')}
                       onClick={onRotateToken ? onRotateToken : () => {}}
                       variant="outline"
                       className="h-9 w-9"
                       disabled={isRotating || !hasValidMcp}
-                      icon={
-                        isRotating ? (
-                          <ReloadIcon className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <RefreshCw className="h-4 w-4" />
-                        )
-                      }
+                      icon={isRotating ? <ReloadIcon className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
                     />
                     <ButtonWithTooltip
                       tooltip={t('Copy URL')}
@@ -509,103 +369,52 @@ export const McpClientTabs = ({
   };
 
   return (
-    <Card
-      className={`mb-8 ${
-        theme === 'dark' ? 'bg-card border-border' : 'bg-gray-50 border-border'
-      }`}
-    >
+    <Card className={`mb-8 ${theme === 'dark' ? 'bg-card border-none' : 'border-none'} shadow-none`}>
       <CardContent className="p-5 pt-5">
         <div className="space-y-4">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={toggleExpanded}
-          >
+          <div className="flex items-center justify-between cursor-pointer">
             <div className="flex items-center gap-2">
               <Zap className="h-5 w-5 text-primary" />
-              <h3 className="font-semibold text-foreground text-lg">
-                {t('Client Setup Instructions')}
-              </h3>
+              <h3 className="font-semibold text-foreground text-lg">{t('Client Setup')}</h3>
               <TooltipProvider delayDuration={100}>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <AlertTriangle className="h-4 w-4 text-amber-500 cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="w-64">
-                    <span className="text-sm">
-                      {t(
-                        'After changing connections or flows, reconnect your MCP server for changes to take effect.',
-                      )}
-                    </span>
+                    <span className="text-sm">{t('After changing connections or flows, reconnect your MCP server for changes to take effect.')}</span>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex items-center gap-1"
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent card click event from firing
-                toggleExpanded();
-              }}
-            >
-              {isExpanded ? (
-                <ChevronUp className="h-4 w-4" />
-              ) : (
-                <ChevronDown className="h-4 w-4" />
-              )}
-            </Button>
           </div>
 
-          {isExpanded && (
-            <>
-              <p className="text-muted-foreground text-sm">
-                {t(
-                  'Follow these steps to set up MCP in your preferred client. This enables your AI assistant to access your tools.',
+          <div className="flex flex-wrap gap-2 mb-4 mt-4 items-center">
+            {tabs.map((tab) => (
+              <Button
+                key={tab.id}
+                variant={'outline'}
+                className={`flex items-center gap-2 ${
+                  activeTab === tab.id ? (theme === 'dark' ? 'bg-muted' : 'bg-red-900 text-white') : theme === 'dark' ? 'bg-card/50' : 'bg-[#f7f6f4]'
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent card click event from firing
+                  setActiveTab(tab.id);
+                }}
+              >
+                {tab.isImage ? (
+                  <img src={tab.icon as string} alt={`${t(tab.label)} ${t('icon')}`} className="w-4 h-4" />
+                ) : (
+                  <tab.icon className="h-4 w-4" />
                 )}
-              </p>
+                {tab.label}
+              </Button>
+            ))}
+          </div>
 
-              <div className="flex flex-wrap gap-2 mb-4 mt-4 items-center">
-                <p className="text-muted-foreground text-sm">
-                  Choose your MCP client option:
-                </p>
-                {tabs.map((tab) => (
-                  <Button
-                    key={tab.id}
-                    variant={'outline'}
-                    className={`flex items-center gap-2 ${
-                      activeTab === tab.id
-                        ? theme === 'dark'
-                          ? 'bg-muted'
-                          : 'bg-red-900 text-white'
-                        : theme === 'dark'
-                        ? 'bg-card/50'
-                        : 'bg-[#f7f6f4]'
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent card click event from firing
-                      setActiveTab(tab.id);
-                    }}
-                  >
-                    {tab.isImage ? (
-                      <img
-                        src={tab.icon as string}
-                        alt={`${t(tab.label)} ${t('icon')}`}
-                        className="w-4 h-4"
-                      />
-                    ) : (
-                      <tab.icon className="h-4 w-4" />
-                    )}
-                    {tab.label}
-                  </Button>
-                ))}
-              </div>
-
-              <div className="p-1" onClick={(e) => e.stopPropagation()}>
-                {renderTabContent()}
-              </div>
-            </>
-          )}
+          <div className="p-1" onClick={(e) => e.stopPropagation()}>
+            {renderTabContent()}
+          </div>
         </div>
       </CardContent>
     </Card>
