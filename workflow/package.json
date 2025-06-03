@@ -4,8 +4,8 @@
   "rcVersion": "0.51.0-rc.0",
   "scripts": {
     "prepare": "echo 'Husky bypassed'",
-    "serve:frontend": "nx serve frontend",
-    "serve:backend": "nx serve backend-api --verbose",
+    "serve:frontend": "npm run build-embed-sdk && nx serve frontend",
+    "serve:backend": "nx serve backend-api",
     "serve:engine": "nx serve engine",
     "reset": "nx reset",
     "dev": "concurrently -n \"GUI,API,ENG\" -c \"bgBlue.bold,bgGreen.bold,bgRed.bold\" \"npm:serve:frontend\" \"npm:serve:backend\" \"npm:serve:engine\"",
@@ -23,6 +23,7 @@
     "pull-i18n": "crowdin pull --config crowdin.yml",
     "push-i18n": "crowdin upload sources",
     "clear": "npm run reset && rm -rf cache",
+    "build-embed-sdk": "nx bundle axb-embed-sdk && cp -r dist/packages/axb/ui/embed-sdk/bundled.js packages/frontend/public/embed-sdk/main.js",
     "build:aixblock-sdk": "cd aixblock-sdk && npm install && npm run build && cd .. && cp -r aixblock-sdk/lib. packages/frontend/public/aixblock-sdk",
     "build:generate-llm-editor": "cd ../tool-llm-editor && npm install --legacy-peer-deps && npm run build && cd ../workflow && cp -r ../tool-llm-editor/build/. packages/frontend/public/llm-editor",
     "build:generate-editor": "cd ../general-editor && npm install --legacy-peer-deps && npm run build:module && cd ../workflow && cp -r ../general-editor/build/ packages/frontend/public/general-editor",
