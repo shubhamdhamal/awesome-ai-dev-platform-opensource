@@ -258,8 +258,6 @@ ai, llm, decentralized-ai, generative-ai, asr, computer-vision, nlp, privacy, se
 
 Give this repository a ⭐ and share it with your network to help grow the AIxBlock community.
 
----
-## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
