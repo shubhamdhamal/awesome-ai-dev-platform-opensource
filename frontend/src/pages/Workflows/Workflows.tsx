@@ -22,7 +22,7 @@ const getInitUrl = (pathname: string) => {
 }
 
 export default function Workflows() {
-  const { setActions, clearActions } = useUserLayout();
+  const { setActions, clearActions, setBreadcrumbs, clearBreadcrumbs } = useUserLayout();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const initUrl = useRef(getInitUrl(pathname));
@@ -76,6 +76,32 @@ export default function Workflows() {
       clearActions();
     }
   }, [clearActions, route, setActions, initialized]);
+
+  useEffect(() => {
+    let label: string = "";
+
+    if (route.startsWith("/flows")) {
+      label = "Flows";
+    } else if (route.startsWith("/runs")) {
+      label = "Runs";
+    } else if (route.startsWith("/connections")) {
+      label = "Connections";
+    } else if (route.startsWith("/mcp")) {
+      label = "MCP";
+    } else if (route.startsWith("/ai-providers")) {
+      label = "AI Providers";
+    }
+
+    if (label.trim().length > 0) {
+      setBreadcrumbs([{label: "Automation Workflows"}, {label}]);
+    } else {
+      setBreadcrumbs([{label: "Automation Workflows"}]);
+    }
+
+    return () => {
+      clearBreadcrumbs();
+    }
+  }, [route, setBreadcrumbs, clearBreadcrumbs]);
 
   useEffect(() => {
     if (initialized) {

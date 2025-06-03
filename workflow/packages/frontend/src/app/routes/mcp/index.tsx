@@ -232,12 +232,12 @@ export default function MCPPage() {
   return (
     <div className="w-full flex flex-col items-center justify-center gap-8 pb-12">
       <div className="w-full space-y-8">
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <TableTitle description={t('Use any MCP client to connect to your hosted server and access your tools.')}>{t('MCP Server')}</TableTitle>
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-4 mb-8">
-          <div className="flex items-center justify-between gap-2">
+          {/* <div className="flex items-center justify-between gap-2">
             <div className="flex gap-2 items-center">
               <Hammer className="h-5 w-5 text-primary" />
               <span className="text-xl font-bold">{t('Tools')}</span>
@@ -247,6 +247,28 @@ export default function MCPPage() {
                 <Settings className="h-5 w-5 text-primary" />
               </div>
             </div>
+          </div> */}
+
+          <div className="absolute right-[16px] top-[30px]">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger
+                  asChild
+                  className="disabled:pointer-events-auto"
+                >
+                  <Button
+                    size={'sm'}
+                    variant="outline-primary"
+                    onClick={() => setShowInstructionDialog(true)}
+                  >
+                    <Settings className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  {t('MCP Client Config')}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
 
           <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as McpTabs)} className="w-full">
