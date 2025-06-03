@@ -115,7 +115,7 @@ function buildConnectionSchema(
   }
   const connectionSchema = Type.Object({
     externalId: Type.String({
-      pattern: '^[A-Za-z0-9_:+.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$',
+      pattern: '^[A-Za-z0-9_:+.-@]+$',
       minLength: 1,
       errorMessage: t('Name can only contain letters, numbers and underscores'),
     }),
