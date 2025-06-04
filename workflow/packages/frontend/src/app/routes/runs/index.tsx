@@ -26,13 +26,13 @@ const FlowRunsPage = () => {
     <div className="flex flex-col gap-4 grow">
       <TaskLimitAlert />
       <div className="flex-col w-full">
-        <TableTitle
+        {/*<TableTitle
           description={t(
             'Track the automation run history and status and troubleshoot issues.',
           )}
         >
           {t('Flow Runs')}
-        </TableTitle>
+        </TableTitle>*/}
         <Tabs
           value={activeTab}
           onValueChange={(value) => setActiveTab(value as FlowRunsTabs)}
