@@ -96,6 +96,7 @@ interface DataTableProps<
   emptyStateTextTitle: string;
   emptyStateTextDescription: string;
   emptyStateIcon: React.ReactNode;
+  customContent?: () => React.ReactNode;
 }
 
 export type BulkAction<TData extends DataWithId> = {
@@ -123,6 +124,7 @@ export function DataTable<
   emptyStateTextTitle,
   emptyStateTextDescription,
   emptyStateIcon,
+  customContent,
 }: DataTableProps<TData, TValue, Keys, F>) {
   const columns =
     actions.length > 0
@@ -271,45 +273,47 @@ export function DataTable<
           </div>
         </DataTableToolbar>
       )}
-
-      <div className="mt-0">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-transparent">
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
+      {customContent ? (
+        customContent()
+      ) : (
+        <div className="mt-0">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id} className="hover:bg-transparent">
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {isLoading ? (
-              <TableRow className="hover:bg-background">
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {isLoading ? (
+                <TableRow className="hover:bg-background">
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  <DataTableSkeleton />
-                </TableCell>
-              </TableRow>
-            ) : table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  className={cn('cursor-pointer', {
-                    'hover:bg-background cursor-default': isNil(onRowClick),
-                  })}
-                  onClick={(e) => {
-                    // Check if the clicked cell is not clickable
+                    <DataTableSkeleton />
+                  </TableCell>
+                </TableRow>
+              ) : table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    className={cn('cursor-pointer', {
+                      'hover:bg-background cursor-default': isNil(onRowClick),
+                    })}
+                    onClick={(e) => {
+                      // Check if the clicked cell is not clickable
                     const clickedCellIndex = (e.target as HTMLElement).closest(
                       'td',
                     )?.cellIndex;
@@ -317,12 +321,12 @@ export function DataTable<
                       clickedCellIndex !== undefined &&
                       columnsInitial[clickedCellIndex]?.notClickable
                     ) {
-                      return; // Don't trigger onRowClick for not clickable columns
-                    }
-                    onRowClick?.(row.original, e.ctrlKey, e);
-                  }}
-                  onAuxClick={(e) => {
-                    // Similar check for auxiliary click (e.g., middle mouse button)
+                        return; // Don't trigger onRowClick for not clickable columns
+                      }
+                      onRowClick?.(row.original, e.ctrlKey, e);
+                    }}
+                    onAuxClick={(e) => {
+                      // Similar check for auxiliary click (e.g., middle mouse button)
                     const clickedCellIndex = (e.target as HTMLElement).closest(
                       'td',
                     )?.cellIndex;
@@ -330,43 +334,43 @@ export function DataTable<
                       clickedCellIndex !== undefined &&
                       columnsInitial[clickedCellIndex]?.notClickable
                     ) {
-                      return;
-                    }
-                    onRowClick?.(row.original, true, e);
-                  }}
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      <div className="flex items-center justify-start">
-                        <div
-                          onClick={(e) => {
-                            if (cell.column.id === 'select') {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              return;
-                            }
-                          }}
-                        >
+                        return;
+                      }
+                      onRowClick?.(row.original, true, e);
+                    }}
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        <div className="flex items-center justify-start">
+                          <div
+                            onClick={(e) => {
+                              if (cell.column.id === 'select') {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                return;
+                              }
+                            }}
+                          >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext(),
                           )}
+                          </div>
                         </div>
-                      </div>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow className="hover:bg-background">
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow className="hover:bg-background">
                 <TableCell
                   colSpan={columns.length}
                   className="h-[350px] text-center"
                 >
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    {emptyStateIcon ? emptyStateIcon : <></>}
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      {emptyStateIcon ? emptyStateIcon : <></>}
                     <p className="text-lg font-semibold">
                       {emptyStateTextTitle}
                     </p>
@@ -375,13 +379,14 @@ export function DataTable<
                         {emptyStateTextDescription}
                       </p>
                     )}
-                  </div>
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      )}
       {!hidePagination && (
         <div className="flex flex-wrap items-center justify-center space-x-2 py-4 gap-3">
           <div className="flex gap-3">

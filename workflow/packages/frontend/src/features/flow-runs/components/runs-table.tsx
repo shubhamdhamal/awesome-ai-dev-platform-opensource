@@ -1,43 +1,17 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { t } from 'i18next';
-import {
-  CheckIcon,
-  ChevronDown,
-  History,
-  PlayIcon,
-  Redo,
-  RotateCw,
-} from 'lucide-react';
+import { Calendar, CheckIcon, ChevronDown, History, PlayIcon, Redo, RotateCw, Workflow } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  FlowRetryStrategy,
-  FlowRun,
-  FlowRunStatus,
-  isFailedState,
-  Permission,
-} from 'workflow-shared';
+import { FlowRetryStrategy, FlowRun, FlowRunStatus, isFailedState, Permission } from 'workflow-shared';
 
 import { useNewWindow } from '@/components/embed-provider';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import {
-  BulkAction,
-  CURSOR_QUERY_PARAM,
-  DataTable,
-  LIMIT_QUERY_PARAM,
-  RowDataWithActions,
-} from '@/components/ui/data-table';
+import { BulkAction, CURSOR_QUERY_PARAM, DataTable, LIMIT_QUERY_PARAM, RowDataWithActions } from '@/components/ui/data-table';
 import { DataTableColumnHeader } from '@/components/ui/data-table/data-table-column-header';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { MessageTooltip } from '@/components/ui/message-tooltip';
-import { PermissionNeededTooltip } from '@/components/ui/permission-needed-tooltip';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { StatusIconWithText } from '@/components/ui/status-icon-with-text';
 import { INTERNAL_ERROR_TOAST, toast } from '@/components/ui/use-toast';
 import { flowRunUtils } from '@/features/flow-runs/lib/flow-run-utils';
@@ -45,7 +19,11 @@ import { flowRunsApi } from '@/features/flow-runs/lib/flow-runs-api';
 import { flowsHooks } from '@/features/flows/lib/flows-hooks';
 import { useAuthorization } from '@/hooks/authorization-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
-import { formatUtils } from '@/lib/utils';
+import { cn, formatUtils } from '@/lib/utils';
+import { Card, CardContent } from '@/components/ui/card';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { PermissionNeededTooltip } from '@/components/ui/permission-needed-tooltip';
+import { MessageTooltip } from '@/components/ui/message-tooltip';
 
 type SelectedRow = {
   id: string;
@@ -58,7 +36,7 @@ export const RunsTable = () => {
   const [selectedAll, setSelectedAll] = useState(false);
   const [excludedRows, setExcludedRows] = useState<Set<string>>(new Set());
   const projectId = authenticationSession.getProjectId()!;
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['flow-run-table', searchParams.toString(), projectId],
     staleTime: 0,
     gcTime: 0,
@@ -66,9 +44,7 @@ export const RunsTable = () => {
       const status = searchParams.getAll('status') as FlowRunStatus[];
       const flowId = searchParams.getAll('flowId');
       const cursor = searchParams.get(CURSOR_QUERY_PARAM);
-      const limit = searchParams.get(LIMIT_QUERY_PARAM)
-        ? parseInt(searchParams.get(LIMIT_QUERY_PARAM)!)
-        : 10;
+      const limit = searchParams.get(LIMIT_QUERY_PARAM) ? parseInt(searchParams.get(LIMIT_QUERY_PARAM)!) : 10;
       const createdAfter = searchParams.get('createdAfter');
       const createdBefore = searchParams.get('createdBefore');
 
@@ -129,14 +105,11 @@ export const RunsTable = () => {
         icon: CheckIcon,
       } as const,
     ],
-    [flows],
+    [flows]
   );
 
   const replayRun = useMutation({
-    mutationFn: (retryParams: {
-      runIds: string[];
-      strategy: FlowRetryStrategy;
-    }) => {
+    mutationFn: (retryParams: { runIds: string[]; strategy: FlowRetryStrategy }) => {
       const status = searchParams.getAll('status') as FlowRunStatus[];
       const flowId = searchParams.getAll('flowId');
       const createdAfter = searchParams.get('createdAfter') || undefined;
@@ -157,7 +130,7 @@ export const RunsTable = () => {
         title: t('Runs replayed successfully'),
         variant: 'default',
       });
-      navigate(window.location.pathname);
+      refetch();
     },
     onError: () => {
       toast(INTERNAL_ERROR_TOAST);
@@ -260,16 +233,12 @@ export const RunsTable = () => {
   const handleRowClick = useCallback(
     (row: FlowRun, newWindow: boolean) => {
       if (newWindow) {
-        openNewWindow(
-          authenticationSession.appendProjectRoutePrefix(`/runs/${row.id}`),
-        );
+        openNewWindow(authenticationSession.appendProjectRoutePrefix(`/runs/${row.id}`));
       } else {
-        navigate(
-          authenticationSession.appendProjectRoutePrefix(`/runs/${row.id}`),
-        );
+        navigate(authenticationSession.appendProjectRoutePrefix(`/runs/${row.id}`));
       }
     },
-    [navigate, openNewWindow],
+    [navigate, openNewWindow]
   );
 
   const columns: ColumnDef<RowDataWithActions<FlowRun>>[] = [
@@ -291,12 +260,8 @@ export const RunsTable = () => {
 
                 setSelectedRows((prev) => {
                   const uniqueRows = new Map<string, SelectedRow>([
-                    ...prev.map(
-                      (row) => [row.id, row] as [string, SelectedRow],
-                    ),
-                    ...currentPageRows.map(
-                      (row) => [row.id, row] as [string, SelectedRow],
-                    ),
+                    ...prev.map((row) => [row.id, row] as [string, SelectedRow]),
+                    ...currentPageRows.map((row) => [row.id, row] as [string, SelectedRow]),
                   ]);
 
                   return Array.from(uniqueRows.values());
@@ -319,12 +284,10 @@ export const RunsTable = () => {
                 <DropdownMenuItem
                   className="cursor-pointer"
                   onClick={() => {
-                    const currentPageRows = table
-                      .getRowModel()
-                      .rows.map((row) => ({
-                        id: row.original.id,
-                        status: row.original.status,
-                      }));
+                    const currentPageRows = table.getRowModel().rows.map((row) => ({
+                      id: row.original.id,
+                      status: row.original.status,
+                    }));
                     setSelectedRows(currentPageRows);
                     setSelectedAll(false);
                     setExcludedRows(new Set());
@@ -357,11 +320,7 @@ export const RunsTable = () => {
       ),
       cell: ({ row }) => {
         const isExcluded = excludedRows.has(row.original.id);
-        const isSelected = selectedAll
-          ? !isExcluded
-          : selectedRows.some(
-              (selectedRow) => selectedRow.id === row.original.id,
-            );
+        const isSelected = selectedAll ? !isExcluded : selectedRows.some((selectedRow) => selectedRow.id === row.original.id);
 
         return (
           <Checkbox
@@ -387,11 +346,7 @@ export const RunsTable = () => {
                     },
                   ]);
                 } else {
-                  setSelectedRows((prev) =>
-                    prev.filter(
-                      (selectedRow) => selectedRow.id !== row.original.id,
-                    ),
-                  );
+                  setSelectedRows((prev) => prev.filter((selectedRow) => selectedRow.id !== row.original.id));
                 }
               }
               row.toggleSelected(isChecked);
@@ -402,57 +357,36 @@ export const RunsTable = () => {
     },
     {
       accessorKey: 'flowId',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Flow')} />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t('Flow')} />,
       cell: ({ row }) => {
         return <div className="text-left">{row.original.flowDisplayName}</div>;
       },
     },
     {
       accessorKey: 'status',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Status')} />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t('Status')} />,
       cell: ({ row }) => {
         const status = row.original.status;
         const { variant, Icon } = flowRunUtils.getStatusIcon(status);
         return (
           <div className="text-left">
-            <StatusIconWithText
-              icon={Icon}
-              text={formatUtils.convertEnumToHumanReadable(status)}
-              variant={variant}
-            />
+            <StatusIconWithText icon={Icon} text={formatUtils.convertEnumToHumanReadable(status)} variant={variant} />
           </div>
         );
       },
     },
     {
       accessorKey: 'created',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Start Time')} />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t('Start Time')} />,
       cell: ({ row }) => {
-        return (
-          <div className="text-left">
-            {formatUtils.formatDate(new Date(row.original.startTime))}
-          </div>
-        );
+        return <div className="text-left">{formatUtils.formatDate(new Date(row.original.startTime))}</div>;
       },
     },
     {
       accessorKey: 'duration',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Duration')} />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t('Duration')} />,
       cell: ({ row }) => {
-        return (
-          <div className="text-left">
-            {row.original.finishTime &&
-              formatUtils.formatDuration(row.original.duration)}
-          </div>
-        );
+        return <div className="text-left">{row.original.finishTime && formatUtils.formatDuration(row.original.duration)}</div>;
       },
     },
   ];
@@ -460,16 +394,114 @@ export const RunsTable = () => {
   return (
     <DataTable
       emptyStateTextTitle={t('No flow runs found')}
-      emptyStateTextDescription={t(
-        'Come back later when your automations start running',
-      )}
+      emptyStateTextDescription={t('Come back later when your automations start running')}
       emptyStateIcon={<History className="size-14" />}
       columns={columns}
       page={data}
       isLoading={isLoading || isFetchingFlows}
       filters={filters}
-      bulkActions={bulkActions}
-      onRowClick={(row, newWindow) => handleRowClick(row, newWindow)}
+      customContent={() => {
+        if (!data?.data?.length)
+          return (
+            <div className="flex flex-col items-center justify-center gap-2">
+              <History className="size-14" />
+              <p className="text-lg font-semibold">{t('No flow runs found')}</p>
+              <p className="text-sm text-muted-foreground ">{t('Come back later when your automations start running')}</p>
+            </div>
+          );
+        return (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {data.data.map((run) => {
+              const { variant, Icon } = flowRunUtils.getStatusIcon(run.status);
+              return (
+                <Card
+                  className={cn(
+                    'overflow-hidden transition-all duration-200 relative border-border cursor-pointer h-full',
+                    'hover:shadow-md hover:border-primary/30 hover:bg-accent/10'
+                  )}
+                  onClick={(e) => {
+                    handleRowClick(run, e.ctrlKey);
+                  }}
+                  onAuxClick={(e) => {
+                    handleRowClick(run, e.ctrlKey);
+                  }}
+                >
+                  <CardContent className="p-4">
+                    <div className="flex flex-col">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-medium text-foreground truncate text-sm min-w-0 flex-1">{run.flowDisplayName}</h4>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="flex items-center space-x-1 text-xs text-muted-foreground flex-shrink-0">
+                              <Calendar className="h-3 w-3" />
+                              <span className="whitespace-nowrap">{formatUtils.formatDate(new Date(run.created))}</span>
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>{t('Start Time')}</TooltipContent>
+                        </Tooltip>
+                      </div>
+                      <div className="w-full mt-5 flex justify-between items-center">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div>
+                              <StatusIconWithText icon={Icon} text={formatUtils.convertEnumToHumanReadable(run.status)} variant={variant} />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>{t('Status')}</TooltipContent>
+                        </Tooltip>
+                        <div className="flex gap-1 items-center">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="text-left">{run.finishTime && formatUtils.formatDuration(run.duration)}</div>
+                            </TooltipTrigger>
+                            <TooltipContent>{t('Duration')}</TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  replayRun.mutate({
+                                    runIds: [run.id],
+                                    strategy: FlowRetryStrategy.ON_LATEST_VERSION,
+                                  });
+                                }}
+                                className="rounded-full p-2 hover:bg-muted cursor-pointer"
+                              >
+                                <RotateCw className="h-4 w-4" />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent>{t('Retry on latest version')}</TooltipContent>
+                          </Tooltip>
+                          {isFailedState(run.status) && (
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    replayRun.mutate({
+                                      runIds: [run.id],
+                                      strategy: FlowRetryStrategy.FROM_FAILED_STEP,
+                                    });
+                                  }}
+                                  className="rounded-full p-2 hover:bg-muted cursor-pointer"
+                                >
+                                  <Redo className="h-4 w-4" />
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>{t('Retry from failed step')}</TooltipContent>
+                            </Tooltip>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        );
+      }}
     />
   );
 };
