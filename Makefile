@@ -44,7 +44,7 @@ build-general-editor:
 		&& npm i --legacy-peer-deps \
 		&& npm run build:module
 
-build-react-image-annotate:c
+build-react-image-annotate:
 	cd react-image-annotate \
 		&& npm i --legacy-peer-deps \
 		&& npm run build

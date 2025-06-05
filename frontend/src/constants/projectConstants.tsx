@@ -169,11 +169,11 @@ export const SIDEBAR_ITEM_LABELS = {
   OPEN_DATASET: "Open Dataset",
   WORKFLOWS: "Automation Workflows",
   WORKFLOWS_FLOWS: "Flows",
-  WORKFLOWS_RUNS: "Runs",
-  WORKFLOWS_CONNECTIONS: "Connections",
-  WORKFLOWS_MCP: "MCP",
+  WORKFLOWS_RUNS: "History",
+  WORKFLOWS_CONNECTIONS: "Applications",
+  WORKFLOWS_MCP: "MCP Configuration",
   WORKFLOWS_BLOCKS: "Blocks",
-  WORKFLOWS_AI_PROVIDERS: "AI Providers",
+  WORKFLOWS_AI_PROVIDERS: "AI Integration",
   TEMPLATE_MARKETPLACE: "Template Marketplace",
 };
 

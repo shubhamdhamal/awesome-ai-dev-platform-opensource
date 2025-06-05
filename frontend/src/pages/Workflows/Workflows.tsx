@@ -83,13 +83,13 @@ export default function Workflows() {
     if (route.startsWith("/flows")) {
       label = "Flows";
     } else if (route.startsWith("/runs")) {
-      label = "Runs";
+      label = "History";
     } else if (route.startsWith("/connections")) {
-      label = "Connections";
+      label = "Applications";
     } else if (route.startsWith("/mcp")) {
-      label = "MCP";
+      label = "MCP Configuration";
     } else if (route.startsWith("/ai-providers")) {
-      label = "AI Providers";
+      label = "AI Integration";
     }
 
     if (label.trim().length > 0) {

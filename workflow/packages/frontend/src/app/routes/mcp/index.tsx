@@ -261,7 +261,7 @@ export default function MCPPage() {
                     variant="outline-primary"
                     onClick={() => setShowInstructionDialog(true)}
                   >
-                    <Settings className="h-5 w-5" />
+                    <Settings className="h-5 w-5 mr-1" /> MCP Client Config
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="top">
