@@ -347,8 +347,8 @@ function AppConnectionsPage() {
     [bulkDeleteMutation, userHasPermissionToWriteAppConnection, isDialogOpen, selectedRows]
   );
   return (
-    <div className="flex-col w-full">
-      <TableTitle description={t('Manage project connections to external systems.')}>{t('Connections')}</TableTitle>
+    <div className="flex-col w-full -mt-4">
+      {/*<TableTitle description={t('Manage project connections to external systems.')}>{t('Connections')}</TableTitle>*/}
       <DataTable
         emptyStateTextTitle={t('No connections found')}
         emptyStateTextDescription={t('Come back later when you create a automation to manage your connections')}

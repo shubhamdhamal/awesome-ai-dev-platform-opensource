@@ -46,7 +46,6 @@ import RewardsHistory from "./pages/Admin/Rewards/History/History";
 import RewardActions from "./pages/Admin/Rewards/Action/Action";
 import ResetPassword from "./pages/ResetPassword/Index";
 import { CachedProvider } from "./providers/CachedProvider";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import EditorDesigner from "./pages/Project/EditorDesigner/EditorDesigner";
 import CentrifugeProvider from "./providers/CentrifugoProvider";
 import DashboardPage from "./pages/Dashboard/Index";
@@ -76,7 +75,6 @@ import Workflows from "./pages/Workflows/Workflows";
 import marketplaceRoutes from "./routes/marketplace";
 
 const Providers = composeProviders([
-  { provider: PayPalScriptProvider, props: { options: { clientId: window.APP_SETTINGS.paypalClientId } } },
   { provider: LoaderProvider },
   { provider: ApiProvider },
   { provider: AuthProvider },

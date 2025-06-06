@@ -64,13 +64,13 @@ export default function AIProvidersProjectPage() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value={AiProviderTabs.AI_PROVIDER}>
-            <div>
+            {/* <div>
               <div className="flex justify-between flex-row w-full">
                 <TableTitle description={t('Set provider credentials that will be used by universal AI blocks, i.e Text AI.')}>
                   {t('AI Providers')}
                 </TableTitle>
               </div>
-            </div>
+            </div> */}
             {isLoading || isDeleting ? (
               <Skeleton className="h-24 w-full" />
             ) : (
@@ -178,13 +178,13 @@ export default function AIProvidersProjectPage() {
           </TabsContent>
           <TabsContent value={AiProviderTabs.COPILOT}>
             <div>
-              <div className="mb-4 flex">
+              {/* <div className="mb-4 flex">
                 <div className="flex justify-between flex-row w-full">
                   <div className="flex flex-col gap-2">
                     <TableTitle>{t('Copilot')}</TableTitle>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <CopilotSetup />
             </div>
           </TabsContent>

@@ -105,7 +105,7 @@ const MemoizedSidebarItem = (props: ISidebarItemProps) => {
             {isExpand && (
               <li
                 key={`key-${child.label}`}
-                className={`c-sidebar__item child ${isActive(child.path)}`}
+                className={`c-sidebar__item child ${isActive(child.path) ? "active" : ""}`}
                 onClick={(e) => onChildItemClick(child, e)}
               >
                 {item.children && item.children?.length - 1 !== index ? (

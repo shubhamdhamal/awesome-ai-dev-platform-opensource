@@ -74,13 +74,13 @@ const flowTemplateController: FastifyPluginAsyncTypebox = async (fastify) => {
     })
 }
 async function resolveTemplatesPlatformId(principal: Principal, platformId: string): Promise<string> {
-    if (principal.type === PrincipalType.UNKNOWN) {
-        return system.getOrThrow(AppSystemProp.CLOUD_PLATFORM_ID)
-    }
+    // if (principal.type === PrincipalType.UNKNOWN) {
+    //     return system.getOrThrow(AppSystemProp.CLOUD_PLATFORM_ID)
+    // }
     const platform = await platformService.getOneOrThrow(platformId)
-    if (!platform.manageTemplatesEnabled) {
-        return system.getOrThrow(AppSystemProp.CLOUD_PLATFORM_ID)
-    }
+    // if (!platform.manageTemplatesEnabled) {
+    //     return system.getOrThrow(AppSystemProp.CLOUD_PLATFORM_ID)
+    // }
     return platform.id
 }
 

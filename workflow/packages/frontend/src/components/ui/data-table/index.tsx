@@ -276,7 +276,7 @@ export function DataTable<
       {customContent ? (
         customContent()
       ) : (
-        <div className="rounded-md border mt-0">
+        <div className="mt-0">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
