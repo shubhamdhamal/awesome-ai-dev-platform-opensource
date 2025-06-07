@@ -1,0 +1,17 @@
+This dataset contains real-world medical conversations between doctors and patients in English (USA accent), covering two specialized domains: ENT (Ear, Nose, Throat) and Dermatology. It includes raw audio recordings and human-verified transcriptions, making it valuable for training medical speech recognition, clinical dialogue systems, and other healthcare AI applications.
+
+🏥 Domains: ENT and Dermatology (e.g., infections, allergies, hearing issues, skin conditions, treatments)
+
+🎧 Audio Format: Raw WAV files recorded in real clinical environments, preserving natural background and acoustic conditions
+
+📝 Transcriptions: High-accuracy transcripts aligned with the audio, curated by professional reviewers
+
+Language: English USA accented
+
+🔒 PII Redaction: All personally identifiable information has been thoroughly redacted from both audio and transcripts. Redacted categories include: account_number, banking_information, blood_type, credit_card_number, credit_card_expiration, credit_card_cvv, date, date_interval, date_of_birth, drivers_license, drug, duration, email_address, event, filename, gender_sexuality, healthcare_number, injury, ip_address, language, location, marital_status, medical_condition, medical_process, money_amount, nationality, number_sequence, occupation, organization, passport_number, password, person_age, person_name, phone_number, physical_attribute, political_affiliation, religion, statistics, time, url, us_social_security_number, username, vehicle_id, zodiac_sign
+
+🔐 License: Provided exclusively for research and AI model development. Commercial use, resale, or redistribution is strictly prohibited.
+
+🎓 Brought to you by AIxBlock – a decentralized platform for AI development and workflow automations, with a commitment to enabling the development of fair, accurate, and responsible AI systems through high-quality open datasets.
+
+Link to download: https://huggingface.co/datasets/AIxBlock/EngUS-doctor-patient-real-conversations-audio-and-transcription-PII-redacted
