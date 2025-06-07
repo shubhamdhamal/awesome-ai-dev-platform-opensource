@@ -1,10 +1,10 @@
 This dataset contains real-world medical conversations between doctors and patients in English (USA accent), covering two specialized domains: ENT (Ear, Nose, Throat) and Dermatology. It includes raw audio recordings and human-verified transcriptions, making it valuable for training medical speech recognition, clinical dialogue systems, and other healthcare AI applications.
 
-🏥 Domains: ENT and Dermatology (e.g., infections, allergies, hearing issues, skin conditions, treatments)
+🏥 Domains: ENT and Dermatology and orthopaedic (e.g., infections, allergies, hearing issues, skin conditions, treatments)
 
-🎧 Audio Format: Raw WAV files recorded in real clinical environments, preserving natural background and acoustic conditions
+🎧 Audio Format: Raw WAV and mp3 files recorded in real clinical environments, preserving natural background and acoustic conditions
 
-📝 Transcriptions: High-accuracy transcripts aligned with the audio, curated by professional reviewers
+📝 Transcriptions: High-accuracy transcripts aligned with the audios
 
 Language: English USA accented
 
