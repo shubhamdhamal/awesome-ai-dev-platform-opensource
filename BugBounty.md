@@ -18,7 +18,6 @@ Welcome to the **AIxBlock.io Bug Bounty Program** – our open invitation to the
 7. [Response Targets](#response-targets)
 8. [Future Benefits](#future-benefits)
 9. [Contact](#contact)
-10. [Changelog](#changelog)
 
 ---
 
