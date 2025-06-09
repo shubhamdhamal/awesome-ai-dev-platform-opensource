@@ -75,18 +75,37 @@ Anyone can participate **except**:
 
 ## Reporting Process
 
-1. **Star + Fork** the repo to stay in sync.
-2. **Open an Issue** using the “Bug Report” template and include:
+Submit vulnerabilities as issues on the public repository at [https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public](https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public). Follow these essential steps:
 
-   * 🔍 **Description** & impact.
-   * 🛠 **Reproduction steps / PoC** (screenshots or video welcome).
-   * ⚙️ **Environment** (domain, build, commit hash).
-3. **Create a Discussion Branch** (e.g. `bugfix/issue‑123`).
-4. **Propose a Fix** via PR to that branch – reference the issue.
-5. **AIxBlock SEC** acknowledges within **48 h**.
-6. **Validation** within **7 business days** – severity & reward confirmed.
-7. **Merge & Release** → researcher credited in `SECURITY.md`.
-8. **Public Disclosure** with our approval once fix is live.
+1. **Star the Repository:** Stay updated and show your engagement.
+2. **Fork the Repository:** Fork to contribute and keep track of your changes.
+3. **Submit Report:**
+
+   * Create an issue using the "Bug Report" template (if available), and include:
+
+     * 🔍 **Vulnerability description**
+     * 🛠 **Reproduction steps / PoC** (screenshots or video if applicable)
+     * 🧠 **Impact assessment**
+     * 📸 **Screenshots or video evidence**
+4. **Discussion:**
+
+   * Create a dedicated branch (e.g., `bugfix/issue-123`) to collaborate on your proposed fix.
+   * Engage with the AIxBlock team and the community via comments on the issue or pull request.
+5. **Fix Submission:**
+
+   * Submit a pull request (PR) to the discussion branch.
+   * Reference the original issue in your PR.
+   * Include clear documentation of the fix in your PR description.
+6. **Response:**
+
+   * The AIxBlock Security Team will acknowledge your submission within **48 hours**.
+7. **Validation:**
+
+   * Vulnerabilities are validated within **7 business days**.
+   * Severity and reward are confirmed after validation.
+8. **Disclosure:**
+
+   * Once the fix is live and merged, public disclosure is permitted with **AIxBlock’s approval**.
 
 
 ---
