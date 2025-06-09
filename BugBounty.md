@@ -76,29 +76,28 @@ Anyone can participate **except**:
 
 Submit vulnerabilities as issues on the public repository at [https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public](https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public). Follow these essential steps:
 
-1. **Star the Repository:** Stay updated and show your engagement.
-2. **Fork the Repository:** Fork to contribute and keep track of your changes.
+1. **Star the Repository (mandatory):** Stay updated and show your engagement.
+2. **Fork the Repository (mandatory):** Fork to contribute, keep track of your changes and use as a proof to claim tokens later as well as to receive long term revenue sharing in the future.
 3. **Submit Report:**
 
    * Create an issue using the "Bug Report" template (if available), and include:
 
      * 🔍 **Vulnerability description**
-     * 🛠 **Reproduction steps / PoC** (screenshots or video if applicable)
-     * 🧠 **Impact assessment**
+     * 🧠 **Impact assessment (should be concise)**
      * 📸 **Screenshots or video evidence**
-4. **Discussion:**
+4. **Discussion (optional, but encouraged):**
 
    * Create a dedicated branch (e.g., `bugfix/issue-123`) to collaborate on your proposed fix.
    * Engage with the AIxBlock team and the community via comments on the issue or pull request.
-5. **Fix Submission:**
+5. **Fix bug/propose solutions and pull PR request :**
 
    * Submit a pull request (PR) to the discussion branch.
    * Reference the original issue in your PR.
-   * Include clear documentation of the fix in your PR description.
-6. **Response:**
+   * Include description of the fix in your PR description.
+6. **AIxBlock Responds:**
 
    * The AIxBlock Security Team will acknowledge your submission within **48 hours**.
-7. **Validation:**
+7. **AIxBlock Validates:**
 
    * Vulnerabilities are validated within **7 business days**.
    * Severity and reward are confirmed after validation.
@@ -124,7 +123,7 @@ Submit vulnerabilities as issues on the public repository at [https://github.com
 
 **No Reward:** Duplicate reports, out-of-scope issues, or vulnerabilities with no security impact.
 
-**Payments:** Rewards can be paid via either bank transfer in fiat currency or in stablecoins (USDC) as cryptocurrency payment, distributed at the end of the bounty campaign once the total cash rewards pool reaches 10,000 USD, will be announced publicly on all of our channels.
+**Payments:** Cash Rewards can be paid via either bank transfer in fiat currency or in stablecoins (USDC) as cryptocurrency payment, distributed at the end of the bounty campaign once the total cash rewards pool reaches 10,000 USD, will be announced publicly on all of our channels. Token rewards shall be distributed on our TGE date or 1 day after our TGE date. Please follow us to make sure you don't miss it.
 
 Total pool: **\$10 000** cash + **30 000 USDC** worth of tokens.
 
