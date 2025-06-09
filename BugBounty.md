@@ -14,7 +14,7 @@ Welcome to the **AIxBlock.io Bug Bounty Program** – our open invitation to the
 3. [Out‑of‑Scope](#out-of-scope)
 4. [Rules of Engagement](#rules-of-engagement)
 5. [Reporting Process](#reporting-process)
-6. [Severity & Rewards](#severity--rewards)
+6. [Severity and Rewards](#severity--rewards)
 7. [Response Targets](#response-targets)
 8. [Future Benefits](#future-benefits)
 9. [Contact](#contact)
@@ -46,7 +46,7 @@ AIxBlock combines decentralized compute, open‑source models, data engines and 
 | `mcp.aixblock.io`            | MCP Layer              | **Medium**   | Connectors to third‑party tools (Cursor, Claude, WindSurf, …).        |
 | `workflow.aixblock.io`       | Workflow Engine        | **Critical** | Core service for building & running automation workflows.             |
 
-### Out of Scope
+## Out of Scope
 
 * Third‑party services we don’t control (e.g. Solana L1, Hugging Face, Roboflow).
 * DoS / DDoS or spam/flood tests.
@@ -63,7 +63,7 @@ AIxBlock combines decentralized compute, open‑source models, data engines and 
 * Chain or duplicate vulnerabilities = one bounty.
 * First valid report wins if duplicates occur.
 
-### Eligibility
+## Eligibility
 
 Anyone can participate **except**:
 
@@ -109,7 +109,7 @@ Submit vulnerabilities as issues on the public repository at [https://github.com
 
 ---
 
-## Severity & Rewards
+## Severity and Rewards
 
 | Severity     | CVSS Range | Examples                                                                                      | Reward (USD + Token)\*                                        |
 | ------------ | ---------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
