@@ -139,3 +139,7 @@ Additional opportunities to claim tokens on our TGE date and receive long-term r
 - **Huggingface**: https://huggingface.co/AIxBlock.
 
 ---
+
+### Footnotes
+
+1. *CVSS v3.1 Severity Rating Scale* – FIRST.org.
