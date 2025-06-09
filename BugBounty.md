@@ -1,111 +1,141 @@
-# AIxBlock.io Bug Bounty Program
+# AIxBlock Bug Bounty Program
 
-Welcome to the official Bug Bounty Program for **AIxBlock.io**, a decentralized, open-source platform for end-to-end AI development and workflow automation.
+Welcome to the **AIxBlock.io Bug Bounty Program** – our open invitation to the security community to help us keep the first unified, decentralized AI‑and‑automation platform safe for everyone. We reward actionable research that keeps our users’ AI workflows, automation pipelines, data and Solana‑based resources secure.
 
----
-
-## 1. Objective
-
-The goal of this program is to strengthen the security of AIxBlock.io by encouraging bug hunters to identify, report vulnerabilities, and propose fixes. All activities are managed transparently via our public repository:
-
-[https://github.com/AIxBlock-2023/awesome-ai-dev-platform-opensource](https://github.com/AIxBlock-2023/awesome-ai-dev-platform-opensource)
-
-This program protects privacy, data integrity, and reliability of AI workflows, automation workflows, and Solana-based decentralized resources.
+> **Important:** All bounty activity must take place publicly in our repository:
+> [https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public](https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public)
 
 ---
 
-## 2. Scope
+## Table of Contents
 
-AIxBlock is the first unified platform for end-to-end AI development and automation workflows powered by decentralized compute, models, datasets, and human validators.
-
-| Domain                    | Type                      | Asset Value | Description                                                                                  |
-|---------------------------|---------------------------|-------------|----------------------------------------------------------------------------------------------|
-| app.aixblock.io           | Web Application           | High        | Main UI for AI workflows, automation workflows, and dashboard.                               |
-| api.aixblock.io           | API                       | Critical    | Public API endpoints for AI model management and workflow execution (/api/*).                |
-| *.aixblock.io             | Wildcard Subdomains       | Medium      | Related subdomains (e.g., docs, staging), excluding third-party services.                     |
-| webhook.aixblock.io       | Webhook Endpoint          | High        | Webhook endpoints for external data, critical for workflows and third-party integrations.    |
-| smartcontracts.aixblock.io| Smart Contracts (Solana)  | Critical    | Solana smart contracts managing decentralized compute, models, validators, transactions.     |
-| compute.aixblock.io       | Decentralized Compute     | High        | Infrastructure for renting/lending CPU/GPU in AI and automation workflows.                   |
-| data.aixblock.io          | Data Engine               | High        | Pipelines for crawling, curation, labeling integrated with Hugging Face, Roboflow, Kaggle.   |
-| mcp.aixblock.io           | MCP Integration Layer     | Medium      | Integration endpoints for third-party platforms (Cursor, Claude, WindSurf) in workflows.     |
-| workflow.aixblock.io      | Automation Workflow Engine| Critical    | Core engine for creating and managing automation workflows (triggers, actions, logic).       |
-
-### Out of Scope
-- Third-party services outside AIxBlock control (e.g., Solana core blockchain, Hugging Face).
-- Denial of Service (DoS/DDoS) attacks.
-- Vulnerabilities without security impact (e.g., UI typos).
-- Proprietary AI models or data not publicly available.
+1. [Overview](#overview)
+2. [Scope](#scope)
+3. [Out‑of‑Scope](#out-of-scope)
+4. [Rules of Engagement](#rules-of-engagement)
+5. [Reporting Process](#reporting-process)
+6. [Severity & Rewards](#severity--rewards)
+7. [Response Targets](#response-targets)
+8. [Future Benefits](#future-benefits)
+9. [Contact](#contact)
+10. [Changelog](#changelog)
 
 ---
 
-## 3. Participation Rules & Reporting Process
+## Overview
 
-### Valid Reports
-Submit vulnerabilities as **issues** on the public repository:
+**Objective — Security Through Openness**
+AIxBlock combines decentralized compute, open‑source models, data engines and human validators into a low‑code environment for end‑to‑end AI and workflow automation. Our goal is to **identify and remediate vulnerabilities quickly and transparently** while crediting and rewarding the researchers who make that possible.
 
-[https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public](https://github.com/AIxBlock-2023/aixblock-ai-dev-platform-public)
-
-**Steps:**
-
-- **Star** the repository to stay updated.
-- **Fork** the repository to contribute and track your changes.
-- **Submit a Pull Request (PR)** reporting bugs and proposing fixes.
-
-### Reporting Process
-
-1. **Submit Report:**
-   - Open an issue describing:
-     - Vulnerability details
-     - Reproduction steps (PoC)
-     - Impact assessment
-     - Screenshots/videos (if any)
-
-2. **Discussion:**
-   - Create a dedicated branch (e.g., `bugfix/issue-123`) to discuss fixes.
-   - Engage with the team/community via issue comments or PR.
-
-3. **Fix Submission:**
-   - Submit a PR referencing the issue.
-   - Include documentation of the fix.
-
-4. **Response & Validation:**
-   - AIxBlock security team will acknowledge receipt within 48 hours.
-   - Validation completed within 7 business days.
-
-5. **Disclosure:**
-   - Public disclosure allowed after fix approval.
+* All vulnerability discussion and fixes are public (issues & PRs).
+* Rewards scale with **impact *and* fix quality** – submit the bug **and** a working patch to maximize your payout.
+* We follow the \[CVSS v3.1] qualitative scale for severity (see footnote 1).
 
 ---
 
-## 4. Severity Levels & Rewards
+## Scope
 
-Rewards are based on severity, assessed via CVSS or internal evaluation. Rewards apply only to submissions including both report and fix (PR).
+| Domain                       | Type                   | Asset Value  | Description                                                           |
+| ---------------------------- | ---------------------- | ------------ | --------------------------------------------------------------------- |
+| `app.aixblock.io`            | Web App                | **High**     | Primary UI for AI & automation workflows.                             |
+| `api.aixblock.io`            | API                    | **Critical** | Model management & workflow execution endpoints (`/api/*`).           |
+| `*.aixblock.io`              | Wildcard               | **Medium**   | All first‑party sub‑domains (docs, staging, etc.).                    |
+| `webhook.aixblock.io`        | Webhook                | **High**     | Inbound hooks powering third‑party integrations.                      |
+| `smartcontracts.aixblock.io` | Solana Smart Contracts | **Critical** | On‑chain logic for compute, models, validators & transactions.        |
+| `compute.aixblock.io`        | Decentralized Compute  | **High**     | GPU/CPU rental marketplace infrastructure.                            |
+| `data.aixblock.io`           | Data Engine            | **High**     | Pipelines for crawl, curate, label – bridges to HF, Roboflow, Kaggle. |
+| `mcp.aixblock.io`            | MCP Layer              | **Medium**   | Connectors to third‑party tools (Cursor, Claude, WindSurf, …).        |
+| `workflow.aixblock.io`       | Workflow Engine        | **Critical** | Core service for building & running automation workflows.             |
 
-| Severity       | Examples                                              | Reward                                                                                                   |
-|----------------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **Critical** (CVSS 9.0-10.0) | Remote Code Execution, Smart Contract flaws causing asset loss, Unauthorized workflow execution | $750 USD + 1,500 USDC equivalent in AIxBlock token (redeemable on/after TGE) + long-term revenue sharing |
-| **High** (CVSS 7.0-8.9)      | SSRF, Authentication bypass, Unauthorized access to compute or triggers                       | $450 USD + 1,000 USDC equivalent in AIxBlock token + long-term revenue sharing                            |
-| **Medium** (CVSS 4.0-6.9)    | XSS, CSRF affecting workflow actions, Webhook misconfiguration                                | $200 USD + 500 USDC equivalent in AIxBlock token + long-term revenue sharing                              |
-| **Low** (CVSS 0.1-3.9)       | Minor config errors, Non-impactful XSS, Non-sensitive info disclosure                        | 200 USDC equivalent in AIxBlock token only + long-term revenue sharing                                   |
+### Out of Scope
 
-### Bonus Rewards
-- Detailed PoCs
-- Vulnerabilities in new features (automation workflows, MCP, decentralized compute)
-
-### No Rewards
-- Duplicate reports
-- Out-of-scope issues
-- Issues without security impact
-
-### Payments
-- Via bank transfer (fiat) or USDC stablecoin.
-- Distributed at campaign end when cash rewards pool reaches $10,000.
-- Public announcement on official channels.
+* Third‑party services we don’t control (e.g. Solana L1, Hugging Face, Roboflow).
+* DoS / DDoS or spam/flood tests.
+* UI bugs with **no** security impact.
+* Proprietary/private models or data not present in the public repo.
 
 ---
 
+## Rules of Engagement
 
-Thank you for helping us make AIxBlock.io more secure!
+* **Be lawful & respectful** – no social engineering, physical attacks, or privacy violations.
+* **Only test with accounts you own** or explicit permission.
+* **No public disclosure until the fix is merged** (see timeline below).
+* Chain or duplicate vulnerabilities = one bounty.
+* First valid report wins if duplicates occur.
+
+### Eligibility
+
+Anyone can participate **except**:
+
+* Current AIxBlock employees or contractors.
 
 
+---
 
+## Reporting Process
+
+1. **Star + Fork** the repo to stay in sync.
+2. **Open an Issue** using the “Bug Report” template and include:
+
+   * 🔍 **Description** & impact.
+   * 🛠 **Reproduction steps / PoC** (screenshots or video welcome).
+   * ⚙️ **Environment** (domain, build, commit hash).
+3. **Create a Discussion Branch** (e.g. `bugfix/issue‑123`).
+4. **Propose a Fix** via PR to that branch – reference the issue.
+5. **AIxBlock SEC** acknowledges within **48 h**.
+6. **Validation** within **7 business days** – severity & reward confirmed.
+7. **Merge & Release** → researcher credited in `SECURITY.md`.
+8. **Public Disclosure** with our approval once fix is live.
+
+
+---
+
+## Severity & Rewards
+
+| Severity     | CVSS Range | Examples                                                                                      | Reward (USD + Token)\*                                        |
+| ------------ | ---------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Critical** | 9.0 – 10.0 | Remote Code Execution (RCE), Smart Contract logic flaws causing asset loss, Data leakage of AI models or automation workflow data, Unauthorized workflow execution | **\$750** cash + **1,500 USDC** in AIxBlock token & rev‑share |
+| **High**     | 7.0 – 8.9  | Server-Side Request Forgery (SSRF), Authentication Bypass, Unauthorized access to decentralized compute or workflow triggers                          | **\$450** cash + **1,000 USDC** in token & rev‑share          |
+| **Medium**   | 4.0 – 6.9  | Cross-Site Scripting (XSS), CSRF affecting workflow actions, Webhook misconfiguration                                              | **\$200** cash + **500 USDC** in token & rev‑share            |
+| **Low**      | 0.1 – 3.9  | Minor configuration errors, Non-impactful XSS, Non-sensitive information disclosure                                                      | **200 USDC** in token & rev‑share                             |
+
+\***Token: payouts redeemable on or one day after TGE.**
+
+**Bonus:** Additional for reports with detailed PoCs or vulnerabilities found in new features (e.g., automation workflows, MCP integration, decentralized compute).
+
+**No Reward:** Duplicate reports, out-of-scope issues, or vulnerabilities with no security impact.
+
+**Payments:** Rewards can be paid via either bank transfer in fiat currency or in stablecoins (USDC) as cryptocurrency payment, distributed at the end of the bounty campaign once the total cash rewards pool reaches 10,000 USD, will be announced publicly on all of our channels.
+
+Total pool: **\$10 000** cash + **30 000 USDC** worth of tokens.
+
+---
+
+## Response Targets
+
+| Stage             | Target SLA                                                    |
+| ----------------- | ------------------------------------------------------------- |
+| Acknowledgement   | **< 48 h**                                                    |
+| Triage & Severity | **≤ 7 business days**                                         |
+
+---
+
+## Future Benefits
+
+Additional opportunities to claim tokens on our TGE date and receive long-term revenue sharing.
+
+---
+
+## Contact
+
+- **Discord**: [Join Us](https://discord.gg/nePjg9g5v6)
+- **Twitter**: [Follow Us](https://x.com/AixBlock)
+- **Telegram**: [Join the Discussion](https://t.me/AIxBlock)
+- **LinkedIn**: [Follow Us](https://www.linkedin.com/company/aixblock/)
+- **YouTube**: [Watch Our Channel](https://www.youtube.com/@AIXBlock)
+- **Website**: https://aixblock.io
+- **Platform**: https://app.aixblock.io
+- **Huggingface**: https://huggingface.co/AIxBlock.
+
+---
