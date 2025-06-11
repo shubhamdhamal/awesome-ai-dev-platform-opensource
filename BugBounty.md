@@ -125,7 +125,7 @@ Submit vulnerabilities as issues on the public repository at [https://github.com
 
 **Payments:** Cash Rewards can be paid via either bank transfer in fiat currency or in stablecoins (USDC) as cryptocurrency payment, distributed at the end of the bounty campaign once the total cash rewards pool reaches 10,000 USD, will be announced publicly on all of our channels. Token rewards shall be distributed on our TGE date or 1 day after our TGE date. Please follow us to make sure you don't miss it.
 
-Total pool: **\$10 000** cash + *0 000 worth of AIxBlock tokens.
+Total pool: **\$10 000** cash + 30 000 worth of AIxBlock tokens.
 
 ---
 
