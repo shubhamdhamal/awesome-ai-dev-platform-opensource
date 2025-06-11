@@ -112,10 +112,10 @@ Submit vulnerabilities as issues on the public repository at [https://github.com
 
 | Severity     | CVSS Range | Examples                                                                                      | Reward (USD + Token)\*                                        |
 | ------------ | ---------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| **Critical** | 9.0 – 10.0 | Remote Code Execution (RCE), Smart Contract logic flaws causing asset loss, Data leakage of AI models or automation workflow data, Unauthorized workflow execution | **\$750** cash + **1,500 USDC** in AIxBlock token & rev‑share |
-| **High**     | 7.0 – 8.9  | Server-Side Request Forgery (SSRF), Authentication Bypass, Unauthorized access to decentralized compute or workflow triggers                          | **\$450** cash + **1,000 USDC** in token & rev‑share          |
-| **Medium**   | 4.0 – 6.9  | Cross-Site Scripting (XSS), CSRF affecting workflow actions, Webhook misconfiguration                                              | **\$200** cash + **500 USDC** in token & rev‑share            |
-| **Low**      | 0.1 – 3.9  | Minor configuration errors, Non-impactful XSS, Non-sensitive information disclosure                                                      | **200 USDC** in token & rev‑share                             |
+| **Critical** | 9.0 – 10.0 | Remote Code Execution (RCE), Smart Contract logic flaws causing asset loss, Data leakage of AI models or automation workflow data, Unauthorized workflow execution | **\$750** cash + **1,500 ** in AIxBlock token & rev‑share |
+| **High**     | 7.0 – 8.9  | Server-Side Request Forgery (SSRF), Authentication Bypass, Unauthorized access to decentralized compute or workflow triggers                          | **\$450** cash + **1,000 ** in token & rev‑share          |
+| **Medium**   | 4.0 – 6.9  | Cross-Site Scripting (XSS), CSRF affecting workflow actions, Webhook misconfiguration                                              | **\$200** cash + **500 ** in token & rev‑share            |
+| **Low**      | 0.1 – 3.9  | Minor configuration errors, Non-impactful XSS, Non-sensitive information disclosure                                                      | **200 ** in token & rev‑share                             |
 
 \***Token: payouts redeemable on or one day after TGE.**
 
@@ -125,7 +125,7 @@ Submit vulnerabilities as issues on the public repository at [https://github.com
 
 **Payments:** Cash Rewards can be paid via either bank transfer in fiat currency or in stablecoins (USDC) as cryptocurrency payment, distributed at the end of the bounty campaign once the total cash rewards pool reaches 10,000 USD, will be announced publicly on all of our channels. Token rewards shall be distributed on our TGE date or 1 day after our TGE date. Please follow us to make sure you don't miss it.
 
-Total pool: **\$10 000** cash + **30 000 USDC** worth of tokens.
+Total pool: **\$10 000** cash + **30 000 ** worth of tokens.
 
 ---
 
