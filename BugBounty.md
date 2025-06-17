@@ -38,11 +38,8 @@ AIxBlock combines decentralized compute, open‑source models, data engines and 
 | ---------------------------- | ---------------------- | ------------ | --------------------------------------------------------------------- |
 | `app.aixblock.io`            | Web App                | **High**     | Primary UI for AI & automation workflows.                             |
 | `api.aixblock.io`            | API                    | **Critical** | Model management & workflow execution endpoints (`/api/*`).           |
-| `*.aixblock.io`              | Wildcard               | **Medium**   | All first‑party sub‑domains (docs, staging, etc.).                    |
-| `webhook.aixblock.io`        | Webhook                | **High**     | Inbound hooks powering third‑party integrations.                      |
-| `smartcontracts.aixblock.io` | Solana Smart Contracts | **Critical** | On‑chain logic for compute, models, validators & transactions.        |
-| `compute.aixblock.io`        | Decentralized Compute  | **High**     | GPU/CPU rental marketplace infrastructure.                            |
-| `data.aixblock.io`           | Data Engine            | **High**     | Pipelines for crawl, curate, label – bridges to HF, Roboflow, Kaggle. |
+| `*.aixblock.io`              | Wildcard               | **Low**   | All first‑party sub‑domains (docs, staging, etc.).                    |
+| `webhook.aixblock.io`        | Webhook                | **Medium**     | Inbound hooks powering third‑party integrations.                      |
 | `mcp.aixblock.io`            | MCP Layer              | **Medium**   | Connectors to third‑party tools (Cursor, Claude, WindSurf, …).        |
 | `workflow.aixblock.io`       | Workflow Engine        | **Critical** | Core service for building & running automation workflows.             |
 
