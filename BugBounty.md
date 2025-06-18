@@ -116,6 +116,9 @@ Submit vulnerabilities as issues on the public repository at [https://github.com
 
 \***Token: payouts redeemable on or one day after TGE.**
 
+⚠️ **Note**: To be eligible for the **full reward**, researchers must not only report the vulnerability but also submit a **valid Pull Request (PR)** that includes a **concrete fix directly in our open-source codebase**. PRs must contain an **actual code-level resolution** (not just a placeholder, comment, or general suggestion) that addresses the root cause of the issue. Submissions that only create a PR to satisfy process requirements without providing a real fix or actionable change in code will **not be considered for full rewards**.
+If only a report is submitted **without a valid code fix**, or the PR does **not provide a working solution**, the researcher will receive **50% of the listed reward**.
+
 **Bonus:** Additional for reports with detailed PoCs or vulnerabilities found in new features (e.g., automation workflows, MCP integration, decentralized compute).
 
 **No Reward:** Duplicate reports, out-of-scope issues, or vulnerabilities with no security impact.
