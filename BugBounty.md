@@ -161,8 +161,8 @@ Additional opportunities to claim tokens on our TGE date and receive long-term r
 
 | User         | Report Title                                               | Domain              | Severity     | Status   | Reward     |
 | ------------ | ---------------------------------------------------------- | ------------------- | ------------ | -------- | ---------- |
-| @0xygyn-X | Insecure Direct Object Reference (IDOR) Vulnerability on "Account Settings --> Organizations" exposing organization & Admin PII | `api.aixblock.io` | High       | Accepted | $225 cash + 500 worth of token & rev‑share     |
-| @eMKayRa0    | Open Redirect via `next` Parameter                         | `app.aixblock.io`   | High       | Accepted | $225 cash + 500 worth of token & rev‑share      |
+| [@0xygyn-X](https://github.com/0xygyn-X)  | Insecure Direct Object Reference (IDOR) Vulnerability on "Account Settings --> Organizations" exposing organization & Admin PII | `api.aixblock.io` | High       | Accepted | $225 cash + 500 worth of token & rev‑share     |
+| [@eMKayRa0](https://github.com/eMKayRa0)    | Security Bug Report – Reflected Cross-Site Scripting (XSS) on app.aixblock.io      | `app.aixblock.io`   | High       | Accepted | $225 cash + 500 worth of token & rev‑share      |
 
 
 ### Footnotes
