@@ -15,12 +15,21 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "TESLA-SATI",
+      "name": "TESLA-SATI",
+      "avatar_url": "https://avatars.githubusercontent.com/u/119964285?v=4",
+      "profile": "https://www.google.com/search?sca_esv=dca996cfbce33230&authuser=0&hl=pl&gl=pl&output=search&q=PRIME+Sp.+z+o.o.&ludocid=17467329443996292901&lsig=AB86z5X0Bf-JfNWCbOR92pcX_xaJ&ved=1i%3A4%2Ct%3A109124%2Ce%3A3%2Cp%3Adv0BZvi9JvuSxc8PjMeKsA8%3A51",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "projectName": "aixblock-ai-dev-platform-public",
+  "projectName": "awesome-ai-dev-platform-opensource",
   "projectOwner": "AIxBlock-2023"
 }
