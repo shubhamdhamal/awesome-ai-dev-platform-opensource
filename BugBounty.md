@@ -157,6 +157,14 @@ Additional opportunities to claim tokens on our TGE date and receive long-term r
 
 ---
 
+## 🏆 Rewarded Reports
+
+| User         | Report Title                                               | Domain              | Severity     | Status   | Reward     |
+| ------------ | ---------------------------------------------------------- | ------------------- | ------------ | -------- | ---------- |
+| @0xygyn-X | Insecure Direct Object Reference (IDOR) Vulnerability on "Account Settings --> Organizations" exposing organization & Admin PII | `api.aixblock.io` | High       | Accepted | $225 cash + 500 worth of token & rev‑share     |
+| @eMKayRa0    | Open Redirect via `next` Parameter                         | `app.aixblock.io`   | High       | Accepted | $225 cash + 500 worth of token & rev‑share      |
+
+
 ### Footnotes
 
 1. *CVSS v3.1 Severity Rating Scale* – FIRST.org.
