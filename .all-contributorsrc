@@ -15,12 +15,21 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "eMKayRa0",
+      "name": "eMKayRao",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106302120?v=4",
+      "profile": "https://github.com/eMKayRa0",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "projectName": "aixblock-ai-dev-platform-public",
+  "projectName": "awesome-ai-dev-platform-opensource",
   "projectOwner": "AIxBlock-2023"
 }
