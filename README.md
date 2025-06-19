@@ -1,6 +1,6 @@
 **Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # AIxBlock
@@ -271,6 +271,7 @@ Give this repository a ⭐ and share it with your network to help grow the AIxBl
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/pravinkumar-exe"><img src="https://avatars.githubusercontent.com/u/52107447?v=4?s=100" width="100px;" alt="pravinkumar-exe"/><br /><sub><b>pravinkumar-exe</b></sub></a><br /><a href="#security-pravinkumar-exe" title="Security">🛡️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/priyanshukumar397"><img src="https://avatars.githubusercontent.com/u/54209223?v=4?s=100" width="100px;" alt="priyanshukumar397"/><br /><sub><b>priyanshukumar397</b></sub></a><br /><a href="#security-priyanshukumar397" title="Security">🛡️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/0xygyn-X"><img src="https://avatars.githubusercontent.com/u/215982257?v=4?s=100" width="100px;" alt="0xygyn-X"/><br /><sub><b>0xygyn-X</b></sub></a><br /><a href="#security-0xygyn-X" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/big14way"><img src="https://avatars.githubusercontent.com/u/115630820?v=4?s=100" width="100px;" alt="Godswill Idolor"/><br /><sub><b>Godswill Idolor</b></sub></a><br /><a href="#security-big14way" title="Security">🛡️</a></td>
     </tr>
   </tbody>
 </table>
