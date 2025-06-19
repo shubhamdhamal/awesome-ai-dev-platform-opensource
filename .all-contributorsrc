@@ -15,6 +15,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "0XZAMAJ",
+      "name": "0XZAMAJ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/215890246?v=4",
+      "profile": "https://github.com/0XZAMAJ",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
