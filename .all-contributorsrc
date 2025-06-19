@@ -24,6 +24,15 @@
       "contributions": [
         "security"
       ]
+    },
+    {
+      "login": "pravinkumar-exe",
+      "name": "pravinkumar-exe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52107447?v=4",
+      "profile": "https://github.com/pravinkumar-exe",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
