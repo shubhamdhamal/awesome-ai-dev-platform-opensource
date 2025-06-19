@@ -265,7 +265,6 @@ Give this repository a ⭐ and share it with your network to help grow the AIxBl
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/vietnv1602"><img src="https://avatars.githubusercontent.com/u/72266805?v=4?s=100" width="100px;" alt="Viet Nguyen"/><br /><sub><b>Viet Nguyen</b></sub></a><br /><a href="https://github.com/AIxBlock-2023/awesome-ai-dev-platform-opensource/commits?author=vietnv1602" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.google.com/search?sca_esv=dca996cfbce33230&authuser=0&hl=pl&gl=pl&output=search&q=PRIME+Sp.+z+o.o.&ludocid=17467329443996292901&lsig=AB86z5X0Bf-JfNWCbOR92pcX_xaJ&ved=1i%3A4%2Ct%3A109124%2Ce%3A3%2Cp%3Adv0BZvi9JvuSxc8PjMeKsA8%3A51"><img src="https://avatars.githubusercontent.com/u/119964285?v=4?s=100" width="100px;" alt="TESLA-SATI"/><br /><sub><b>TESLA-SATI</b></sub></a><br /><a href="https://github.com/AIxBlock-2023/awesome-ai-dev-platform-opensource/commits?author=TESLA-SATI" title="Documentation">📖</a></td>
     </tr>
   </tbody>
