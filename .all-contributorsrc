@@ -60,6 +60,15 @@
       "contributions": [
         "security"
       ]
+    },
+    {
+      "login": "big14way",
+      "name": "Godswill Idolor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115630820?v=4",
+      "profile": "https://github.com/big14way",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
