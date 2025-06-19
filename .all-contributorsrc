@@ -69,6 +69,15 @@
       "contributions": [
         "security"
       ]
+    },
+    {
+      "login": "sonw-vh",
+      "name": "s.0wn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/99324997?v=4",
+      "profile": "http://cv-sonwday.web.app",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
