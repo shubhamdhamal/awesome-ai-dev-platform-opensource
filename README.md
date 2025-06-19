@@ -1,6 +1,6 @@
 **Breaking: AIxBlock transitions to open-source. Please follow us for more updates. Here is a brief overview of our project.**
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # AIxBlock
@@ -277,6 +277,7 @@ Give this repository a ⭐ and share it with your network to help grow the AIxBl
       <td align="center" valign="top" width="14.28%"><a href="http://cv-sonwday.web.app"><img src="https://avatars.githubusercontent.com/u/99324997?v=4?s=100" width="100px;" alt="s.0wn"/><br /><sub><b>s.0wn</b></sub></a><br /><a href="#security-sonw-vh" title="Security">🛡️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/FCGitUser"><img src="https://avatars.githubusercontent.com/u/122260273?v=4?s=100" width="100px;" alt="FCGitUser"/><br /><sub><b>FCGitUser</b></sub></a><br /><a href="#security-FCGitUser" title="Security">🛡️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://ryanwinstonelliott.com"><img src="https://avatars.githubusercontent.com/u/81211706?v=4?s=100" width="100px;" alt="Ryan E. "/><br /><sub><b>Ryan E. </b></sub></a><br /><a href="#security-comradeflats" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AbhishekKumar9430"><img src="https://avatars.githubusercontent.com/u/158041237?v=4?s=100" width="100px;" alt="AbhishekKumar9430"/><br /><sub><b>AbhishekKumar9430</b></sub></a><br /><a href="#security-AbhishekKumar9430" title="Security">🛡️</a></td>
     </tr>
   </tbody>
 </table>
