@@ -164,6 +164,7 @@ Additional opportunities to claim tokens on our TGE date and receive long-term r
 | [@0XZAMAJ](https://github.com/0XZAMAJ) | Unauthorized Deletion of Other Users’ Profile Pictures | `api.aixblock.io` | High       | Accepted | $225 cash + 500 worth of token & rev‑share     |
 | [@0xygyn-X](https://github.com/0xygyn-X)  | Insecure Direct Object Reference (IDOR) Vulnerability on "Account Settings --> Organizations" exposing organization & Admin PII | `api.aixblock.io` | High       | Accepted | $225 cash + 500 worth of token & rev‑share     |
 | [@eMKayRa0](https://github.com/eMKayRa0)    | Security Bug Report – Reflected Cross-Site Scripting (XSS) on app.aixblock.io      | `app.aixblock.io`   | High       | Accepted | $225 cash + 500 worth of token & rev‑share      |
+| [@pravinkumar-exe](https://github.com/pravinkumar-exe)    | Missing Email Verification Grants Full Account Access      | `*.aixblock.io`   | Low       | Accepted |  100 worth of token & rev‑share      |
 
 
 ### Footnotes
