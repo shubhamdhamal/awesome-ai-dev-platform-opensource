@@ -51,6 +51,15 @@
       "contributions": [
         "security"
       ]
+    },
+    {
+      "login": "0xygyn-X",
+      "name": "0xygyn-X",
+      "avatar_url": "https://avatars.githubusercontent.com/u/215982257?v=4",
+      "profile": "https://github.com/0xygyn-X",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
