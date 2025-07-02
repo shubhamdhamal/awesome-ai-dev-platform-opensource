@@ -169,6 +169,8 @@ Additional opportunities to claim tokens on our TGE date and receive long-term r
 | [@sonw-vh](https://github.com/sonw-vh)    | Stored XSS via SVG file upload in label-and-validate-data and fine-tune-and-deploy projects → Data Preparation module      | `app.aixblock.io`   | Medium       | Accepted |  $200 cash + worth of token & rev‑share       |
 | [@comradeflats](https://github.com/comradeflats)    | CRITICAL: Path Traversal Authentication Bypass Exposes 1,388+ Admin Projects with Tokens      | `*.aixblock.io`   | Medium       | Accepted |  $100 cash + 250 worth of token & rev‑share      |
 | [@aybanda](https://github.com/aybanda)    | Security Bug Report – Stored XSS in General Editor (Production)      | `workflow.aixblock.io`   | High       | Accepted |  $450 cash + 1000 worth of token & rev‑share      |
+| [@Wizard0fthedigitalage](https://github.com/Wizard0fthedigitalage)    | Rate Limiting bypass on Login Endpoint via IP Rotation and null byte characters on alxblock      | `app.aixblock.io`   | Low       | Accepted |  100 worth of token & rev‑share      |
+
 
 
 ### Footnotes
