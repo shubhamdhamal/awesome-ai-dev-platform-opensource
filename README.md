@@ -32,7 +32,7 @@ Easily connect AIxBlock’s AI ecosystem to third-party environments and dev pla
 ---
 
 ## 🌟 How Does It Work ?
- [Data] → [Label] → [Train] → [Deploy] → [Use/Automate]  → [Monetize]
+ [Curate Data] → [Label] → [Train] → [Deploy] → [Use/Automate]  → [Monetize]
  
 ①  Bring Your Data or Use our Crawler
 - Collect, curate, and label structured or unstructured data — all in one place.
@@ -55,20 +55,14 @@ Coming soon: Decentralized data pool
 - On-Demand High-End Compute at up to 90% cheaper
 - Global Labeling Workforce across 100+ Countries
 - Pre-trained AI/ML Models Marketplace 
-- AI automation workflow templates
 - AI Dataset Pool (soon)
 ⑤  Deploy models
-- Test models in a built-in real-time demo environment & Deploy them
-- Or Use it on any MCP-compatible clients:
-Cursor
-Claude
-WindSurf
-Any of your own MCP clients
+- Test models in a built-in real-time demo environment & Deploy them using decentralized high performance compute
 
 ⑥ Automate Workflows
 - Build AI automation workflows with your custom models:
 - Use our our built-in AI automation workflow builder to connect models to APIs, CRMs, and any apps/environment of your choice
-- Run your own models or rent from the marketplace — full flexibility, zero vendor lock-in
+- Use your own models or rent from the marketplace — full flexibility, zero vendor lock-in
 
 ⑦ Monetize It All
 - Turn every part of your workflow into income.
@@ -209,7 +203,7 @@ The contributions are categorized and weighted as follows:
 
 ---
 
-3. Monthly Token Distribution
+3. Monthly Token Distribution (tentative schedule):
 
 Every month, a fixed number of tokens from the open-source contributor pool are unlocked and distributed based on the total points earned by contributors during that period.
 
