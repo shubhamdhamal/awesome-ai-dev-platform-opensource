@@ -6,7 +6,7 @@
 # AIxBlock
 
 
-**The first unified platform for end-to-end Al development and automation workflows — MCP compatible**
+**The first unified platform for end-to-end Al development and workflow automation — MCP compatible**
 
 ---
 
