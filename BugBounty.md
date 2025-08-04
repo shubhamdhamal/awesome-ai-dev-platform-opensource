@@ -170,6 +170,8 @@ Additional opportunities to claim tokens on our TGE date and receive long-term r
 | [@comradeflats](https://github.com/comradeflats)    | CRITICAL: Path Traversal Authentication Bypass Exposes 1,388+ Admin Projects with Tokens      | `*.aixblock.io`   | Medium       | Accepted |  $100 cash + 250 worth of token & rev‑share      |
 | [@aybanda](https://github.com/aybanda)    | Security Bug Report – Stored XSS in General Editor (Production)      | `workflow.aixblock.io`   | High       | Accepted |  $450 cash + 1000 worth of token & rev‑share      |
 | [@Wizard0fthedigitalage](https://github.com/Wizard0fthedigitalage)    | Rate Limiting bypass on Login Endpoint via IP Rotation and null byte characters on alxblock      | `app.aixblock.io`   | Low       | Accepted |  100 worth of token & rev‑share      |
+| [@eMKayRa0](https://github.com/eMKayRa0)    | Vulnerability Report: Session Mismanagement / Broken Authentication in Profile Update Endpoint      | `app.aixblock.io`   | High       | Accepted |  $225 cash + 500 worth of token & rev‑share      |
+| [@0xygyn-X](https://github.com/0xygyn-X)    | API Rate-Limit Restriction (3 request maximum) Bypass using Race Condition      | `app.aixblock.io`   | Low       | Accepted |  100 worth of token & rev‑share      |
 
 
 
