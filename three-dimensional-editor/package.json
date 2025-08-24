@@ -10,7 +10,7 @@
     "cross-env": "^7.0.3",
     "fastintcompression": "0.0.2",
     "hull.js": "0.2.10",
-    "jquery": "3.5.1",
+    "jquery": "3.7.1",
     "lineclip": "1.1.5",
     "mdi-material-ui": "^6.30.0",
     "mousetrap": "1.6.2",
